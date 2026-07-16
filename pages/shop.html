@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop Grid - Stackly Marketplace</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="../assets/images/logoStackly.webp" />
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- FontAwesome 6 CDN -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link href="../assets/css/styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Dynamic Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main py-5 bg-light">
+      <div class="container">
+        <!-- Flash Deals (Top Banner) -->
+        <div class="row g-4 mb-5">
+          <div class="col-12">
+            <div class="p-4 p-md-5 rounded-4 bg-gradient-primary text-white shadow-sm position-relative overflow-hidden">
+              <div class="row align-items-center g-4">
+                <div class="col-lg-8 text-start">
+                  <span class="badge bg-warning text-dark px-3 py-2 font-xxs mb-3 text-uppercase"><i class="fa-solid fa-fire me-1"></i>Flash Deal of the Day</span>
+                  <h2 class="display-6 font-bold text-white mb-2">Drill & Tool Kit Bundle — 40% Off</h2>
+                  <p class="font-xs text-light opacity-90 mb-4" style="max-width: 500px;">Get the Bosch 18V Cordless Power Drill + 50-piece accessory kit + hard carrier case. Offer expires soon!</p>
+                  <!-- Countdown Timer -->
+                  <div class="d-flex align-items-center gap-2 mb-3">
+                    <span class="font-xxs text-light uppercase me-2">Offer ends in:</span>
+                    <div class="bg-dark text-white rounded px-2 py-1 font-sm-bold" id="countdown-hours">13</div>
+                    <div class="text-white font-sm-bold">:</div>
+                    <div class="bg-dark text-white rounded px-2 py-1 font-sm-bold" id="countdown-minutes">45</div>
+                    <div class="text-white font-sm-bold">:</div>
+                    <div class="bg-dark text-white rounded px-2 py-1 font-sm-bold" id="countdown-seconds">08</div>
+                  </div>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                  <div class="mb-3">
+                    <span class="font-xxs text-light d-block mb-1">Hurry! Only 12 items left in stock</span>
+                    <div class="progress bg-white bg-opacity-20 mx-auto ms-lg-auto" style="height: 6px; max-width: 250px;">
+                      <div class="progress-bar bg-warning" role="progressbar" style="width: 82%" aria-valuenow="82" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                  <a href="products.html" class="btn btn-warning px-4 py-2 font-sm-bold text-uppercase">Claim Deal <i class="fa-solid fa-arrow-right ms-1"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categories Quick-Filters -->
+        <div class="mb-5">
+          <h5 class="font-sm-bold text-dark mb-3 text-start">Browse Top Hardware Categories</h5>
+          <div class="row g-3 row-cols-2 row-cols-sm-4 row-cols-lg-6">
+            <div class="col">
+              <a href="#" class="p-3 border rounded-3 bg-white text-center text-decoration-none d-block hover-up">
+                <div class="text-primary fs-3 mb-2"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                <span class="font-xs-bold text-dark">Hand Tools</span>
+              </a>
+            </div>
+            <div class="col">
+              <a href="#" class="p-3 border rounded-3 bg-white text-center text-decoration-none d-block hover-up">
+                <div class="text-primary fs-3 mb-2"><i class="fa-solid fa-plug"></i></div>
+                <span class="font-xs-bold text-dark">Electronics</span>
+              </a>
+            </div>
+            <div class="col">
+              <a href="#" class="p-3 border rounded-3 bg-white text-center text-decoration-none d-block hover-up">
+                <div class="text-primary fs-3 mb-2"><i class="fa-solid fa-kitchen-sink"></i></div>
+                <span class="font-xs-bold text-dark">Appliances</span>
+              </a>
+            </div>
+            <div class="col">
+              <a href="#" class="p-3 border rounded-3 bg-white text-center text-decoration-none d-block hover-up">
+                <div class="text-primary fs-3 mb-2"><i class="fa-solid fa-shield-halved"></i></div>
+                <span class="font-xs-bold text-dark">Safety Wear</span>
+              </a>
+            </div>
+            <div class="col">
+              <a href="#" class="p-3 border rounded-3 bg-white text-center text-decoration-none d-block hover-up">
+                <div class="text-primary fs-3 mb-2"><i class="fa-solid fa-lightbulb"></i></div>
+                <span class="font-xs-bold text-dark">Smart Lighting</span>
+              </a>
+            </div>
+            <div class="col">
+              <a href="#" class="p-3 border rounded-3 bg-white text-center text-decoration-none d-block hover-up">
+                <div class="text-primary fs-3 mb-2"><i class="fa-solid fa-gift"></i></div>
+                <span class="font-xs-bold text-dark">New Arrivals</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <!-- Sidebar Filters (3 Cols) -->
+          <div class="col-lg-3">
+            <div class="border rounded p-3 bg-white shadow-sm mb-4">
+              <h5 class="font-sm-bold border-bottom pb-2 mb-3">
+                Filter By Categories
+              </h5>
+              <ul class="list-unstyled font-xs d-flex flex-column gap-2 mb-4">
+                <li>
+                  <a
+                    href="#"
+                    class="text-muted text-decoration-none hover-primary"
+                    >Computers &amp; Accessories</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="text-muted text-decoration-none hover-primary"
+                    >Cell Phones &amp; Tabs</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="text-muted text-decoration-none hover-primary"
+                    >Gaming Gadgets</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="text-muted text-decoration-none hover-primary"
+                    >Smart Watches</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="text-muted text-decoration-none hover-primary"
+                    >Home Audio &amp; Video</a
+                  >
+                </li>
+              </ul>
+
+              <h5 class="font-sm-bold border-bottom pb-2 mb-3">Price Range</h5>
+              <div class="mb-4">
+                <input
+                  type="range"
+                  class="form-range"
+                  min="0"
+                  max="5000"
+                  id="priceRange"
+                />
+                <div
+                  class="d-flex justify-content-between font-xs text-muted mt-2"
+                >
+                  <span>Min: $0</span>
+                  <span>Max: $5000</span>
+                </div>
+              </div>
+
+              <button
+                class="btn btn-primary btn-sm w-100 font-xs-bold py-2 text-uppercase"
+              >
+                Apply Filters
+              </button>
+            </div>
+          </div>
+
+          <!-- Products Catalog (9 Cols) -->
+          <div class="col-lg-9">
+            <div
+              class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom g-3"
+            >
+              <span class="font-xs text-muted"
+                >Showing <strong class="text-dark">1 - 6</strong> of 48
+                items</span
+              >
+              <div class="dropdown">
+                <button
+                  class="btn btn-light btn-sm border dropdown-toggle font-xs"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Sort by: Featured
+                </button>
+                <ul class="dropdown-menu border-light">
+                  <li>
+                    <a class="dropdown-item font-xs" href="#">Featured</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item font-xs" href="#"
+                      >Price: Low to High</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item font-xs" href="#"
+                      >Price: High to Low</a
+                    >
+                  </li>
+                  <li>
+                    <a class="dropdown-item font-xs" href="#"
+                      >Customer Rating</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="row g-4 row-cols-1 row-cols-sm-2 row-cols-md-3">
+              <!-- Product 1 -->
+              <div class="col">
+                <div class="card-grid-style-3">
+                  <div class="image-box">
+                    <span class="label bg-danger">-15%</span>
+                    <img
+                      src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=250&q=80"
+                      alt="Apple iMac"
+                    />
+                  </div>
+                  <div class="info-right">
+                    <a
+                      class="font-xs text-primary text-decoration-none"
+                      href="#"
+                      >Apple</a
+                    >
+                    <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                      <a
+                        href="products.html"
+                        class="text-decoration-none text-dark hover-primary"
+                        >2026 Apple iMac Retina 5K</a
+                      >
+                    </h6>
+                    <div class="rating-stars">
+                      <i class="fa-solid fa-star"></i
+                      ><i class="fa-solid fa-star"></i
+                      ><i class="fa-solid fa-star"></i
+                      ><i class="fa-solid fa-star"></i
+                      ><i class="fa-solid fa-star"></i>
+                    </div>
+                    <div class="price-info">
+                      <strong class="price-main">$2856.30</strong>
+                    </div>
+                    <button class="btn-cart mt-3">
+                      <i class="fa-solid fa-cart-shopping me-1"></i> Add To Cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Product 2 -->
+              <div class="col">
+                <div class="card-grid-style-3">
+                  <div class="image-box">
+                    <span class="label bg-brand-2">-10%</span>
+                    <img
+                      src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=250&q=80"
+                      alt="Drill"
+                    />
+                  </div>
+                  <div class="info-right">
+                    <a
+                      class="font-xs text-primary text-decoration-none"
+                      href="#"
+                      >Bosch</a
+                    >
+                    <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                      <a
+                        href="products.html"
+                        class="text-decoration-none text-dark hover-primary"
+                        >Bosch Cordless Power Drill 18V</a
+                      >
+                    </h6>
+                    <div class="rating-stars">
+                      <i class="fa-solid fa-star"></i
+                      ><i class="fa-solid fa-star"></i
+                      ><i class="fa-solid fa-star"></i
+                      ><i class="fa-solid fa-star"></i
+                      ><i class="fa-regular fa-star"></i>
+                    </div>
+                    <div class="price-info">
+                      <strong class="price-main">$125.00</strong>
+                    </div>
+                    <button class="btn-cart mt-3">
+                      <i class="fa-solid fa-cart-shopping me-1"></i> Add To Cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Product 3 -->
+              <div class="col">
+                <div class="card-grid-style-3">
+                  <div class="image-box">
+                    <span class="label bg-success">New</span>
+                    <img
+                      src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=250&q=80"
+                      alt="Sony WH-1000XM4"
+                    />
+                  </div>
+                  <div class="info-right">
+                    <a
+                      class="font-xs text-primary text-decoration-none"
+                      href="#"
+                      >Sony</a
+                    >
+                    <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                      <a
+                        href="products.html"
+                        class="text-decoration-none text-dark hover-primary"
+                        >Sony WH-1000XM4 Headphones</a
+                      >
+                    </h6>
+                    <div class="rating-stars">
+                      <i class="fa-solid fa-star"></i
+                      ><i class="fa-solid fa-star"></i
+                      ><i class="fa-solid fa-star"></i
+                      ><i class="fa-solid fa-star"></i
+                      ><i class="fa-solid fa-star"></i>
+                    </div>
+                    <div class="price-info">
+                      <strong class="price-main">$349.99</strong>
+                    </div>
+                    <button class="btn-cart mt-3">
+                      <i class="fa-solid fa-cart-shopping me-1"></i> Add To Cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top Vendors Section -->
+        <div class="my-5 py-5 border-top">
+          <div class="text-center mb-5">
+            <span class="badge bg-primary px-3 py-2 font-xxs text-uppercase">Top Partners</span>
+            <h3 class="font-lg-bold mt-2">Verified Stores of the Month</h3>
+          </div>
+          <div class="row g-4 text-start">
+            <div class="col-md-3 col-sm-6">
+              <div class="p-4 border bg-white rounded-3 shadow-sm text-center h-100 hover-up">
+                <div class="avatar border rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 60px; height: 60px;">
+                  <i class="fa-solid fa-store fa-lg text-primary"></i>
+                </div>
+                <h6 class="font-sm-bold text-dark mb-1">Stackly Tech Store</h6>
+                <div class="rating-stars mb-2 justify-content-center d-flex"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <span class="font-xxs text-muted d-block mb-3">145 Verified Ratings</span>
+                <a href="vendors.html" class="btn btn-outline-primary btn-sm font-xs w-100">Visit Shop</a>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <div class="p-4 border bg-white rounded-3 shadow-sm text-center h-100 hover-up">
+                <div class="avatar border rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 60px; height: 60px;">
+                  <i class="fa-solid fa-wrench fa-lg text-primary"></i>
+                </div>
+                <h6 class="font-sm-bold text-dark mb-1">Industrial Depot</h6>
+                <div class="rating-stars mb-2 justify-content-center d-flex"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
+                <span class="font-xxs text-muted d-block mb-3">82 Verified Ratings</span>
+                <a href="vendors.html" class="btn btn-outline-primary btn-sm font-xs w-100">Visit Shop</a>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <div class="p-4 border bg-white rounded-3 shadow-sm text-center h-100 hover-up">
+                <div class="avatar border rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 60px; height: 60px;">
+                  <i class="fa-solid fa-kitchen-sink fa-lg text-primary"></i>
+                </div>
+                <h6 class="font-sm-bold text-dark mb-1">Modern Home</h6>
+                <div class="rating-stars mb-2 justify-content-center d-flex"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <span class="font-xxs text-muted d-block mb-3">96 Verified Ratings</span>
+                <a href="vendors.html" class="btn btn-outline-primary btn-sm font-xs w-100">Visit Shop</a>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <div class="p-4 border bg-white rounded-3 shadow-sm text-center h-100 hover-up">
+                <div class="avatar border rounded-circle bg-light d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 60px; height: 60px;">
+                  <i class="fa-solid fa-house-chimney-window fa-lg text-primary"></i>
+                </div>
+                <h6 class="font-sm-bold text-dark mb-1">Smart Living LLC</h6>
+                <div class="rating-stars mb-2 justify-content-center d-flex"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <span class="font-xxs text-muted d-block mb-3">112 Verified Ratings</span>
+                <a href="vendors.html" class="btn btn-outline-primary btn-sm font-xs w-100">Visit Shop</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buyer Benefits Section -->
+        <div class="my-5 py-5 border-top">
+          <div class="row g-4 text-center">
+            <div class="col-md-3 col-sm-6">
+              <div class="p-3">
+                <div class="text-primary fs-2 mb-2"><i class="fa-solid fa-truck-fast"></i></div>
+                <h6 class="font-sm-bold mb-1">Free Delivery</h6>
+                <p class="font-xs text-muted mb-0">For all catalog orders over $75.00</p>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <div class="p-3">
+                <div class="text-primary fs-2 mb-2"><i class="fa-solid fa-shield-halved"></i></div>
+                <h6 class="font-sm-bold mb-1">Secure Checkout</h6>
+                <p class="font-xs text-muted mb-0">Escrow payments protected by SSL</p>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <div class="p-3">
+                <div class="text-primary fs-2 mb-2"><i class="fa-solid fa-arrows-rotate"></i></div>
+                <h6 class="font-sm-bold mb-1">30-Day Returns</h6>
+                <p class="font-xs text-muted mb-0">Return items easily with printable label</p>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <div class="p-3">
+                <div class="text-primary fs-2 mb-2"><i class="fa-solid fa-headset"></i></div>
+                <h6 class="font-sm-bold mb-1">24/7 Live Support</h6>
+                <p class="font-xs text-muted mb-0">Dedicated team ready to assist you</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buyer Shopping FAQ Section -->
+        <div class="my-5 py-5 border-top">
+          <div class="text-center mb-5">
+            <span class="badge bg-primary px-3 py-2 font-xxs text-uppercase">Help Desk</span>
+            <h3 class="font-lg-bold mt-2">Buyer Shopping Guide</h3>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <div class="accordion shadow-sm" id="shopAccordion">
+                <div class="accordion-item border-light">
+                  <h2 class="accordion-header" id="sHeadingOne">
+                    <button class="accordion-button font-sm-bold" type="button" data-bs-toggle="collapse" data-bs-target="#sCollapseOne" aria-expanded="true" aria-controls="sCollapseOne">
+                      Can I buy from multiple vendors at once?
+                    </button>
+                  </h2>
+                  <div id="sCollapseOne" class="accordion-collapse collapse show" aria-labelledby="sHeadingOne" data-bs-parent="#shopAccordion">
+                    <div class="accordion-body font-xs text-muted">
+                      Yes! You can add products from multiple separate vendors into a single shopping cart. When checking out, you make a single unified payment. The system automatically segments the orders and coordinates shipping with each vendor.
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item border-light">
+                  <h2 class="accordion-header" id="sHeadingTwo">
+                    <button class="accordion-button collapsed font-sm-bold" type="button" data-bs-toggle="collapse" data-bs-target="#sCollapseTwo" aria-expanded="false" aria-controls="sCollapseTwo">
+                      Who handles product shipping?
+                    </button>
+                  </h2>
+                  <div id="sCollapseTwo" class="accordion-collapse collapse" aria-labelledby="sHeadingTwo" data-bs-parent="#shopAccordion">
+                    <div class="accordion-body font-xs text-muted">
+                      Shipping is managed directly by each independent store/vendor. They configure shipping providers (such as DHL, FedEx, UPS, or USPS). Tracking numbers are updated in your Account Portal as soon as the item leaves their warehouse.
+                    </div>
+                  </div>
+                </div>
+                <div class="accordion-item border-light">
+                  <h2 class="accordion-header" id="sHeadingThree">
+                    <button class="accordion-button collapsed font-sm-bold" type="button" data-bs-toggle="collapse" data-bs-target="#sCollapseThree" aria-expanded="false" aria-controls="sCollapseThree">
+                      Are hardware items covered by warranty?
+                    </button>
+                  </h2>
+                  <div id="sCollapseThree" class="accordion-collapse collapse" aria-labelledby="sHeadingThree" data-bs-parent="#shopAccordion">
+                    <div class="accordion-body font-xs text-muted">
+                      Most brand items (e.g. power tools, electronics) come with a manufacturer warranty covered directly by the brand. Additionally, individual vendors outline specific store warranty policies on their shop profile.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Dynamic Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Bootstrap 5 Bundle JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom Script -->
+    <script src="../assets/js/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,3187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stackly - Multi-Vendor Marketplace</title>
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- FontAwesome 6 CDN -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Swiper.js CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link href="assets/css/styles.css" rel="stylesheet" />
+
+    <style>
+      #stackly-preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        background: #080e1a;
+        transition: opacity 0.65s cubic-bezier(0.4,0,0.2,1), visibility 0.65s;
+      }
+      #stackly-preloader.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+
+      .pre-blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(90px);
+        pointer-events: none;
+        opacity: 0;
+        animation: preBlobIn 1s ease forwards;
+      }
+      .pre-blob-1 {
+        width: 520px; height: 520px;
+        background: radial-gradient(circle, rgba(253,150,54,0.22) 0%, transparent 70%);
+        top: -160px; left: -160px;
+        animation-delay: 0.1s;
+      }
+      .pre-blob-2 {
+        width: 420px; height: 420px;
+        background: radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%);
+        bottom: -120px; right: -100px;
+        animation-delay: 0.25s;
+      }
+      .pre-blob-3 {
+        width: 300px; height: 300px;
+        background: radial-gradient(circle, rgba(253,150,54,0.1) 0%, transparent 70%);
+        bottom: 10%; left: 20%;
+        animation-delay: 0.4s;
+      }
+      @keyframes preBlobIn { to { opacity: 1; } }
+
+      .pre-grid {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+        background-size: 28px 28px;
+        mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, black 30%, transparent 100%);
+        -webkit-mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, black 30%, transparent 100%);
+        pointer-events: none;
+      }
+
+      .pre-card {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.07);
+        border-radius: 28px;
+        padding: 48px 56px 40px;
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        box-shadow: 0 32px 80px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(253,150,54,0.07);
+        animation: preCardIn 0.7s cubic-bezier(0.34,1.56,0.64,1) both;
+      }
+      .pre-card::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 50%;
+        transform: translateX(-50%);
+        width: 55%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(253,150,54,0.75), transparent);
+        border-radius: 99px;
+      }
+      @keyframes preCardIn {
+        from { opacity: 0; transform: scale(0.88) translateY(28px); }
+        to   { opacity: 1; transform: scale(1) translateY(0); }
+      }
+
+      .pre-logo {
+        margin-bottom: 28px;
+        animation: preFadeDown 0.5s 0.3s ease both;
+      }
+      .pre-logo img {
+        width: 148px;
+        display: block;
+        filter: drop-shadow(0 4px 20px rgba(253,150,54,0.3));
+      }
+
+      .pre-orbit-wrap {
+        position: relative;
+        width: 88px;
+        height: 88px;
+        margin-bottom: 28px;
+        animation: preFadeUp 0.5s 0.4s ease both;
+      }
+      .pre-orbit-wrap::before {
+        content: '';
+        position: absolute;
+        inset: -8px;
+        border-radius: 50%;
+        border: 1px dashed rgba(253,150,54,0.18);
+        animation: preOrbitSpin 10s linear infinite;
+      }
+      .pre-orbit-wrap::after {
+        content: '';
+        position: absolute;
+        top: -12px; left: 50%;
+        transform: translateX(-50%);
+        width: 7px; height: 7px;
+        border-radius: 50%;
+        background: #fd9636;
+        box-shadow: 0 0 10px 3px rgba(253,150,54,0.55);
+        animation: preOrbitSpin 2.6s linear infinite;
+        transform-origin: 50% calc(50% + 52px);
+      }
+      @keyframes preOrbitSpin { to { transform: rotate(360deg); } }
+
+      .pre-orbit-svg {
+        position: absolute;
+        inset: 0;
+        transform: rotate(-90deg);
+      }
+      .pre-arc-track { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 3; }
+      .pre-arc-fill {
+        fill: none;
+        stroke: url(#preGrad);
+        stroke-width: 3;
+        stroke-linecap: round;
+        stroke-dasharray: 251;
+        stroke-dashoffset: 251;
+        animation: preArcFill 1.7s 0.5s cubic-bezier(0.4,0,0.2,1) forwards;
+        filter: drop-shadow(0 0 5px rgba(253,150,54,0.8));
+      }
+      @keyframes preArcFill { to { stroke-dashoffset: 0; } }
+
+      .pre-core {
+        position: absolute;
+        inset: 10px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 40% 35%, rgba(253,150,54,0.16), rgba(253,150,54,0.03));
+        border: 1px solid rgba(253,150,54,0.14);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: prePulse 2.2s ease-in-out infinite;
+      }
+      .pre-core i { font-size: 22px; color: #fd9636; filter: drop-shadow(0 0 8px rgba(253,150,54,0.9)); }
+      @keyframes prePulse {
+        0%,100% { box-shadow: 0 0 0 0 rgba(253,150,54,0.22); }
+        50%      { box-shadow: 0 0 0 12px rgba(253,150,54,0); }
+      }
+
+      .pre-brand {
+        font-family: 'Outfit', sans-serif;
+        font-size: 30px;
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: -0.5px;
+        margin-bottom: 6px;
+        animation: preFadeUp 0.5s 0.5s ease both;
+      }
+      .pre-brand em { font-style: normal; color: #fd9636; }
+
+      .pre-tagline {
+        font-family: 'Inter', sans-serif;
+        font-size: 10.5px;
+        font-weight: 600;
+        color: rgba(255,255,255,0.32);
+        letter-spacing: 3.5px;
+        text-transform: uppercase;
+        margin-bottom: 32px;
+        animation: preFadeUp 0.5s 0.6s ease both;
+      }
+
+      .pre-progress-wrap {
+        width: 220px;
+        animation: preFadeUp 0.5s 0.65s ease both;
+      }
+      .pre-progress-labels {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+      }
+      .pre-progress-labels span {
+        font-family: 'Inter', sans-serif;
+        font-size: 10px;
+        color: rgba(255,255,255,0.28);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .pre-pct { color: #fd9636 !important; font-weight: 700 !important; font-size: 11px !important; }
+      .pre-bar-track {
+        height: 4px;
+        background: rgba(255,255,255,0.07);
+        border-radius: 99px;
+        overflow: hidden;
+        position: relative;
+      }
+      .pre-bar-fill {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, #e07d1e 0%, #fd9636 50%, #ffb347 100%);
+        border-radius: 99px;
+        animation: preBarFill 1.7s 0.5s cubic-bezier(0.4,0,0.2,1) forwards;
+        box-shadow: 0 0 10px rgba(253,150,54,0.55);
+        position: relative;
+      }
+      .pre-bar-fill::after {
+        content: '';
+        position: absolute;
+        top: 0; left: -60px;
+        width: 60px; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        animation: preShimmer 1.7s 0.5s ease forwards;
+      }
+      @keyframes preBarFill { to { width: 100%; } }
+      @keyframes preShimmer { to { left: 260px; } }
+
+      .pre-dots {
+        display: flex;
+        gap: 7px;
+        margin-top: 22px;
+        animation: preFadeUp 0.5s 0.75s ease both;
+      }
+      .pre-dot {
+        width: 5px; height: 5px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.12);
+      }
+      .pre-dot.active { background: #fd9636; box-shadow: 0 0 8px rgba(253,150,54,0.65); }
+      .pre-dot:nth-child(1).active { animation: preDotPulse 1.2s 0s ease-in-out infinite; }
+      .pre-dot:nth-child(2).active { animation: preDotPulse 1.2s 0.2s ease-in-out infinite; }
+      .pre-dot:nth-child(3).active { animation: preDotPulse 1.2s 0.4s ease-in-out infinite; }
+      @keyframes preDotPulse {
+        0%,100% { transform: scale(1); opacity: 1; }
+        50%      { transform: scale(1.6); opacity: 0.5; }
+      }
+
+      @keyframes preFadeDown {
+        from { opacity: 0; transform: translateY(-14px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes preFadeUp {
+        from { opacity: 0; transform: translateY(10px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Preloader -->
+    <div id="stackly-preloader">
+      <div class="pre-blob pre-blob-1"></div>
+      <div class="pre-blob pre-blob-2"></div>
+      <div class="pre-blob pre-blob-3"></div>
+      <div class="pre-grid"></div>
+      <div class="pre-card">
+        <div class="pre-logo">
+          <img src="assets/images/logoStackly.webp" alt="Stackly" />
+        </div>
+        <div class="pre-orbit-wrap">
+          <svg class="pre-orbit-svg" viewBox="0 0 88 88">
+            <defs>
+              <linearGradient id="preGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#fd9636"/>
+                <stop offset="100%" stop-color="#ffb347"/>
+              </linearGradient>
+            </defs>
+            <circle class="pre-arc-track" cx="44" cy="44" r="40"/>
+            <circle class="pre-arc-fill"  cx="44" cy="44" r="40"/>
+          </svg>
+          <div class="pre-core">
+            <i class="fa-solid fa-store"></i>
+          </div>
+        </div>
+        <div class="pre-brand">Stack<em>ly</em></div>
+        <div class="pre-tagline">Multi-Vendor Marketplace</div>
+        <div class="pre-progress-wrap">
+          <div class="pre-progress-labels">
+            <span>Loading</span>
+            <span class="pre-pct" id="pre-pct-val">0%</span>
+          </div>
+          <div class="pre-bar-track">
+            <div class="pre-bar-fill"></div>
+          </div>
+        </div>
+        <div class="pre-dots">
+          <div class="pre-dot active"></div>
+          <div class="pre-dot active"></div>
+          <div class="pre-dot active"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dynamic Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Hero Slider Section -->
+      <section class="section-box hero-section">
+        <div class="container">
+          <div class="hero-slider-container">
+            <div class="swiper swiper-hero">
+              <div class="swiper-wrapper">
+                <!-- Slide 1 -->
+                <div
+                  class="swiper-slide banner-slide-item"
+                  style="
+                    background: url(&quot;https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1600&q=80&quot;)
+                      no-repeat center center;
+                  "
+                >
+                  <div class="banner-desc-content">
+                    <div class="hero-eyebrow">
+                      <span class="hero-dot"></span>
+                      <span>New Arrival — 2026 Collection</span>
+                    </div>
+                    <h1 class="hero-title">
+                      The Best <span class="hero-accent">Hand Tools</span
+                      ><br />For Every Job
+                    </h1>
+                    <p class="hero-subtitle">
+                      Discover premium industrial &amp; residential tools from
+                      verified global vendors — built to last.
+                    </p>
+                    <div class="hero-actions">
+                      <a href="#" class="btn-hero-primary"
+                        >Shop Now <i class="fa-solid fa-arrow-right ms-2"></i
+                      ></a>
+                      <a href="#" class="btn-hero-ghost"
+                        ><i class="fa-solid fa-play me-2"></i>See Catalogue</a
+                      >
+                    </div>
+                    <div class="hero-stats">
+                      <div class="hero-stat-item">
+                        <strong>12K+</strong>
+                        <span>Products</span>
+                      </div>
+                      <div class="hero-stat-divider"></div>
+                      <div class="hero-stat-item">
+                        <strong>500+</strong>
+                        <span>Vendors</span>
+                      </div>
+                      <div class="hero-stat-divider"></div>
+                      <div class="hero-stat-item">
+                        <strong>98%</strong>
+                        <span>Satisfaction</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div
+                  class="swiper-slide banner-slide-item"
+                  style="
+                    background: url(&quot;https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=1600&q=80&quot;)
+                      no-repeat center center;
+                  "
+                >
+                  <div class="banner-desc-content">
+                    <div class="hero-eyebrow hero-eyebrow--offer">
+                      <span class="hero-dot"></span>
+                      <span>Limited Time — Up to 25% Off</span>
+                    </div>
+                    <h1 class="hero-title">
+                      Upgrade Your <span class="hero-accent">Workspace</span
+                      ><br />With Power Drills
+                    </h1>
+                    <p class="hero-subtitle">
+                      This week only — free shipping on all orders. Trusted
+                      brands, unbeatable prices.
+                    </p>
+                    <div class="hero-actions">
+                      <a href="#" class="btn-hero-primary"
+                        >Claim Discount <i class="fa-solid fa-bolt ms-2"></i
+                      ></a>
+                      <a href="#" class="btn-hero-ghost"
+                        ><i class="fa-solid fa-tag me-2"></i>View Deals</a
+                      >
+                    </div>
+                    <div class="hero-stats">
+                      <div class="hero-stat-item">
+                        <strong>25%</strong>
+                        <span>Max Savings</span>
+                      </div>
+                      <div class="hero-stat-divider"></div>
+                      <div class="hero-stat-item">
+                        <strong>Free</strong>
+                        <span>Shipping</span>
+                      </div>
+                      <div class="hero-stat-divider"></div>
+                      <div class="hero-stat-item">
+                        <strong>7 Days</strong>
+                        <span>Returns</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Pagination -->
+              <div class="swiper-pagination swiper-pagination-hero"></div>
+              <!-- Navigation Arrows -->
+              <div class="hero-nav-prev">
+                <i class="fa-solid fa-chevron-left"></i>
+              </div>
+              <div class="hero-nav-next">
+                <i class="fa-solid fa-chevron-right"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services / Features list -->
+      <section class="section-box mb-5">
+        <div class="container">
+          <ul class="features-grid-list">
+            <li>
+              <div class="feature-box-item">
+                <div class="icon-left">
+                  <i class="fa-solid fa-truck-fast"></i>
+                </div>
+                <div class="info-right">
+                  <h5 class="font-md-bold mb-1">Free Delivery</h5>
+                  <p class="font-xs text-muted mb-0">
+                    From all orders over $10
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="feature-box-item">
+                <div class="icon-left"><i class="fa-solid fa-headset"></i></div>
+                <div class="info-right">
+                  <h5 class="font-md-bold mb-1">Support 24/7</h5>
+                  <p class="font-xs text-muted mb-0">Shop with an expert</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="feature-box-item">
+                <div class="icon-left"><i class="fa-solid fa-ticket"></i></div>
+                <div class="info-right">
+                  <h5 class="font-md-bold mb-1">Gift Voucher</h5>
+                  <p class="font-xs text-muted mb-0">
+                    Refer a friend &amp; save
+                  </p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="feature-box-item">
+                <div class="icon-left">
+                  <i class="fa-solid fa-arrow-rotate-left"></i>
+                </div>
+                <div class="info-right">
+                  <h5 class="font-md-bold mb-1">Return &amp; Refund</h5>
+                  <p class="font-xs text-muted mb-0">Free return over $200</p>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="feature-box-item">
+                <div class="icon-left">
+                  <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div class="info-right">
+                  <h5 class="font-md-bold mb-1">Secure Payment</h5>
+                  <p class="font-xs text-muted mb-0">
+                    100% Protected transactions
+                  </p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Most Popular Categories -->
+      <section class="section-box mb-5">
+        <div class="container">
+          <div
+            class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom"
+          >
+            <h4 class="font-lg-bold mb-0 section-heading">
+              Most Popular Categories
+            </h4>
+            <a href="#" class="text-primary text-decoration-none font-xs-bold"
+              >View All Categories <i class="fa-solid fa-arrow-right ms-1"></i
+            ></a>
+          </div>
+          <div class="swiper swiper-categories py-2">
+            <div class="swiper-wrapper">
+              <!-- Category Item 1 -->
+              <div class="swiper-slide">
+                <div class="box-category-card">
+                  <div class="image">
+                    <img
+                      src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=120&q=80"
+                      alt="Drills"
+                    />
+                  </div>
+                  <h6 class="font-sm-bold mb-1 text-dark">Drilling Machine</h6>
+                  <span class="font-xxs text-muted">1025 items</span>
+                </div>
+              </div>
+              <!-- Category Item 2 -->
+              <div class="swiper-slide">
+                <div class="box-category-card">
+                  <div class="image">
+                    <img
+                      src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=120&q=80"
+                      alt="Cordless"
+                    />
+                  </div>
+                  <h6 class="font-sm-bold mb-1 text-dark">Cordless Tools</h6>
+                  <span class="font-xxs text-muted">2185 items</span>
+                </div>
+              </div>
+              <!-- Category Item 3 -->
+              <div class="swiper-slide">
+                <div class="box-category-card">
+                  <div class="image">
+                    <img
+                      src="https://images.unsplash.com/photo-1534224039826-c7a0eda0e6b3?auto=format&fit=crop&w=120&q=80"
+                      alt="Blades"
+                    />
+                  </div>
+                  <h6 class="font-sm-bold mb-1 text-dark">Blades</h6>
+                  <span class="font-xxs text-muted">635 items</span>
+                </div>
+              </div>
+              <!-- Category Item 4 -->
+              <div class="swiper-slide">
+                <div class="box-category-card">
+                  <div class="image">
+                    <img
+                      src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=120&q=80"
+                      alt="Abrasives"
+                    />
+                  </div>
+                  <h6 class="font-sm-bold mb-1 text-dark">Abrasives</h6>
+                  <span class="font-xxs text-muted">965 items</span>
+                </div>
+              </div>
+              <!-- Category Item 5 -->
+              <div class="swiper-slide">
+                <div class="box-category-card">
+                  <div class="image">
+                    <img
+                      src="https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?auto=format&fit=crop&w=120&q=80"
+                      alt="Appliances"
+                    />
+                  </div>
+                  <h6 class="font-sm-bold mb-1 text-dark">Home Appliances</h6>
+                  <span class="font-xxs text-muted">3256 items</span>
+                </div>
+              </div>
+              <!-- Category Item 6 -->
+              <div class="swiper-slide">
+                <div class="box-category-card">
+                  <div class="image">
+                    <img
+                      src="https://images.unsplash.com/photo-1473081556163-2a17de81fc97?auto=format&fit=crop&w=120&q=80"
+                      alt="Outdoor"
+                    />
+                  </div>
+                  <h6 class="font-sm-bold mb-1 text-dark">Outdoor Power</h6>
+                  <span class="font-xxs text-muted">9658 items</span>
+                </div>
+              </div>
+              <!-- Category Item 7 -->
+              <div class="swiper-slide">
+                <div class="box-category-card">
+                  <div class="image">
+                    <img
+                      src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=120&q=80"
+                      alt="Watches"
+                    />
+                  </div>
+                  <h6 class="font-sm-bold mb-1 text-dark">Smart Watches</h6>
+                  <span class="font-xxs text-muted">2356 items</span>
+                </div>
+              </div>
+              <!-- Category Item 8 -->
+              <div class="swiper-slide">
+                <div class="box-category-card">
+                  <div class="image">
+                    <img
+                      src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=120&q=80"
+                      alt="Computers"
+                    />
+                  </div>
+                  <h6 class="font-sm-bold mb-1 text-dark">Computers</h6>
+                  <span class="font-xxs text-muted">6358 items</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Ad Banner 1 (Upgraded) -->
+      <section class="section-box mb-5">
+        <div class="container">
+          <a href="#" class="promo-banner-card">
+            <img
+              src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&w=1200&h=180&q=80"
+              alt="Ad Banner"
+            />
+            <div class="promo-banner-content">
+              <span class="promo-banner-badge">Mega Industrial Sale</span>
+              <h2 class="promo-banner-title">Professional Hardware & Tools</h2>
+              <p class="promo-banner-desc mb-0">
+                Get up to 40% off on all verified heavy-duty machinery and hand
+                tool kits this week only.
+              </p>
+              <div class="promo-banner-btn mt-2">
+                Explore Deals <i class="fa-solid fa-arrow-right ms-1"></i>
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- Section 1: Daily Flash Deals (New) -->
+      <section class="section-box mb-5">
+        <div class="container">
+          <div class="flash-deals-section p-4 p-md-5 shadow-sm">
+            <div
+              class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-4 mb-4 pb-3 border-bottom border-light"
+            >
+              <div>
+                <span class="badge bg-danger mb-2 font-xxs text-uppercase"
+                  ><i class="fa-solid fa-bolt me-1"></i> Limited Time</span
+                >
+                <h3 class="mb-0 font-lg-bold">Deals of the Day</h3>
+                <p class="font-xs text-muted mb-0">
+                  Hot discounts available for a very limited duration. Buy
+                  before stock runs out!
+                </p>
+              </div>
+              <div class="d-flex align-items-center gap-2">
+                <span
+                  class="font-xs-bold text-dark text-uppercase me-2 d-none d-sm-inline"
+                  >Ends In:</span
+                >
+                <div class="countdown-container" id="deal-countdown">
+                  <div class="countdown-unit">
+                    <span class="countdown-digit" id="countdown-hours">00</span>
+                    <span class="countdown-label">hours</span>
+                  </div>
+                  <span class="countdown-separator">:</span>
+                  <div class="countdown-unit">
+                    <span class="countdown-digit" id="countdown-minutes"
+                      >00</span
+                    >
+                    <span class="countdown-label">mins</span>
+                  </div>
+                  <span class="countdown-separator">:</span>
+                  <div class="countdown-unit">
+                    <span class="countdown-digit" id="countdown-seconds"
+                      >00</span
+                    >
+                    <span class="countdown-label">secs</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper swiper-products-deals py-2">
+              <div class="swiper-wrapper">
+                <!-- Deal Product 1 -->
+                <div class="swiper-slide">
+                  <div class="card-grid-style-3">
+                    <div class="tools">
+                      <a class="tools-btn" href="#"
+                        ><i class="fa-solid fa-code-compare"></i
+                      ></a>
+                      <a class="tools-btn" href="#"
+                        ><i class="fa-regular fa-heart"></i
+                      ></a>
+                    </div>
+                    <div class="image-box">
+                      <span class="label bg-danger">-35%</span>
+                      <img
+                        src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=300&q=80"
+                        alt="Tool Set"
+                      />
+                    </div>
+                    <div class="info-right">
+                      <a
+                        class="font-xs text-primary text-decoration-none"
+                        href="#"
+                        >Makita</a
+                      >
+                      <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                        <a
+                          href="#"
+                          class="text-decoration-none text-dark hover-primary"
+                          >Makita Brushless Cordless Drill Driver Set</a
+                        >
+                      </h6>
+                      <div class="rating-stars">
+                        <i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i>
+                        <span class="review-count">(112)</span>
+                      </div>
+                      <div class="price-info">
+                        <strong class="price-main">$149.00</strong>
+                        <span class="price-line">$229.00</span>
+                      </div>
+                      <div class="deal-progress-container">
+                        <div
+                          class="d-flex justify-content-between font-xxs text-muted mb-1"
+                        >
+                          <span>Sold: 37</span>
+                          <span>Available: 13</span>
+                        </div>
+                        <div class="deal-progress-bar">
+                          <div
+                            class="deal-progress-fill"
+                            style="width: 74%"
+                          ></div>
+                        </div>
+                      </div>
+                      <button class="btn-cart mt-2">
+                        <i class="fa-solid fa-cart-shopping me-1"></i> Add To
+                        Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Deal Product 2 -->
+                <div class="swiper-slide">
+                  <div class="card-grid-style-3">
+                    <div class="tools">
+                      <a class="tools-btn" href="#"
+                        ><i class="fa-solid fa-code-compare"></i
+                      ></a>
+                      <a class="tools-btn" href="#"
+                        ><i class="fa-regular fa-heart"></i
+                      ></a>
+                    </div>
+                    <div class="image-box">
+                      <span class="label bg-danger">-40%</span>
+                      <img
+                        src="https://images.unsplash.com/photo-1534224039826-c7a0eda0e6b3?auto=format&fit=crop&w=300&q=80"
+                        alt="Angle Grinder"
+                      />
+                    </div>
+                    <div class="info-right">
+                      <a
+                        class="font-xs text-primary text-decoration-none"
+                        href="#"
+                        >DeWalt</a
+                      >
+                      <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                        <a
+                          href="#"
+                          class="text-decoration-none text-dark hover-primary"
+                          >DeWalt Max XR Angle Grinder 20V</a
+                        >
+                      </h6>
+                      <div class="rating-stars">
+                        <i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-regular fa-star"></i>
+                        <span class="review-count">(84)</span>
+                      </div>
+                      <div class="price-info">
+                        <strong class="price-main">$99.00</strong>
+                        <span class="price-line">$165.00</span>
+                      </div>
+                      <div class="deal-progress-container">
+                        <div
+                          class="d-flex justify-content-between font-xxs text-muted mb-1"
+                        >
+                          <span>Sold: 42</span>
+                          <span>Available: 8</span>
+                        </div>
+                        <div class="deal-progress-bar">
+                          <div
+                            class="deal-progress-fill"
+                            style="width: 84%"
+                          ></div>
+                        </div>
+                      </div>
+                      <button class="btn-cart mt-2">
+                        <i class="fa-solid fa-cart-shopping me-1"></i> Add To
+                        Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Deal Product 3 -->
+                <div class="swiper-slide">
+                  <div class="card-grid-style-3">
+                    <div class="tools">
+                      <a class="tools-btn" href="#"
+                        ><i class="fa-solid fa-code-compare"></i
+                      ></a>
+                      <a class="tools-btn" href="#"
+                        ><i class="fa-regular fa-heart"></i
+                      ></a>
+                    </div>
+                    <div class="image-box">
+                      <span class="label bg-danger">-20%</span>
+                      <img
+                        src="https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?auto=format&fit=crop&w=300&q=80"
+                        alt="Pressure Washer"
+                      />
+                    </div>
+                    <div class="info-right">
+                      <a
+                        class="font-xs text-primary text-decoration-none"
+                        href="#"
+                        >Karcher</a
+                      >
+                      <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                        <a
+                          href="#"
+                          class="text-decoration-none text-dark hover-primary"
+                          >Karcher K5 Premium Pressure Washer</a
+                        >
+                      </h6>
+                      <div class="rating-stars">
+                        <i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i>
+                        <span class="review-count">(195)</span>
+                      </div>
+                      <div class="price-info">
+                        <strong class="price-main">$279.00</strong>
+                        <span class="price-line">$349.00</span>
+                      </div>
+                      <div class="deal-progress-container">
+                        <div
+                          class="d-flex justify-content-between font-xxs text-muted mb-1"
+                        >
+                          <span>Sold: 15</span>
+                          <span>Available: 35</span>
+                        </div>
+                        <div class="deal-progress-bar">
+                          <div
+                            class="deal-progress-fill"
+                            style="width: 30%"
+                          ></div>
+                        </div>
+                      </div>
+                      <button class="btn-cart mt-2">
+                        <i class="fa-solid fa-cart-shopping me-1"></i> Add To
+                        Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Deal Product 4 -->
+                <div class="swiper-slide">
+                  <div class="card-grid-style-3">
+                    <div class="tools">
+                      <a class="tools-btn" href="#"
+                        ><i class="fa-solid fa-code-compare"></i
+                      ></a>
+                      <a class="tools-btn" href="#"
+                        ><i class="fa-regular fa-heart"></i
+                      ></a>
+                    </div>
+                    <div class="image-box">
+                      <span class="label bg-danger">-50%</span>
+                      <img
+                        src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=300&q=80"
+                        alt="Socket Wrench"
+                      />
+                    </div>
+                    <div class="info-right">
+                      <a
+                        class="font-xs text-primary text-decoration-none"
+                        href="#"
+                        >Stanley</a
+                      >
+                      <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                        <a
+                          href="#"
+                          class="text-decoration-none text-dark hover-primary"
+                          >Stanley 150-Piece Socket Wrench Set</a
+                        >
+                      </h6>
+                      <div class="rating-stars">
+                        <i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-regular fa-star"></i>
+                        <span class="review-count">(340)</span>
+                      </div>
+                      <div class="price-info">
+                        <strong class="price-main">$49.99</strong>
+                        <span class="price-line">$99.99</span>
+                      </div>
+                      <div class="deal-progress-container">
+                        <div
+                          class="d-flex justify-content-between font-xxs text-muted mb-1"
+                        >
+                          <span>Sold: 120</span>
+                          <span>Available: 30</span>
+                        </div>
+                        <div class="deal-progress-bar">
+                          <div
+                            class="deal-progress-fill"
+                            style="width: 80%"
+                          ></div>
+                        </div>
+                      </div>
+                      <button class="btn-cart mt-2">
+                        <i class="fa-solid fa-cart-shopping me-1"></i> Add To
+                        Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="swiper-nav-btn-absolute swiper-button-next-deals d-none d-md-flex"
+                style="right: 10px"
+                aria-label="Next slide"
+              >
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+              <button
+                type="button"
+                class="swiper-nav-btn-absolute swiper-button-prev-deals d-none d-md-flex"
+                style="left: 10px"
+                aria-label="Previous slide"
+              >
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Product Tabs Slider Section -->
+      <section class="section-box mb-5">
+        <div class="container">
+          <div
+            class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 pb-3 border-bottom g-3"
+          >
+            <!-- Nav Tabs -->
+            <ul
+              class="nav nav-tabs nav-tabs-underline mb-2 mb-md-0"
+              id="productTabs"
+              role="tablist"
+            >
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link active"
+                  id="featured-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#featured-pane"
+                  type="button"
+                  role="tab"
+                  aria-controls="featured-pane"
+                  aria-selected="true"
+                >
+                  Featured
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="bestseller-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#bestseller-pane"
+                  type="button"
+                  role="tab"
+                  aria-controls="bestseller-pane"
+                  aria-selected="false"
+                >
+                  Best Seller
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="mostviewed-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#mostviewed-pane"
+                  type="button"
+                  role="tab"
+                  aria-controls="mostviewed-pane"
+                  aria-selected="false"
+                >
+                  Most Viewed
+                </button>
+              </li>
+            </ul>
+
+            <!-- Swiper Navigation Buttons -->
+            <div class="d-flex gap-2">
+              <button
+                type="button"
+                class="swiper-nav-btn swiper-button-prev-products"
+                aria-label="Previous slide"
+              >
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <button
+                type="button"
+                class="swiper-nav-btn swiper-button-next-products"
+                aria-label="Next slide"
+              >
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="tab-content" id="productTabsContent">
+            <!-- Tab 1: Featured -->
+            <div
+              class="tab-pane fade show active"
+              id="featured-pane"
+              role="tabpanel"
+              aria-labelledby="featured-tab"
+            >
+              <div class="swiper swiper-products-featured py-3">
+                <div class="swiper-wrapper">
+                  <!-- Product 1 -->
+                  <div class="swiper-slide">
+                    <div class="card-grid-style-3">
+                      <div class="tools">
+                        <a class="tools-btn" href="#" title="Compare"
+                          ><i class="fa-solid fa-code-compare"></i
+                        ></a>
+                        <a class="tools-btn" href="#" title="Add to Wishlist"
+                          ><i class="fa-regular fa-heart"></i
+                        ></a>
+                        <a class="tools-btn" href="#" title="Quick View"
+                          ><i class="fa-regular fa-eye"></i
+                        ></a>
+                      </div>
+                      <div class="image-box">
+                        <span class="label label-sale">-15%</span>
+                        <img
+                          src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80"
+                          alt="iMac"
+                        />
+                      </div>
+                      <div class="info-right">
+                        <a
+                          class="font-xs text-primary text-decoration-none"
+                          href="#"
+                          >Apple</a
+                        >
+                        <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                          <a
+                            href="#"
+                            class="text-decoration-none text-dark hover-primary"
+                            >2022 Apple iMac Retina 5K Display</a
+                          >
+                        </h6>
+                        <div class="rating-stars">
+                          <i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i>
+                          <span class="review-count">(65)</span>
+                        </div>
+                        <div class="price-info">
+                          <strong class="price-main">$2856.30</strong>
+                          <span class="price-line">$3225.60</span>
+                        </div>
+                        <ul class="list-features">
+                          <li>27-inch Retina 5K display</li>
+                          <li>Intel Core i5 6-core processor</li>
+                          <li>AMD Radeon Pro GPU</li>
+                        </ul>
+                        <button class="btn-cart mt-3">
+                          <i class="fa-solid fa-cart-shopping me-1"></i> Add To
+                          Cart
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Product 2 -->
+                  <div class="swiper-slide">
+                    <div class="card-grid-style-3">
+                      <div class="tools">
+                        <a class="tools-btn" href="#" title="Compare"
+                          ><i class="fa-solid fa-code-compare"></i
+                        ></a>
+                        <a class="tools-btn" href="#" title="Add to Wishlist"
+                          ><i class="fa-regular fa-heart"></i
+                        ></a>
+                        <a class="tools-btn" href="#" title="Quick View"
+                          ><i class="fa-regular fa-eye"></i
+                        ></a>
+                      </div>
+                      <div class="image-box">
+                        <span class="label label-sale">-10%</span>
+                        <img
+                          src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=300&q=80"
+                          alt="Drill"
+                        />
+                      </div>
+                      <div class="info-right">
+                        <a
+                          class="font-xs text-primary text-decoration-none"
+                          href="#"
+                          >Bosch</a
+                        >
+                        <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                          <a
+                            href="#"
+                            class="text-decoration-none text-dark hover-primary"
+                            >Bosch Cordless Power Drill 18V</a
+                          >
+                        </h6>
+                        <div class="rating-stars">
+                          <i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i
+                          ><i class="fa-regular fa-star"></i>
+                          <span class="review-count">(42)</span>
+                        </div>
+                        <div class="price-info">
+                          <strong class="price-main">$125.00</strong>
+                          <span class="price-line">$139.00</span>
+                        </div>
+                        <ul class="list-features">
+                          <li>Brushless motor tech</li>
+                          <li>Double speed settings</li>
+                          <li>Ergonomic rubber grip</li>
+                        </ul>
+                        <button class="btn-cart mt-3">
+                          <i class="fa-solid fa-cart-shopping me-1"></i> Add To
+                          Cart
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Product 3 -->
+                  <div class="swiper-slide">
+                    <div class="card-grid-style-3">
+                      <div class="tools">
+                        <a class="tools-btn" href="#" title="Compare"
+                          ><i class="fa-solid fa-code-compare"></i
+                        ></a>
+                        <a class="tools-btn" href="#" title="Add to Wishlist"
+                          ><i class="fa-regular fa-heart"></i
+                        ></a>
+                        <a class="tools-btn" href="#" title="Quick View"
+                          ><i class="fa-regular fa-eye"></i
+                        ></a>
+                      </div>
+                      <div class="image-box">
+                        <span class="label label-new">New</span>
+                        <img
+                          src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=300&q=80"
+                          alt="Headphones"
+                        />
+                      </div>
+                      <div class="info-right">
+                        <a
+                          class="font-xs text-primary text-decoration-none"
+                          href="#"
+                          >Sony</a
+                        >
+                        <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                          <a
+                            href="#"
+                            class="text-decoration-none text-dark hover-primary"
+                            >Sony WH-1000XM4 Noise Cancelling</a
+                          >
+                        </h6>
+                        <div class="rating-stars">
+                          <i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i>
+                          <span class="review-count">(118)</span>
+                        </div>
+                        <div class="price-info">
+                          <strong class="price-main">$349.99</strong>
+                          <span class="price-line">$379.99</span>
+                        </div>
+                        <ul class="list-features">
+                          <li>Industry-leading ANC</li>
+                          <li>Up to 30h battery life</li>
+                          <li>Touch control sensors</li>
+                        </ul>
+                        <button class="btn-cart mt-3">
+                          <i class="fa-solid fa-cart-shopping me-1"></i> Add To
+                          Cart
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Product 4 -->
+                  <div class="swiper-slide">
+                    <div class="card-grid-style-3">
+                      <div class="tools">
+                        <a class="tools-btn" href="#" title="Compare"
+                          ><i class="fa-solid fa-code-compare"></i
+                        ></a>
+                        <a class="tools-btn" href="#" title="Add to Wishlist"
+                          ><i class="fa-regular fa-heart"></i
+                        ></a>
+                        <a class="tools-btn" href="#" title="Quick View"
+                          ><i class="fa-regular fa-eye"></i
+                        ></a>
+                      </div>
+                      <div class="image-box">
+                        <span class="label label-sale">-20%</span>
+                        <img
+                          src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=300&q=80"
+                          alt="Watch"
+                        />
+                      </div>
+                      <div class="info-right">
+                        <a
+                          class="font-xs text-primary text-decoration-none"
+                          href="#"
+                          >Fossil</a
+                        >
+                        <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                          <a
+                            href="#"
+                            class="text-decoration-none text-dark hover-primary"
+                            >Fossil Gen 6 Smartwatch Slate</a
+                          >
+                        </h6>
+                        <div class="rating-stars">
+                          <i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i
+                          ><i class="fa-regular fa-star"></i>
+                          <span class="review-count">(89)</span>
+                        </div>
+                        <div class="price-info">
+                          <strong class="price-main">$229.00</strong>
+                          <span class="price-line">$299.00</span>
+                        </div>
+                        <ul class="list-features">
+                          <li>Wear OS by Google</li>
+                          <li>Heart rate &amp; SpO2 tracking</li>
+                          <li>Rapid 30-min charge</li>
+                        </ul>
+                        <button class="btn-cart mt-3">
+                          <i class="fa-solid fa-cart-shopping me-1"></i> Add To
+                          Cart
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Product 5 -->
+                  <div class="swiper-slide">
+                    <div class="card-grid-style-3">
+                      <div class="tools">
+                        <a class="tools-btn" href="#" title="Compare"
+                          ><i class="fa-solid fa-code-compare"></i
+                        ></a>
+                        <a class="tools-btn" href="#" title="Add to Wishlist"
+                          ><i class="fa-regular fa-heart"></i
+                        ></a>
+                        <a class="tools-btn" href="#" title="Quick View"
+                          ><i class="fa-regular fa-eye"></i
+                        ></a>
+                      </div>
+                      <div class="image-box">
+                        <span class="label label-sale">-8%</span>
+                        <img
+                          src="https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=300&q=80"
+                          alt="Vacuum"
+                        />
+                      </div>
+                      <div class="info-right">
+                        <a
+                          class="font-xs text-primary text-decoration-none"
+                          href="#"
+                          >Dyson</a
+                        >
+                        <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                          <a
+                            href="#"
+                            class="text-decoration-none text-dark hover-primary"
+                            >Dyson V11 Animal Cordless Vacuum</a
+                          >
+                        </h6>
+                        <div class="rating-stars">
+                          <i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i>
+                          <span class="review-count">(72)</span>
+                        </div>
+                        <div class="price-info">
+                          <strong class="price-main">$599.99</strong>
+                          <span class="price-line">$649.99</span>
+                        </div>
+                        <ul class="list-features">
+                          <li>Intelligent cleaning modes</li>
+                          <li>Up to 60 min runtime</li>
+                          <li>High torque cleaner head</li>
+                        </ul>
+                        <button class="btn-cart mt-3">
+                          <i class="fa-solid fa-cart-shopping me-1"></i> Add To
+                          Cart
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab 2: Bestseller -->
+            <div
+              class="tab-pane fade"
+              id="bestseller-pane"
+              role="tabpanel"
+              aria-labelledby="bestseller-tab"
+            >
+              <div class="swiper swiper-products-bestseller py-3">
+                <div class="swiper-wrapper">
+                  <!-- Product 1 -->
+                  <div class="swiper-slide">
+                    <div class="card-grid-style-3">
+                      <div class="tools">
+                        <a class="tools-btn" href="#" title="Compare"
+                          ><i class="fa-solid fa-code-compare"></i
+                        ></a>
+                        <a class="tools-btn" href="#" title="Add to Wishlist"
+                          ><i class="fa-regular fa-heart"></i
+                        ></a>
+                        <a class="tools-btn" href="#" title="Quick View"
+                          ><i class="fa-regular fa-eye"></i
+                        ></a>
+                      </div>
+                      <div class="image-box">
+                        <span class="label label-sale">-17%</span>
+                        <img
+                          src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=300&q=80"
+                          alt="TV"
+                        />
+                      </div>
+                      <div class="info-right">
+                        <a
+                          class="font-xs text-primary text-decoration-none"
+                          href="#"
+                          >Roku</a
+                        >
+                        <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                          <a
+                            href="#"
+                            class="text-decoration-none text-dark hover-primary"
+                            >Class 4K UHD LED Roku Smart TV</a
+                          >
+                        </h6>
+                        <div class="rating-stars">
+                          <i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i
+                          ><i class="fa-regular fa-star"></i>
+                          <span class="review-count">(145)</span>
+                        </div>
+                        <div class="price-info">
+                          <strong class="price-main">$268.00</strong>
+                          <span class="price-line">$320.00</span>
+                        </div>
+                        <ul class="list-features">
+                          <li>High Definition 4K Panel</li>
+                          <li>Built-in Roku smart systems</li>
+                          <li>Vibrant HDR display support</li>
+                        </ul>
+                        <button class="btn-cart mt-3">
+                          <i class="fa-solid fa-cart-shopping me-1"></i> Add To
+                          Cart
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Reuse product items -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab 3: Most Viewed -->
+            <div
+              class="tab-pane fade"
+              id="mostviewed-pane"
+              role="tabpanel"
+              aria-labelledby="mostviewed-tab"
+            >
+              <div class="swiper swiper-products-mostviewed py-3">
+                <div class="swiper-wrapper">
+                  <!-- Product 1 -->
+                  <div class="swiper-slide">
+                    <div class="card-grid-style-3">
+                      <div class="tools">
+                        <a class="tools-btn" href="#" title="Compare"
+                          ><i class="fa-solid fa-code-compare"></i
+                        ></a>
+                        <a class="tools-btn" href="#" title="Add to Wishlist"
+                          ><i class="fa-regular fa-heart"></i
+                        ></a>
+                        <a class="tools-btn" href="#" title="Quick View"
+                          ><i class="fa-regular fa-eye"></i
+                        ></a>
+                      </div>
+                      <div class="image-box">
+                        <span class="label label-new">Hot</span>
+                        <img
+                          src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=300&q=80"
+                          alt="HP Laptop"
+                        />
+                      </div>
+                      <div class="info-right">
+                        <a
+                          class="font-xs text-primary text-decoration-none"
+                          href="#"
+                          >HP</a
+                        >
+                        <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                          <a
+                            href="#"
+                            class="text-decoration-none text-dark hover-primary"
+                            >HP Pavilion Laptop 15-inch</a
+                          >
+                        </h6>
+                        <div class="rating-stars">
+                          <i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i
+                          ><i class="fa-solid fa-star"></i>
+                          <span class="review-count">(96)</span>
+                        </div>
+                        <div class="price-info">
+                          <strong class="price-main">$736.30</strong>
+                          <span class="price-line">$825.00</span>
+                        </div>
+                        <ul class="list-features">
+                          <li>AMD Ryzen 5 processor</li>
+                          <li>8GB DDR4 RAM / 256GB SSD</li>
+                          <li>Narrow bezel IPS screen</li>
+                        </ul>
+                        <button class="btn-cart mt-3">
+                          <i class="fa-solid fa-cart-shopping me-1"></i> Add To
+                          Cart
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Side-by-side Ad Banners (2 & 3) (Upgraded) -->
+      <section class="section-box mb-5">
+        <div class="container">
+          <div class="row g-4">
+            <div class="col-md-6">
+              <a href="#" class="promo-banner-card">
+                <img
+                  src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&h=180&q=80"
+                  alt="Promo Banner"
+                />
+                <div class="promo-banner-content">
+                  <span class="promo-banner-badge bg-primary">Power Tools</span>
+                  <h3 class="promo-banner-title">Cordless Heavy Drills</h3>
+                  <p class="promo-banner-desc">
+                    Engineered for maximum torque and performance. Professional
+                    quality.
+                  </p>
+                  <div class="promo-banner-btn">
+                    Shop Now <i class="fa-solid fa-arrow-right ms-1"></i>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="#" class="promo-banner-card">
+                <img
+                  src="https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&w=600&h=180&q=80"
+                  alt="Promo Banner 2"
+                />
+                <div class="promo-banner-content">
+                  <span class="promo-banner-badge bg-danger">New Arrivals</span>
+                  <h3 class="promo-banner-title">Premium Safety Gear</h3>
+                  <p class="promo-banner-desc">
+                    Advanced protection shields, industrial gloves & reinforced
+                    jackets.
+                  </p>
+                  <div class="promo-banner-btn">
+                    View Collection <i class="fa-solid fa-arrow-right ms-1"></i>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Top-Rated Verified Vendors Showcase (New) -->
+      <section class="section-box mb-5">
+        <div class="container">
+          <div
+            class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom"
+          >
+            <div>
+              <h4 class="font-lg-bold mb-0 section-heading">
+                Verified Premium Vendors
+              </h4>
+              <p class="font-xs text-muted mb-0">
+                Shop directly from top-rated global manufacturers & suppliers.
+              </p>
+            </div>
+            <div class="d-flex gap-2">
+              <button
+                type="button"
+                class="swiper-nav-btn swiper-button-prev-vendors"
+                aria-label="Previous slide"
+              >
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <button
+                type="button"
+                class="swiper-nav-btn swiper-button-next-vendors"
+                aria-label="Next slide"
+              >
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+          <div class="swiper swiper-vendors py-2">
+            <div class="swiper-wrapper">
+              <!-- Vendor 1 -->
+              <div class="swiper-slide">
+                <div class="vendor-card">
+                  <span class="vendor-badge"
+                    ><i class="fa-solid fa-shield-check"></i> Certified</span
+                  >
+                  <img
+                    src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=150&q=80"
+                    alt="Apex Tools"
+                    class="vendor-avatar"
+                  />
+                  <h6 class="font-md-bold text-dark mb-1">
+                    Apex Industrial Tools
+                  </h6>
+                  <div class="rating-stars font-xs mb-2">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <span class="review-count">(4.9)</span>
+                  </div>
+                  <div class="vendor-stats">
+                    <div class="vendor-stat-item">
+                      <span class="vendor-stat-val">1.2k+</span>
+                      <span class="vendor-stat-lbl">Products</span>
+                    </div>
+                    <div class="vendor-stat-item">
+                      <span class="vendor-stat-val">99%</span>
+                      <span class="vendor-stat-lbl">Positive</span>
+                    </div>
+                  </div>
+                  <a href="#" class="btn btn-vendor-visit text-decoration-none"
+                    >Visit Store</a
+                  >
+                </div>
+              </div>
+
+              <!-- Vendor 2 -->
+              <div class="swiper-slide">
+                <div class="vendor-card">
+                  <span class="vendor-badge"
+                    ><i class="fa-solid fa-shield-check"></i> Certified</span
+                  >
+                  <img
+                    src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=150&q=80"
+                    alt="Bosch Tech"
+                    class="vendor-avatar"
+                  />
+                  <h6 class="font-md-bold text-dark mb-1">Bosch Power Depot</h6>
+                  <div class="rating-stars font-xs mb-2">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-regular fa-star"></i>
+                    <span class="review-count">(4.7)</span>
+                  </div>
+                  <div class="vendor-stats">
+                    <div class="vendor-stat-item">
+                      <span class="vendor-stat-val">840+</span>
+                      <span class="vendor-stat-lbl">Products</span>
+                    </div>
+                    <div class="vendor-stat-item">
+                      <span class="vendor-stat-val">98%</span>
+                      <span class="vendor-stat-lbl">Positive</span>
+                    </div>
+                  </div>
+                  <a href="#" class="btn btn-vendor-visit text-decoration-none"
+                    >Visit Store</a
+                  >
+                </div>
+              </div>
+
+              <!-- Vendor 3 -->
+              <div class="swiper-slide">
+                <div class="vendor-card">
+                  <span class="vendor-badge"
+                    ><i class="fa-solid fa-shield-check"></i> Certified</span
+                  >
+                  <img
+                    src="https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?auto=format&fit=crop&w=150&q=80"
+                    alt="Titan Hardware"
+                    class="vendor-avatar"
+                  />
+                  <h6 class="font-md-bold text-dark mb-1">
+                    Titan Hardware Ltd.
+                  </h6>
+                  <div class="rating-stars font-xs mb-2">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <span class="review-count">(4.8)</span>
+                  </div>
+                  <div class="vendor-stats">
+                    <div class="vendor-stat-item">
+                      <span class="vendor-stat-val">2.3k+</span>
+                      <span class="vendor-stat-lbl">Products</span>
+                    </div>
+                    <div class="vendor-stat-item">
+                      <span class="vendor-stat-val">97%</span>
+                      <span class="vendor-stat-lbl">Positive</span>
+                    </div>
+                  </div>
+                  <a href="#" class="btn btn-vendor-visit text-decoration-none"
+                    >Visit Store</a
+                  >
+                </div>
+              </div>
+
+              <!-- Vendor 4 -->
+              <div class="swiper-slide">
+                <div class="vendor-card">
+                  <span class="vendor-badge"
+                    ><i class="fa-solid fa-shield-check"></i> Certified</span
+                  >
+                  <img
+                    src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=150&q=80"
+                    alt="Matrix Electrics"
+                    class="vendor-avatar"
+                  />
+                  <h6 class="font-md-bold text-dark mb-1">
+                    Matrix Electrics Inc.
+                  </h6>
+                  <div class="rating-stars font-xs mb-2">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-regular fa-star"></i>
+                    <span class="review-count">(4.6)</span>
+                  </div>
+                  <div class="vendor-stats">
+                    <div class="vendor-stat-item">
+                      <span class="vendor-stat-val">410+</span>
+                      <span class="vendor-stat-lbl">Products</span>
+                    </div>
+                    <div class="vendor-stat-item">
+                      <span class="vendor-stat-val">95%</span>
+                      <span class="vendor-stat-lbl">Positive</span>
+                    </div>
+                  </div>
+                  <a href="#" class="btn btn-vendor-visit text-decoration-none"
+                    >Visit Store</a
+                  >
+                </div>
+              </div>
+
+              <!-- Vendor 5 -->
+              <div class="swiper-slide">
+                <div class="vendor-card">
+                  <span class="vendor-badge"
+                    ><i class="fa-solid fa-shield-check"></i> Certified</span
+                  >
+                  <img
+                    src="https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=150&q=80"
+                    alt="Craftsman Hub"
+                    class="vendor-avatar"
+                  />
+                  <h6 class="font-md-bold text-dark mb-1">
+                    Craftsmen Gear Hub
+                  </h6>
+                  <div class="rating-stars font-xs mb-2">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <span class="review-count">(4.9)</span>
+                  </div>
+                  <div class="vendor-stats">
+                    <div class="vendor-stat-item">
+                      <span class="vendor-stat-val">930+</span>
+                      <span class="vendor-stat-lbl">Products</span>
+                    </div>
+                    <div class="vendor-stat-item">
+                      <span class="vendor-stat-val">99%</span>
+                      <span class="vendor-stat-lbl">Positive</span>
+                    </div>
+                  </div>
+                  <a href="#" class="btn btn-vendor-visit text-decoration-none"
+                    >Visit Store</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trending This Week Section -->
+      <section class="section-box py-5 bg-light mb-5">
+        <div class="container">
+          <div
+            class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 pb-2 border-bottom"
+          >
+            <div>
+              <h3 class="mb-1 font-lg-bold section-heading">
+                Trending This Week
+              </h3>
+              <p class="font-xs text-muted mb-0">
+                Specially recommended products for you this month.
+              </p>
+            </div>
+            <ul
+              class="nav nav-tabs nav-tabs-underline text-uppercase font-xs-bold"
+              id="trendingTabs"
+              role="tablist"
+            >
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  data-bs-toggle="tab"
+                  href="#trend-all"
+                  >All</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  data-bs-toggle="tab"
+                  href="#trend-bestseller"
+                  >Best Seller</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  data-bs-toggle="tab"
+                  href="#trend-mostviewed"
+                  >Most Viewed</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="tab-content">
+            <!-- All Products Grid -->
+            <div class="tab-pane fade show active" id="trend-all">
+              <div
+                class="row g-4 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5"
+              >
+                <!-- Item 1 -->
+                <div class="col">
+                  <div class="card-grid-style-3">
+                    <div class="tools">
+                      <a class="tools-btn" href="#"
+                        ><i class="fa-solid fa-code-compare"></i
+                      ></a>
+                      <a class="tools-btn" href="#"
+                        ><i class="fa-regular fa-heart"></i
+                      ></a>
+                    </div>
+                    <div class="image-box">
+                      <span class="label label-sale">-17%</span>
+                      <img
+                        src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80"
+                        alt="Apple iMac"
+                      />
+                    </div>
+                    <div class="info-right">
+                      <a
+                        class="font-xs text-primary text-decoration-none"
+                        href="#"
+                        >Apple</a
+                      >
+                      <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                        <a
+                          href="shop-single-product.html"
+                          class="text-decoration-none text-dark hover-primary"
+                          >2022 Apple iMac with Retina 5K</a
+                        >
+                      </h6>
+                      <div class="rating-stars">
+                        <i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i>
+                      </div>
+                      <div class="price-info">
+                        <strong class="price-main">$2856.30</strong>
+                      </div>
+                      <button class="btn-cart mt-3">
+                        <i class="fa-solid fa-cart-shopping me-1"></i> Add To
+                        Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="col">
+                  <div class="card-grid-style-3">
+                    <div class="tools">
+                      <a class="tools-btn" href="#"
+                        ><i class="fa-solid fa-code-compare"></i
+                      ></a>
+                      <a class="tools-btn" href="#"
+                        ><i class="fa-regular fa-heart"></i
+                      ></a>
+                    </div>
+                    <div class="image-box">
+                      <span class="label label-sale">-10%</span>
+                      <img
+                        src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=300&q=80"
+                        alt="Power drill"
+                      />
+                    </div>
+                    <div class="info-right">
+                      <a
+                        class="font-xs text-primary text-decoration-none"
+                        href="#"
+                        >Bosch</a
+                      >
+                      <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                        <a
+                          href="shop-single-product.html"
+                          class="text-decoration-none text-dark hover-primary"
+                          >Bosch Cordless Power Drill 18V</a
+                        >
+                      </h6>
+                      <div class="rating-stars">
+                        <i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-regular fa-star"></i>
+                      </div>
+                      <div class="price-info">
+                        <strong class="price-main">$125.00</strong>
+                      </div>
+                      <button class="btn-cart mt-3">
+                        <i class="fa-solid fa-cart-shopping me-1"></i> Add To
+                        Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Item 3 -->
+                <div class="col">
+                  <div class="card-grid-style-3">
+                    <div class="tools">
+                      <a class="tools-btn" href="#"
+                        ><i class="fa-solid fa-code-compare"></i
+                      ></a>
+                      <a class="tools-btn" href="#"
+                        ><i class="fa-regular fa-heart"></i
+                      ></a>
+                    </div>
+                    <div class="image-box">
+                      <span class="label label-new">New</span>
+                      <img
+                        src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=300&q=80"
+                        alt="Sony Headphones"
+                      />
+                    </div>
+                    <div class="info-right">
+                      <a
+                        class="font-xs text-primary text-decoration-none"
+                        href="#"
+                        >Sony</a
+                      >
+                      <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                        <a
+                          href="shop-single-product.html"
+                          class="text-decoration-none text-dark hover-primary"
+                          >Sony Noise Cancelling WH-1000XM4</a
+                        >
+                      </h6>
+                      <div class="rating-stars">
+                        <i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i>
+                      </div>
+                      <div class="price-info">
+                        <strong class="price-main">$349.99</strong>
+                      </div>
+                      <button class="btn-cart mt-3">
+                        <i class="fa-solid fa-cart-shopping me-1"></i> Add To
+                        Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Item 4 -->
+                <div class="col">
+                  <div class="card-grid-style-3">
+                    <div class="tools">
+                      <a class="tools-btn" href="#"
+                        ><i class="fa-solid fa-code-compare"></i
+                      ></a>
+                      <a class="tools-btn" href="#"
+                        ><i class="fa-regular fa-heart"></i
+                      ></a>
+                    </div>
+                    <div class="image-box">
+                      <span class="label label-sale">-20%</span>
+                      <img
+                        src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=300&q=80"
+                        alt="Fossil watch"
+                      />
+                    </div>
+                    <div class="info-right">
+                      <a
+                        class="font-xs text-primary text-decoration-none"
+                        href="#"
+                        >Fossil</a
+                      >
+                      <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                        <a
+                          href="shop-single-product.html"
+                          class="text-decoration-none text-dark hover-primary"
+                          >Fossil Gen 6 Smartwatch Slate</a
+                        >
+                      </h6>
+                      <div class="rating-stars">
+                        <i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-regular fa-star"></i>
+                      </div>
+                      <div class="price-info">
+                        <strong class="price-main">$229.00</strong>
+                      </div>
+                      <button class="btn-cart mt-3">
+                        <i class="fa-solid fa-cart-shopping me-1"></i> Add To
+                        Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Item 5 -->
+                <div class="col">
+                  <div class="card-grid-style-3">
+                    <div class="tools">
+                      <a class="tools-btn" href="#"
+                        ><i class="fa-solid fa-code-compare"></i
+                      ></a>
+                      <a class="tools-btn" href="#"
+                        ><i class="fa-regular fa-heart"></i
+                      ></a>
+                    </div>
+                    <div class="image-box">
+                      <span class="label label-sale">-8%</span>
+                      <img
+                        src="https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=300&q=80"
+                        alt="Vacuum cleaner"
+                      />
+                    </div>
+                    <div class="info-right">
+                      <a
+                        class="font-xs text-primary text-decoration-none"
+                        href="#"
+                        >Dyson</a
+                      >
+                      <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                        <a
+                          href="shop-single-product.html"
+                          class="text-decoration-none text-dark hover-primary"
+                          >Dyson V11 Animal Vacuum Cleaner</a
+                        >
+                      </h6>
+                      <div class="rating-stars">
+                        <i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i
+                        ><i class="fa-solid fa-star"></i>
+                      </div>
+                      <div class="price-info">
+                        <strong class="price-main">$599.99</strong>
+                      </div>
+                      <button class="btn-cart mt-3">
+                        <i class="fa-solid fa-cart-shopping me-1"></i> Add To
+                        Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Side Bestsellers & Main Trending Section Row -->
+      <section class="section-box mb-5">
+        <div class="container">
+          <div class="row g-4">
+            <!-- Sidebar Column: Bestseller (3 Cols) -->
+            <div class="col-lg-3">
+              <div class="border rounded p-3 h-100 bg-white shadow-sm">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom"
+                >
+                  <h5 class="mb-0 font-sm-bold">Best Sellers</h5>
+                  <!-- Navigation -->
+                  <div class="d-flex gap-1">
+                    <button
+                      type="button"
+                      class="swiper-nav-btn swiper-button-prev-bestseller"
+                      style="width: 24px; height: 24px; font-size: 10px"
+                      aria-label="Previous slide"
+                    >
+                      <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button
+                      type="button"
+                      class="swiper-nav-btn swiper-button-next-bestseller"
+                      style="width: 24px; height: 24px; font-size: 10px"
+                      aria-label="Next slide"
+                    >
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="swiper swiper-best-seller-sidebar">
+                  <div class="swiper-wrapper">
+                    <!-- Page slide 1 -->
+                    <div class="swiper-slide">
+                      <!-- Mini Product 1 -->
+                      <div class="card-grid-style-2 border-bottom">
+                        <div class="image-box">
+                          <img
+                            src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=70&q=80"
+                            alt="Product"
+                          />
+                        </div>
+                        <div class="info-right">
+                          <a
+                            href="shop-single-product.html"
+                            class="product-title"
+                            >Apple iMac Retina 5K 27"</a
+                          >
+                          <div class="rating-stars">
+                            <i class="fa-solid fa-star"></i
+                            ><i class="fa-solid fa-star"></i
+                            ><i class="fa-solid fa-star"></i
+                            ><span class="review-count"> (48)</span>
+                          </div>
+                          <strong class="font-sm-bold text-primary"
+                            >$2856.30</strong
+                          >
+                        </div>
+                      </div>
+                      <!-- Mini Product 2 -->
+                      <div class="card-grid-style-2 border-bottom">
+                        <div class="image-box">
+                          <img
+                            src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=70&q=80"
+                            alt="Product"
+                          />
+                        </div>
+                        <div class="info-right">
+                          <a
+                            href="shop-single-product.html"
+                            class="product-title"
+                            >Bosch Cordless Power Drill 18V</a
+                          >
+                          <div class="rating-stars">
+                            <i class="fa-solid fa-star"></i
+                            ><i class="fa-solid fa-star"></i
+                            ><i class="fa-solid fa-star"></i
+                            ><span class="review-count"> (32)</span>
+                          </div>
+                          <strong class="font-sm-bold text-primary"
+                            >$125.00</strong
+                          >
+                        </div>
+                      </div>
+                      <!-- Mini Product 3 -->
+                      <div class="card-grid-style-2">
+                        <div class="image-box">
+                          <img
+                            src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=70&q=80"
+                            alt="Product"
+                          />
+                        </div>
+                        <div class="info-right">
+                          <a
+                            href="shop-single-product.html"
+                            class="product-title"
+                            >Sony Noise Cancelling WH-1000XM4</a
+                          >
+                          <div class="rating-stars">
+                            <i class="fa-solid fa-star"></i
+                            ><i class="fa-solid fa-star"></i
+                            ><i class="fa-solid fa-star"></i
+                            ><span class="review-count"> (118)</span>
+                          </div>
+                          <strong class="font-sm-bold text-primary"
+                            >$349.99</strong
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Main Grid Column: Trending Products (9 Cols) -->
+            <div class="col-lg-9">
+              <div class="border rounded p-3 h-100 bg-white shadow-sm">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom"
+                >
+                  <h5 class="mb-0 font-sm-bold">Trending Products</h5>
+                  <!-- Swiper Navigation Buttons -->
+                  <div class="d-flex gap-2">
+                    <button
+                      type="button"
+                      class="swiper-nav-btn swiper-button-prev-trending"
+                      aria-label="Previous slide"
+                    >
+                      <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button
+                      type="button"
+                      class="swiper-nav-btn swiper-button-next-trending"
+                      aria-label="Next slide"
+                    >
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="swiper swiper-products-trending py-2">
+                  <div class="swiper-wrapper">
+                    <!-- Product 1 -->
+                    <div class="swiper-slide">
+                      <div class="card-grid-style-3">
+                        <div class="image-box">
+                          <span class="label label-sale">-17%</span>
+                          <img
+                            src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=200&q=80"
+                            alt="Fossil"
+                          />
+                        </div>
+                        <div class="info-right text-center">
+                          <a
+                            class="font-xxs text-primary text-decoration-none"
+                            href="#"
+                            >Fossil</a
+                          >
+                          <h6
+                            class="font-xs-bold text-dark mt-1 mb-1 text-truncate"
+                          >
+                            <a
+                              href="shop-single-product.html"
+                              class="text-decoration-none text-dark hover-primary"
+                              >Fossil Gen 6 Smartwatch</a
+                            >
+                          </h6>
+                          <strong class="font-sm-bold text-primary"
+                            >$229.00</strong
+                          >
+                          <button class="btn-cart btn-sm mt-2">
+                            <i class="fa-solid fa-cart-shopping me-1"></i> Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Product 2 -->
+                    <div class="swiper-slide">
+                      <div class="card-grid-style-3">
+                        <div class="image-box">
+                          <span class="label label-sale">-15%</span>
+                          <img
+                            src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=200&q=80"
+                            alt="HP"
+                          />
+                        </div>
+                        <div class="info-right text-center">
+                          <a
+                            class="font-xxs text-primary text-decoration-none"
+                            href="#"
+                            >HP</a
+                          >
+                          <h6
+                            class="font-xs-bold text-dark mt-1 mb-1 text-truncate"
+                          >
+                            <a
+                              href="shop-single-product.html"
+                              class="text-decoration-none text-dark hover-primary"
+                              >HP Pavilion Laptop 15</a
+                            >
+                          </h6>
+                          <strong class="font-sm-bold text-primary"
+                            >$736.30</strong
+                          >
+                          <button class="btn-cart btn-sm mt-2">
+                            <i class="fa-solid fa-cart-shopping me-1"></i> Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Product 3 -->
+                    <div class="swiper-slide">
+                      <div class="card-grid-style-3">
+                        <div class="image-box">
+                          <span class="label label-new">New</span>
+                          <img
+                            src="https://images.unsplash.com/photo-1588449668338-d151688f3a83?auto=format&fit=crop&w=200&q=80"
+                            alt="Airpods"
+                          />
+                        </div>
+                        <div class="info-right text-center">
+                          <a
+                            class="font-xxs text-primary text-decoration-none"
+                            href="#"
+                            >Apple</a
+                          >
+                          <h6
+                            class="font-xs-bold text-dark mt-1 mb-1 text-truncate"
+                          >
+                            <a
+                              href="shop-single-product.html"
+                              class="text-decoration-none text-dark hover-primary"
+                              >Apple AirPods Pro 2</a
+                            >
+                          </h6>
+                          <strong class="font-sm-bold text-primary"
+                            >$249.00</strong
+                          >
+                          <button class="btn-cart btn-sm mt-2">
+                            <i class="fa-solid fa-cart-shopping me-1"></i> Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Smart Product Finder / Buying Guide (New) -->
+      <section class="section-box mb-5">
+        <div class="container">
+          <div class="text-center mb-4 pb-2">
+            <span
+              class="badge bg-primary-light text-primary mb-2 font-xxs text-uppercase"
+              >Interactive Selector</span
+            >
+            <h3 class="font-lg-bold mb-1">Smart Product Finder</h3>
+            <p class="font-xs text-muted mb-0 mx-auto" style="max-width: 600px">
+              Tell us your needs, and we'll show you the exact tools you
+              require. Filter instantly by project type.
+            </p>
+            <div class="finder-tabs-wrapper mt-3">
+              <button class="finder-tab-btn active" data-category="all">
+                <i class="fa-solid fa-border-all"></i> Show All
+              </button>
+              <button class="finder-tab-btn" data-category="diy">
+                <i class="fa-solid fa-hammer"></i> DIY Hobbyist
+              </button>
+              <button class="finder-tab-btn" data-category="pro">
+                <i class="fa-solid fa-hard-hat"></i> Professional Contractor
+              </button>
+              <button class="finder-tab-btn" data-category="auto">
+                <i class="fa-solid fa-car"></i> Automotive Repair
+              </button>
+              <button class="finder-tab-btn" data-category="garden">
+                <i class="fa-solid fa-seedling"></i> Gardening & Outdoors
+              </button>
+            </div>
+          </div>
+
+          <div
+            class="row g-4 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 justify-content-center"
+            id="finder-results"
+          >
+            <!-- Finder Product 1 (DIY) -->
+            <div class="col finder-product-item" data-category="diy">
+              <div class="card-grid-style-3">
+                <div class="image-box">
+                  <span class="label label-new">DIY Ideal</span>
+                  <img
+                    src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=300&q=80"
+                    alt="DIY kit"
+                  />
+                </div>
+                <div class="info-right">
+                  <span class="guide-badge">Home DIY</span>
+                  <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                    <a
+                      href="shop-single-product.html"
+                      class="text-decoration-none text-dark hover-primary"
+                      >Stanley 57-Piece Essential Tools Kit</a
+                    >
+                  </h6>
+                  <div class="price-info">
+                    <strong class="price-main">$34.99</strong>
+                  </div>
+                  <button class="btn-cart mt-3">
+                    <i class="fa-solid fa-cart-shopping me-1"></i> Add To Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Finder Product 2 (Pro) -->
+            <div class="col finder-product-item" data-category="pro">
+              <div class="card-grid-style-3">
+                <div class="image-box">
+                  <span class="label bg-dark text-white">Contractor Pro</span>
+                  <img
+                    src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=300&q=80"
+                    alt="Hammer drill"
+                  />
+                </div>
+                <div class="info-right">
+                  <span class="guide-badge">Heavy Duty</span>
+                  <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                    <a
+                      href="shop-single-product.html"
+                      class="text-decoration-none text-dark hover-primary"
+                      >DeWalt Max 20V SDS Rotary Hammer</a
+                    >
+                  </h6>
+                  <div class="price-info">
+                    <strong class="price-main">$249.00</strong>
+                  </div>
+                  <button class="btn-cart mt-3">
+                    <i class="fa-solid fa-cart-shopping me-1"></i> Add To Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Finder Product 3 (Auto) -->
+            <div class="col finder-product-item" data-category="auto">
+              <div class="card-grid-style-3">
+                <div class="image-box">
+                  <span class="label label-new">Auto Essential</span>
+                  <img
+                    src="https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?auto=format&fit=crop&w=300&q=80"
+                    alt="Socket Set"
+                  />
+                </div>
+                <div class="info-right">
+                  <span class="guide-badge">Garage Spec</span>
+                  <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                    <a
+                      href="shop-single-product.html"
+                      class="text-decoration-none text-dark hover-primary"
+                      >Craftsman 3/8-Inch Drive Socket Set</a
+                    >
+                  </h6>
+                  <div class="price-info">
+                    <strong class="price-main">$59.99</strong>
+                  </div>
+                  <button class="btn-cart mt-3">
+                    <i class="fa-solid fa-cart-shopping me-1"></i> Add To Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Finder Product 4 (Garden) -->
+            <div class="col finder-product-item" data-category="garden">
+              <div class="card-grid-style-3">
+                <div class="image-box">
+                  <span class="label label-new">Outdoor</span>
+                  <img
+                    src="https://images.unsplash.com/photo-1473081556163-2a17de81fc97?auto=format&fit=crop&w=300&q=80"
+                    alt="Hedge Trimmer"
+                  />
+                </div>
+                <div class="info-right">
+                  <span class="guide-badge">Gardening</span>
+                  <h6 class="font-sm-bold text-dark mt-1 text-truncate">
+                    <a
+                      href="shop-single-product.html"
+                      class="text-decoration-none text-dark hover-primary"
+                      >Makita 18V Cordless Hedge Trimmer</a
+                    >
+                  </h6>
+                  <div class="price-info">
+                    <strong class="price-main">$129.00</strong>
+                  </div>
+                  <button class="btn-cart mt-3">
+                    <i class="fa-solid fa-cart-shopping me-1"></i> Add To Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Side-by-side Ad Banners (4 & 5) (Upgraded) -->
+      <section class="section-box mb-5">
+        <div class="container">
+          <div class="row g-4">
+            <div class="col-md-6">
+              <a href="#" class="promo-banner-card">
+                <img
+                  src="https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=600&h=180&q=80"
+                  alt="Promo Banner 4"
+                />
+                <div class="promo-banner-content">
+                  <span class="promo-banner-badge bg-primary">Home Decor</span>
+                  <h3 class="promo-banner-title">Premium Kitchen Fixtures</h3>
+                  <p class="promo-banner-desc">
+                    Modern minimalist sinks, luxury faucets, and complete
+                    installation accessories.
+                  </p>
+                  <div class="promo-banner-btn">
+                    Shop Now <i class="fa-solid fa-arrow-right ms-1"></i>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="#" class="promo-banner-card">
+                <img
+                  src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&h=180&q=80"
+                  alt="Promo Banner 5"
+                />
+                <div class="promo-banner-content">
+                  <span class="promo-banner-badge bg-danger"
+                    >Clearance Sale</span
+                  >
+                  <h3 class="promo-banner-title">Up to 50% Off Smart Plugs</h3>
+                  <p class="promo-banner-desc">
+                    Automate your workspace. App & voice control enabled devices
+                    at historic low prices.
+                  </p>
+                  <div class="promo-banner-btn">
+                    Claim Offers <i class="fa-solid fa-arrow-right ms-1"></i>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Premium Partner Brands Marquee (New) -->
+      <section class="section-box mb-5 py-4 border-top border-bottom bg-white">
+        <div class="container text-center mb-3">
+          <h5 class="font-sm-bold text-muted text-uppercase tracking-wider">
+            Trusted by Industry Professionals Globally
+          </h5>
+        </div>
+        <div class="brand-marquee-container">
+          <div class="marquee-track">
+            <!-- Set 1 -->
+            <div class="brand-logo-item">
+              <img
+                src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=120&q=80"
+                alt="Makita"
+              />
+            </div>
+            <div class="brand-logo-item">
+              <img
+                src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=120&q=80"
+                alt="Bosch"
+              />
+            </div>
+            <div class="brand-logo-item">
+              <img
+                src="https://images.unsplash.com/photo-1534224039826-c7a0eda0e6b3?auto=format&fit=crop&w=120&q=80"
+                alt="DeWalt"
+              />
+            </div>
+            <div class="brand-logo-item">
+              <img
+                src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=120&q=80"
+                alt="Milwaukee"
+              />
+            </div>
+            <div class="brand-logo-item">
+              <img
+                src="https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?auto=format&fit=crop&w=120&q=80"
+                alt="Stanley"
+              />
+            </div>
+            <div class="brand-logo-item">
+              <img
+                src="https://images.unsplash.com/photo-1473081556163-2a17de81fc97?auto=format&fit=crop&w=120&q=80"
+                alt="Ryobi"
+              />
+            </div>
+            <div class="brand-logo-item">
+              <img
+                src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=120&q=80"
+                alt="Black & Decker"
+              />
+            </div>
+            <div class="brand-logo-item">
+              <img
+                src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=120&q=80"
+                alt="Hilti"
+              />
+            </div>
+            <!-- Set 2 (Duplicated for seamless looping) -->
+            <div class="brand-logo-item">
+              <img
+                src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=120&q=80"
+                alt="Makita"
+              />
+            </div>
+            <div class="brand-logo-item">
+              <img
+                src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=120&q=80"
+                alt="Bosch"
+              />
+            </div>
+            <div class="brand-logo-item">
+              <img
+                src="https://images.unsplash.com/photo-1534224039826-c7a0eda0e6b3?auto=format&fit=crop&w=120&q=80"
+                alt="DeWalt"
+              />
+            </div>
+            <div class="brand-logo-item">
+              <img
+                src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=120&q=80"
+                alt="Milwaukee"
+              />
+            </div>
+            <div class="brand-logo-item">
+              <img
+                src="https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?auto=format&fit=crop&w=120&q=80"
+                alt="Stanley"
+              />
+            </div>
+            <div class="brand-logo-item">
+              <img
+                src="https://images.unsplash.com/photo-1473081556163-2a17de81fc97?auto=format&fit=crop&w=120&q=80"
+                alt="Ryobi"
+              />
+            </div>
+            <div class="brand-logo-item">
+              <img
+                src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=120&q=80"
+                alt="Black & Decker"
+              />
+            </div>
+            <div class="brand-logo-item">
+              <img
+                src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=120&q=80"
+                alt="Hilti"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Latest News Section -->
+      <section class="section-box mb-5">
+        <div class="container">
+          <div
+            class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom"
+          >
+            <div>
+              <h4 class="font-lg-bold mb-0 section-heading">
+                Latest News &amp; Events
+              </h4>
+              <p class="font-xs text-muted mb-0">
+                From our official blog and forums
+              </p>
+            </div>
+            <!-- Navigation -->
+            <div class="d-flex gap-2">
+              <button
+                type="button"
+                class="swiper-nav-btn swiper-button-prev-news"
+                aria-label="Previous slide"
+              >
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <button
+                type="button"
+                class="swiper-nav-btn swiper-button-next-news"
+                aria-label="Next slide"
+              >
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="swiper swiper-news py-2">
+            <div class="swiper-wrapper">
+              <!-- Article 1 -->
+              <div class="swiper-slide">
+                <div
+                  class="card border border-light rounded-4 overflow-hidden shadow-sm h-100 hover-up"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?auto=format&fit=crop&w=400&h=250&q=80"
+                    class="card-img-top"
+                    alt="News VR"
+                    style="object-fit: cover; height: 200px"
+                  />
+                  <div class="card-body p-3">
+                    <span
+                      class="badge font-xxs mb-2"
+                      style="
+                        background: var(--primary-light);
+                        color: var(--primary-color);
+                      "
+                      >Technology</span
+                    >
+                    <h6 class="font-sm-bold text-dark leading-snug">
+                      <a
+                        href="blog-single.html"
+                        class="text-decoration-none text-dark hover-primary"
+                        >The latest technologies to be used for VR in 2026</a
+                      >
+                    </h6>
+                    <div
+                      class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top font-xxs text-muted"
+                    >
+                      <span>Sept 02, 2026</span>
+                      <span>4 Mins read</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Article 2 -->
+              <div class="swiper-slide">
+                <div
+                  class="card border border-light rounded-4 overflow-hidden shadow-sm h-100 hover-up"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1612287230202-1bf1d85d1bdf?auto=format&fit=crop&w=400&h=250&q=80"
+                    class="card-img-top"
+                    alt="News Web 3"
+                    style="object-fit: cover; height: 200px"
+                  />
+                  <div class="card-body p-3">
+                    <span
+                      class="badge font-xxs mb-2"
+                      style="
+                        background: var(--primary-light);
+                        color: var(--primary-color);
+                      "
+                      >Gaming</span
+                    >
+                    <h6 class="font-sm-bold text-dark leading-snug">
+                      <a
+                        href="blog-single.html"
+                        class="text-decoration-none text-dark hover-primary"
+                        >How can Web 3.0 Bring Changes to Gaming?</a
+                      >
+                    </h6>
+                    <div
+                      class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top font-xxs text-muted"
+                    >
+                      <span>Aug 30, 2026</span>
+                      <span>5 Mins read</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Article 3 -->
+              <div class="swiper-slide">
+                <div
+                  class="card border border-light rounded-4 overflow-hidden shadow-sm h-100 hover-up"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=400&h=250&q=80"
+                    class="card-img-top"
+                    alt="News NFT"
+                    style="object-fit: cover; height: 200px"
+                  />
+                  <div class="card-body p-3">
+                    <span
+                      class="badge font-xxs mb-2"
+                      style="
+                        background: var(--primary-light);
+                        color: var(--primary-color);
+                      "
+                      >BlockChain</span
+                    >
+                    <h6 class="font-sm-bold text-dark leading-snug">
+                      <a
+                        href="blog-single.html"
+                        class="text-decoration-none text-dark hover-primary"
+                        >NFT Blockchain Games That Might Take Off</a
+                      >
+                    </h6>
+                    <div
+                      class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top font-xxs text-muted"
+                    >
+                      <span>Aug 25, 2026</span>
+                      <span>3 Mins read</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Customer Reviews & Testimonials Carousel (New) -->
+      <section class="section-box mb-5">
+        <div class="container">
+          <div
+            class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom"
+          >
+            <div>
+              <h4 class="font-lg-bold mb-0 section-heading">
+                What Our Buyers Say
+              </h4>
+              <p class="font-xs text-muted mb-0">
+                Read stories of verified builders, DIYers, and workshops using
+                Stackly.
+              </p>
+            </div>
+            <div
+              class="swiper-pagination swiper-pagination-testimonials d-flex justify-content-end w-auto gap-1"
+            ></div>
+          </div>
+          <div class="swiper swiper-testimonials py-2">
+            <div class="swiper-wrapper">
+              <!-- Testimonial 1 -->
+              <div class="swiper-slide">
+                <div class="testimonial-card">
+                  <span class="quote-icon"
+                    ><i class="fa-solid fa-quote-right"></i
+                  ></span>
+                  <div class="rating-stars font-xs mb-3">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                  </div>
+                  <p class="testimonial-text">
+                    "Outstanding service! I bought a set of cordless drills from
+                    Bosch Depot. They were delivered within 48 hours. The buyer
+                    protection scheme is phenomenal!"
+                  </p>
+                  <div class="testimonial-user">
+                    <img
+                      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=80&q=80"
+                      alt="Marcus Finch"
+                    />
+                    <div>
+                      <h6 class="testimonial-user-name">Marcus Finch</h6>
+                      <span class="testimonial-user-role"
+                        ><i
+                          class="fa-solid fa-circle-check testimonial-verified-badge"
+                        ></i>
+                        Verified Contractor</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonial 2 -->
+              <div class="swiper-slide">
+                <div class="testimonial-card">
+                  <span class="quote-icon"
+                    ><i class="fa-solid fa-quote-right"></i
+                  ></span>
+                  <div class="rating-stars font-xs mb-3">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                  </div>
+                  <p class="testimonial-text">
+                    "As a home DIY enthusiast, finding genuine hand tools has
+                    always been a chore. On Stackly, I buy direct from
+                    manufacturer outlets with full warranty support."
+                  </p>
+                  <div class="testimonial-user">
+                    <img
+                      src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80"
+                      alt="Sarah Jenkins"
+                    />
+                    <div>
+                      <h6 class="testimonial-user-name">Sarah Jenkins</h6>
+                      <span class="testimonial-user-role"
+                        ><i
+                          class="fa-solid fa-circle-check testimonial-verified-badge"
+                        ></i>
+                        Verified Hobbyist</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonial 3 -->
+              <div class="swiper-slide">
+                <div class="testimonial-card">
+                  <span class="quote-icon"
+                    ><i class="fa-solid fa-quote-right"></i
+                  ></span>
+                  <div class="rating-stars font-xs mb-3">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                  </div>
+                  <p class="testimonial-text">
+                    "The multi-vendor architecture is perfect. I ordered
+                    components from three different suppliers, and the order
+                    tracing was super simple. Excellent design!"
+                  </p>
+                  <div class="testimonial-user">
+                    <img
+                      src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&q=80"
+                      alt="David Thorne"
+                    />
+                    <div>
+                      <h6 class="testimonial-user-name">David Thorne</h6>
+                      <span class="testimonial-user-role"
+                        ><i
+                          class="fa-solid fa-circle-check testimonial-verified-badge"
+                        ></i>
+                        Workshop Owner</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Vendor Safeguards & Warranties Section (Visually Upgraded bottom features list) -->
+      <section class="section-box py-5 bottom-safeguard-section mb-5">
+        <div class="container">
+          <div class="row g-4 justify-content-center">
+            <div class="col-md-6 col-lg-3">
+              <div class="bottom-safeguard-item">
+                <div class="icon-left">
+                  <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h5 class="font-md-bold mb-2">Buyer Protection</h5>
+                <p class="font-xs text-muted mb-0">
+                  100% Protected transactions from checkout to delivery. Refund
+                  guarantees if item is counterfeit or delayed.
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="bottom-safeguard-item">
+                <div class="icon-left">
+                  <i class="fa-solid fa-rotate-left"></i>
+                </div>
+                <h5 class="font-md-bold mb-2">Hassle-Free Returns</h5>
+                <p class="font-xs text-muted mb-0">
+                  Not satisfied? Return your product within 30 days. Our sellers
+                  will issue replacements or instant refunds.
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="bottom-safeguard-item">
+                <div class="icon-left">
+                  <i class="fa-solid fa-certificate"></i>
+                </div>
+                <h5 class="font-md-bold mb-2">Official Warranty</h5>
+                <p class="font-xs text-muted mb-0">
+                  Every product sold on Stackly comes with an authentic
+                  manufacturer warranty registered automatically.
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div class="bottom-safeguard-item">
+                <div class="icon-left"><i class="fa-solid fa-headset"></i></div>
+                <h5 class="font-md-bold mb-2">Expert Consultation</h5>
+                <p class="font-xs text-muted mb-0">
+                  Chat live with hardware experts and verified vendor
+                  representatives for advice on tool specifications.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 6: FAQ Accordion Section (New) -->
+      <section class="section-box mb-5">
+        <div class="container">
+          <div class="text-center mb-5">
+            <span
+              class="badge bg-primary-light text-primary mb-2 font-xxs text-uppercase"
+              >Got Questions?</span
+            >
+            <h3 class="font-lg-bold mb-1">Frequently Asked Questions</h3>
+            <p class="font-xs text-muted mb-0 mx-auto" style="max-width: 600px">
+              Everything you need to know about purchasing, shipping, and seller
+              protection policies on Stackly.
+            </p>
+          </div>
+          <div class="faq-wrapper">
+            <div class="accordion" id="faqAccordion">
+              <!-- Item 1 -->
+              <div class="accordion-item faq-card-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button
+                    class="accordion-button faq-btn"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne"
+                    aria-expanded="true"
+                    aria-controls="collapseOne"
+                  >
+                    How does the buyer protection program work?
+                  </button>
+                </h2>
+                <div
+                  id="collapseOne"
+                  class="accordion-collapse collapse show"
+                  aria-labelledby="headingOne"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body faq-body">
+                    When you purchase a tool on Stackly, your payment is held
+                    securely in escrow. Funds are only transferred to the vendor
+                    once you confirm the item has arrived in perfect condition.
+                    If you receive a damaged or wrong tool, you can initiate a
+                    dispute within 14 days for a full refund.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 2 -->
+              <div class="accordion-item faq-card-item">
+                <h2 class="accordion-header" id="headingTwo">
+                  <button
+                    class="accordion-button faq-btn collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo"
+                    aria-expanded="false"
+                    aria-controls="collapseTwo"
+                  >
+                    Are the tools sold on this platform genuine?
+                  </button>
+                </h2>
+                <div
+                  id="collapseTwo"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingTwo"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body faq-body">
+                    Yes, 100%. We verify the business license and factory origin
+                    of every single manufacturer and reseller before they list
+                    products on Stackly. Look for the "Certified" green badge on
+                    vendor profile cards to guarantee official
+                    factory-authorized warranty coverage.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 3 -->
+              <div class="accordion-item faq-card-item">
+                <h2 class="accordion-header" id="headingThree">
+                  <button
+                    class="accordion-button faq-btn collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree"
+                    aria-expanded="false"
+                    aria-controls="collapseThree"
+                  >
+                    What are the shipping durations and charges?
+                  </button>
+                </h2>
+                <div
+                  id="collapseThree"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingThree"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body faq-body">
+                    Shipping costs and durations vary depending on your location
+                    and the vendor's warehouse location. Many vendors offer free
+                    shipping on orders above $75. Average delivery times are 2-5
+                    business days for domestic shipments and 7-14 days for
+                    international vendor shipments.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 4 -->
+              <div class="accordion-item faq-card-item">
+                <h2 class="accordion-header" id="headingFour">
+                  <button
+                    class="accordion-button faq-btn collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseFour"
+                    aria-expanded="false"
+                    aria-controls="collapseFour"
+                  >
+                    How do I claim a product warranty?
+                  </button>
+                </h2>
+                <div
+                  id="collapseFour"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="headingFour"
+                  data-bs-parent="#faqAccordion"
+                >
+                  <div class="accordion-body faq-body">
+                    All vendor products on Stackly are eligible for official
+                    manufacturer warranties. Once your order is complete, a
+                    digital warranty certificate with serial numbers is
+                    generated. You can upload this directly to manufacturer
+                    registration sites or contact our customer support for help.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Subscription Newsletter Banner (Visually Upgraded) -->
+      <section class="section-box mb-5">
+        <div class="container">
+          <div class="box-newsletter-banner">
+            <div class="row align-items-center g-4">
+              <div class="col-lg-7 text-white">
+                <h3 class="font-xl-bold text-white mb-2">
+                  Subscribe &amp; Get
+                  <span style="color: #ffe066">10%</span> Discount
+                </h3>
+                <p class="mb-0 opacity-90">
+                  Get E-mail updates about our latest arrivals, verified
+                  vendors, and special offers.
+                </p>
+              </div>
+              <div class="col-lg-5">
+                <form class="box-form-newsletter d-flex">
+                  <input
+                    type="email"
+                    class="form-control"
+                    placeholder="Your Email Address..."
+                    required
+                  />
+                  <button type="submit" class="btn font-xs-bold">
+                    Sign Up
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Dynamic Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Bootstrap 5 Bundle JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Swiper.js Bundle JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Custom Script -->
+    <script src="assets/js/script.js"></script>
+    <script>
+      (function () {
+        var pct = document.getElementById('pre-pct-val');
+        var start = Date.now(), dur = 1700, delay = 500;
+        function tick() {
+          var elapsed = Date.now() - start - delay;
+          if (elapsed < 0) { requestAnimationFrame(tick); return; }
+          var p = Math.min(Math.round((elapsed / dur) * 100), 100);
+          if (pct) pct.textContent = p + '%';
+          if (p < 100) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        setTimeout(function () {
+          document.getElementById('stackly-preloader').classList.add('hide');
+        }, 2000);
+      })();
+    </script>
+  </body>
+</html>

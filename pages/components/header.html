@@ -1,0 +1,724 @@
+<!-- Topbar -->
+<div class="topbar bg-dark py-2 border-bottom border-secondary text-light">
+  <div
+    class="container d-flex flex-column flex-md-row justify-content-between align-items-center"
+  >
+    <div class="menu-topbar-left mb-2 mb-md-0">
+      <ul class="nav-small list-inline m-0">
+        <li class="list-inline-item">
+          <a
+            class="font-xs text-light text-decoration-none hover-secondary"
+            href="pages/about.html"
+            >About Us</a
+          >
+        </li>
+        <li class="list-inline-item ms-3">
+          <a
+            class="font-xs text-light text-decoration-none hover-secondary"
+            href="pages/career.html"
+            >Careers</a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="info-topbar text-center mb-2 mb-md-0 d-none d-lg-block">
+      <span class="font-xs">Free shipping for all orders over </span>
+      <span class="font-sm-bold text-warning">$75.00</span>
+    </div>
+    <div class="menu-topbar-right d-flex align-items-center">
+      <span class="font-xs me-2">Need help? Call Us: </span>
+      <span class="font-sm-bold text-success me-3">+91 98765 43210</span>
+
+      <!-- Language Dropdown -->
+      <div class="dropdown me-3">
+        <button
+          class="btn btn-sm btn-dark dropdown-toggle font-xs py-0"
+          type="button"
+          id="dropdownLang"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <i class="fa-solid fa-globe me-1"></i> English
+        </button>
+        <ul
+          class="dropdown-menu dropdown-menu-dark"
+          aria-labelledby="dropdownLang"
+        >
+          <li><a class="dropdown-item font-xs active" href="#">English</a></li>
+          <li><a class="dropdown-item font-xs" href="#">Français</a></li>
+          <li><a class="dropdown-item font-xs" href="#">Español</a></li>
+          <li><a class="dropdown-item font-xs" href="#">Português</a></li>
+          <li><a class="dropdown-item font-xs" href="#">中国人</a></li>
+        </ul>
+      </div>
+
+      <!-- Currency Dropdown -->
+      <div class="dropdown">
+        <button
+          class="btn btn-sm btn-dark dropdown-toggle font-xs py-0"
+          type="button"
+          id="dropdownCurr"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          USD
+        </button>
+        <ul
+          class="dropdown-menu dropdown-menu-dark dropdown-menu-end"
+          aria-labelledby="dropdownCurr"
+        >
+          <li><a class="dropdown-item font-xs active" href="#">USD</a></li>
+          <li><a class="dropdown-item font-xs" href="#">EUR</a></li>
+          <li><a class="dropdown-item font-xs" href="#">AUD</a></li>
+          <li><a class="dropdown-item font-xs" href="#">SGP</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Header -->
+<header class="header bg-blur py-3 shadow-sm border-bottom border-light">
+  <div class="container">
+    <div class="row align-items-center g-3">
+      <!-- Logo -->
+      <div class="col-6 col-lg-2 d-flex align-items-center">
+        <a
+          href="index.html"
+          class="logo-link d-flex align-items-center text-decoration-none"
+        >
+          <img
+            src="assets/images/logoStackly.webp"
+            alt="Stackly Logo"
+            class="logo-img"
+            style="height: 38px; width: auto; object-fit: contain"
+          />
+        </a>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="col-12 col-lg-5 order-3 order-lg-2">
+        <form class="search-form d-flex w-100" action="#" method="post">
+          <div class="input-group">
+            <select
+              class="form-select bg-light border-end-0 text-muted category-select d-none d-sm-block"
+              style="max-width: 160px"
+            >
+              <option selected>All categories</option>
+              <option value="Computers Accessories">Computers &amp; Acc</option>
+              <option value="Cell Phones">Cell Phones</option>
+              <option value="Gaming Gatgets">Gaming Gadgets</option>
+              <option value="Smart watches">Smart Watches</option>
+              <option value="Wired Headphone">Headphones</option>
+              <option value="Mouse Keyboard">Mouse &amp; Keyboard</option>
+              <option value="Bluetooth devices">Bluetooth</option>
+              <option value="Cloud Software">Cloud Software</option>
+            </select>
+            <input
+              class="form-control bg-light border-start-0"
+              type="text"
+              placeholder="Search for items..."
+              aria-label="Search"
+            />
+            <button class="btn btn-primary" type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Actions (Account, Wishlist, Cart, Compare) -->
+      <div
+        class="col-6 col-lg-5 order-2 order-lg-3 d-flex justify-content-end align-items-center gap-3"
+      >
+        <!-- Compare Link -->
+        <a
+          class="header-action-btn text-decoration-none text-muted d-none d-md-flex align-items-center"
+          href="pages/shop.html"
+        >
+          <div class="icon-box position-relative">
+            <i class="fa-solid fa-code-compare fa-lg text-dark"></i>
+          </div>
+        </a>
+
+        <!-- Wishlist Link -->
+        <a
+          class="header-action-btn text-decoration-none text-muted d-flex align-items-center"
+          href="pages/shop.html"
+        >
+          <div class="icon-box position-relative">
+            <i class="fa-regular fa-heart fa-lg text-dark"></i>
+            <span
+              class="badge rounded-pill bg-primary position-absolute top-0 start-100 translate-middle font-xxs"
+              >5</span
+            >
+          </div>
+        </a>
+
+        <!-- Cart Dropdown -->
+        <div class="dropdown" id="cartDropdown">
+          <a
+            class="header-action-btn text-decoration-none text-muted d-flex align-items-center"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <div class="icon-box position-relative me-2">
+              <i class="fa-solid fa-cart-shopping fa-lg text-dark"></i>
+              <span
+                class="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle font-xxs"
+                >2</span
+              >
+            </div>
+            <!-- <div class="cart-label d-none d-lg-block text-start">
+              <div class="font-xxs text-muted">My Cart</div>
+              <div class="font-xs-bold text-dark">$2586.30</div>
+            </div> -->
+          </a>
+          <!-- <ul
+            class="dropdown-menu dropdown-menu-end dropdown-cart-list p-3 border-light shadow-lg"
+            style="width: 320px"
+          >
+            <li class="cart-item mb-3 d-flex align-items-center">
+              <div
+                class="item-img border rounded p-1 me-3"
+                style="width: 50px; height: 50px"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=80&q=80"
+                  alt="iMac"
+                  class="w-100 h-100 object-fit-contain"
+                />
+              </div>
+              <div class="item-details flex-grow-1 overflow-hidden">
+                <a
+                  href="pages/shop.html"
+                  class="font-xs-bold text-dark text-decoration-none text-truncate d-block"
+                  >Apple iMac Retina 5K</a
+                >
+                <div class="font-xs text-muted">1 x $1850.00</div>
+              </div>
+              <button class="btn btn-sm btn-link text-danger border-0">
+                <i class="fa-regular fa-trash-can"></i>
+              </button>
+            </li>
+            <li class="cart-item mb-3 d-flex align-items-center">
+              <div
+                class="item-img border rounded p-1 me-3"
+                style="width: 50px; height: 50px"
+              >
+                <img
+                  src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=80&q=80"
+                  alt="Laptop"
+                  class="w-100 h-100 object-fit-contain"
+                />
+              </div>
+              <div class="item-details flex-grow-1 overflow-hidden">
+                <a
+                  href="pages/shop.html"
+                  class="font-xs-bold text-dark text-decoration-none text-truncate d-block"
+                  >HP Pavilion Laptop 15</a
+                >
+                <div class="font-xs text-muted">1 x $736.30</div>
+              </div>
+              <button class="btn btn-sm btn-link text-danger border-0">
+                <i class="fa-regular fa-trash-can"></i>
+              </button>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li class="d-flex justify-content-between align-items-center my-2">
+              <span class="font-sm-bold text-muted">Total:</span>
+              <span class="font-md-bold text-primary">$2586.30</span>
+            </li>
+            <li class="d-flex gap-2 mt-3">
+              <a
+                href="pages/shop.html"
+                class="btn btn-outline-primary btn-sm w-50 font-xs py-2"
+                >View Cart</a
+              >
+              <a
+                href="pages/shop.html"
+                class="btn btn-primary btn-sm w-50 font-xs py-2"
+                >Checkout</a
+              >
+            </li>
+          </ul> -->
+        </div>
+
+        <!-- Auth Buttons (Login / Register) -->
+        <div class="d-none d-sm-flex align-items-center gap-2 ms-2">
+          <a
+            href="pages/login.html"
+            class="btn btn-sm btn-outline-primary font-xs-bold px-3 py-2 rounded-3 text-decoration-none"
+            style="transition: all 0.3s ease"
+            >Log In</a
+          >
+          <a
+            href="pages/register.html"
+            class="btn btn-sm btn-primary font-xs-bold px-3 py-2 rounded-3 text-decoration-none text-white"
+            style="transition: all 0.3s ease"
+            >Register</a
+          >
+        </div>
+
+        <!-- Account Dropdown -->
+        <!-- <div class="dropdown">
+          <a
+            class="header-action-btn text-decoration-none text-muted d-flex align-items-center dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <div
+              class="avatar-box border rounded-circle bg-light d-flex align-items-center justify-content-center"
+              style="width: 32px; height: 32px"
+            >
+              <i class="fa-regular fa-user text-dark font-xs"></i>
+            </div>
+            <span class="ms-2 font-xs d-none d-lg-inline text-dark"
+              >Account</span
+            >
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end border-light shadow-lg">
+            <li>
+              <a class="dropdown-item font-xs" href="pages/about.html"
+                ><i class="fa-regular fa-user-circle me-2 text-primary"></i> My
+                Profile</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item font-xs" href="pages/about.html"
+                ><i class="fa-solid fa-map-marker-alt me-2 text-primary"></i>
+                Order Tracking</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item font-xs" href="pages/about.html"
+                ><i class="fa-solid fa-box-open me-2 text-primary"></i> My
+                Orders</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item font-xs" href="pages/about.html"
+                ><i class="fa-regular fa-heart me-2 text-primary"></i> My
+                Wishlist</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item font-xs" href="pages/about.html"
+                ><i class="fa-solid fa-cog me-2 text-primary"></i> Settings</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a
+                class="dropdown-item font-xs text-danger"
+                href="pages/about.html"
+                ><i class="fa-solid fa-sign-out-alt me-2"></i> Sign Out</a
+              >
+            </li>
+          </ul>
+        </div> -->
+
+        <!-- Mobile Menu Toggle Button -->
+        <button
+          class="btn btn-outline-secondary d-xl-none py-1 px-2"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#mobileMenuOffcanvas"
+          aria-controls="mobileMenuOffcanvas"
+        >
+          <i class="fa-solid fa-bars fa-lg"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation / Categories Bar -->
+  <div
+    class="header-bottom bg-light border-top border-light mt-3 py-2 d-none d-xl-block"
+  >
+    <div class="container d-flex justify-content-between align-items-center">
+      <!-- Shop By Categories Dropdown -->
+      <div class="dropdown">
+        <button
+          class="btn btn-primary font-sm-bold px-4 py-2 dropdown-toggle d-flex align-items-center"
+          type="button"
+          id="dropdownCategories"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <i class="fa-solid fa-bars-staggered me-2"></i> Shop By Categories
+        </button>
+        <ul
+          class="dropdown-menu border-light shadow-lg"
+          aria-labelledby="dropdownCategories"
+          style="min-width: 250px"
+        >
+          <li class="dropdown-submenu">
+            <a
+              class="dropdown-item d-flex justify-content-between align-items-center"
+              href="#"
+              ><span class="category-icon me-2 text-primary"
+                ><i class="fa-solid fa-laptop"></i
+              ></span>
+              Computers &amp; Acc
+              <i class="fa-solid fa-chevron-right font-xxs"></i
+            ></a>
+            <ul class="dropdown-menu border-light shadow-lg">
+              <li>
+                <a class="dropdown-item" href="#">Computer Accessories</a>
+              </li>
+              <li><a class="dropdown-item" href="#">Computer Cases</a></li>
+              <li><a class="dropdown-item" href="#">Laptops</a></li>
+              <li><a class="dropdown-item" href="#">HDDs / SSDs</a></li>
+              <li><a class="dropdown-item" href="#">RAM Modules</a></li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a
+              class="dropdown-item d-flex justify-content-between align-items-center"
+              href="#"
+              ><span class="category-icon me-2 text-primary"
+                ><i class="fa-solid fa-mobile-screen-button"></i
+              ></span>
+              Cell Phones <i class="fa-solid fa-chevron-right font-xxs"></i
+            ></a>
+            <ul class="dropdown-menu border-light shadow-lg">
+              <li><a class="dropdown-item" href="#">Phone Accessories</a></li>
+              <li>
+                <a class="dropdown-item" href="#">Cases &amp; Protectors</a>
+              </li>
+              <li><a class="dropdown-item" href="#">Unlocked Phones</a></li>
+              <li><a class="dropdown-item" href="#">iPhone</a></li>
+              <li><a class="dropdown-item" href="#">Samsung Galaxy</a></li>
+            </ul>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#"
+              ><span class="category-icon me-2 text-primary"
+                ><i class="fa-solid fa-gamepad"></i
+              ></span>
+              Gaming Gadgets</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="#"
+              ><span class="category-icon me-2 text-primary"
+                ><i class="fa-solid fa-stopwatch"></i
+              ></span>
+              Smart Watches</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="#"
+              ><span class="category-icon me-2 text-primary"
+                ><i class="fa-solid fa-headphones"></i
+              ></span>
+              Headset &amp; Audio</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="#"
+              ><span class="category-icon me-2 text-primary"
+                ><i class="fa-solid fa-keyboard"></i
+              ></span>
+              Mouse &amp; Keyboard</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="#"
+              ><span class="category-icon me-2 text-primary"
+                ><i class="fa-solid fa-network-wired"></i
+              ></span>
+              Network Accessories</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Main Navigation Menu -->
+      <nav class="main-nav-bar flex-grow-1 ms-4">
+        <ul class="nav justify-content-start align-items-center">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link text-dark font-sm-bold"
+              href="index.html"
+              role="button"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link text-dark font-sm-bold hover-primary"
+              href="pages/shop.html"
+              >Electronics</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link text-dark font-sm-bold hover-primary"
+              href="pages/shop.html"
+              >Appliances</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link text-dark font-sm-bold hover-primary"
+              href="pages/shop.html"
+              >New Arrivals</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link text-dark font-sm-bold hover-primary"
+              href="pages/shop.html"
+              >Shop</a
+            >
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link text-dark font-sm-bold dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              >Pages</a
+            >
+            <ul class="dropdown-menu shadow border-light">
+              <li>
+                <a class="dropdown-item" href="pages/about.html">About Us</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="pages/contact.html"
+                  >Contact Us</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="pages/career.html">Careers</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="pages/register.html">Register</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="pages/login.html">Login</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link text-dark font-sm-bold hover-primary"
+              href="pages/vendors.html"
+              >Vendors</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link text-dark font-sm-bold hover-primary"
+              href="pages/contact.html"
+              >Contact</a
+            >
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Special Offer Label -->
+      <a href="#"
+        ><button
+          class="special-offer-badge text-white font-sm-bold px-3 py-2 rounded shadow-sm border-0"
+          style="background: var(--gradient-secondary)"
+        >
+          <i class="fa-solid fa-fire me-1"></i> SPECIAL OFFER
+        </button></a
+      >
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Navigation Offcanvas Sidebar -->
+<div
+  class="offcanvas offcanvas-start border-0 shadow"
+  tabindex="-1"
+  id="mobileMenuOffcanvas"
+  aria-labelledby="mobileMenuOffcanvasLabel"
+>
+  <div class="offcanvas-header bg-light border-bottom border-light">
+    <h5
+      class="offcanvas-title font-bold text-dark d-flex align-items-center"
+      id="mobileMenuOffcanvasLabel"
+    >
+      <i class="fa-solid fa-store text-primary me-2"></i> Stackly<span
+        class="text-primary"
+        >.</span
+      >
+    </h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body perfect-scrollbar p-3">
+    <!-- User Account Header -->
+    <div
+      class="user-account-mobile d-flex align-items-center p-3 bg-light border rounded mb-3"
+    >
+      <div
+        class="avatar border rounded-circle bg-white d-flex align-items-center justify-content-center me-3"
+        style="width: 48px; height: 48px"
+      >
+        <i class="fa-regular fa-user text-muted fa-lg"></i>
+      </div>
+      <div>
+        <h6 class="mb-0 font-sm-bold text-dark">
+          Hello, <span class="text-primary">Steven!</span>
+        </h6>
+        <p class="font-xxs text-muted mb-0">You have 3 new messages</p>
+      </div>
+    </div>
+
+    <!-- Mobile Auth Buttons -->
+    <div class="d-flex gap-2 mb-3">
+      <a
+        href="pages/login.html"
+        class="btn btn-outline-primary btn-sm w-50 font-xs-bold py-2 rounded-3 text-center text-decoration-none"
+        >Log In</a
+      >
+      <a
+        href="pages/register.html"
+        class="btn btn-primary btn-sm w-50 font-xs-bold py-2 rounded-3 text-white text-center text-decoration-none"
+        >Register</a
+      >
+    </div>
+
+    <!-- Search Mobile -->
+    <form class="search-form mb-4" action="#" method="post">
+      <div class="input-group input-group-sm">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Search for items..."
+        />
+        <button class="btn btn-primary" type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+    </form>
+
+    <!-- Mobile Menu Navigation Links -->
+    <h6 class="text-uppercase font-xs-bold text-muted border-bottom pb-2 mb-3">
+      Menu
+    </h6>
+    <nav class="mobile-nav-menu mb-4">
+      <ul class="nav flex-column gap-2">
+        <li class="nav-item">
+          <a
+            class="nav-link font-sm-bold text-dark py-1 active"
+            href="index.html"
+            ><i class="fa-solid fa-house me-2 text-primary"></i> Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-sm-bold text-dark py-1" href="pages/shop.html"
+            ><i class="fa-solid fa-tv me-2 text-primary"></i> Electronics</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-sm-bold text-dark py-1" href="pages/shop.html"
+            ><i class="fa-solid fa-plug me-2 text-primary"></i> Appliances</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-sm-bold text-dark py-1" href="pages/shop.html"
+            ><i class="fa-solid fa-tags me-2 text-primary"></i> New Arrivals</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-sm-bold text-dark py-1" href="pages/shop.html"
+            ><i class="fa-solid fa-shop me-2 text-primary"></i> Shop Grid</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link font-sm-bold text-dark py-1" href="pages/shop.html"
+            ><i class="fa-solid fa-cart-shopping me-2 text-primary"></i> Shop
+            Cart</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link font-sm-bold text-dark py-1"
+            href="pages/vendors.html"
+            ><i class="fa-solid fa-users me-2 text-primary"></i> Vendors</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link font-sm-bold text-dark py-1"
+            href="pages/contact.html"
+            ><i class="fa-regular fa-envelope me-2 text-primary"></i> Contact</a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Mobile Account Links -->
+    <h6 class="text-uppercase font-xs-bold text-muted border-bottom pb-2 mb-3">
+      Account Settings
+    </h6>
+    <ul class="nav flex-column gap-2 mb-4">
+      <li class="nav-item">
+        <a class="nav-link font-xs text-dark py-1" href="pages/about.html"
+          ><i class="fa-regular fa-user me-2"></i> My Profile</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link font-xs text-dark py-1" href="pages/about.html"
+          ><i class="fa-solid fa-location-arrow me-2"></i> Order Tracking</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link font-xs text-dark py-1" href="pages/about.html"
+          ><i class="fa-solid fa-box-open me-2"></i> My Orders</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link font-xs text-dark py-1" href="pages/about.html"
+          ><i class="fa-regular fa-heart me-2"></i> My Wishlist</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link font-xs text-dark py-1" href="pages/about.html"
+          ><i class="fa-solid fa-cog me-2"></i> Settings</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link font-xs text-danger py-1" href="pages/about.html"
+          ><i class="fa-solid fa-sign-out-alt me-2"></i> Sign Out</a
+        >
+      </li>
+    </ul>
+
+    <!-- Mobile Sidebar Banner Advertisement -->
+    <div
+      class="mobile-menu-banner p-4 border-radius-10 text-white text-center position-relative overflow-hidden mb-3"
+      style="background: var(--gradient-secondary)"
+    >
+      <span class="badge bg-warning text-dark font-xxs mb-2">HOT SALE</span>
+      <h5 class="font-md-bold mb-1">iPhone 12 Pro</h5>
+      <p class="font-xs opacity-75 mb-3">Starting from $899</p>
+      <a href="pages/shop.html" class="btn btn-light btn-sm font-xs px-3"
+        >Learn More</a
+      >
+    </div>
+
+    <!-- Copyright -->
+    <div
+      class="site-copyright font-xxs text-muted text-center pt-3 border-top mt-4"
+    >
+      Copyright 2026 &copy; Stackly - Marketplace.<br />Designed by AliThemes.
+    </div>
+  </div>
+</div>

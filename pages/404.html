@@ -1,0 +1,957 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 — Page Not Found | Stackly Marketplace</title>
+    <link
+      rel="icon"
+      type="image/webp"
+      href="../assets/images/logoStackly.webp"
+    />
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- FontAwesome 6 CDN -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+
+    <style>
+      body {
+        padding-top: 0 !important;
+        min-height: 100vh;
+        background-color: var(--white, #ffffff);
+        display: flex;
+        flex-direction: column;
+        overflow-x: hidden;
+      }
+
+      /* ── Immersive Main Container ── */
+      .err-main {
+        position: relative;
+        background: radial-gradient(
+          circle at 50% 50%,
+          #1e293b 0%,
+          #0f172a 100%
+        );
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        color: #f8fafc;
+        padding: 60px 0;
+      }
+
+      /* Glowing background radial blobs */
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        z-index: 1;
+        opacity: 0.12;
+        pointer-events: none;
+      }
+      .blob-orange {
+        width: 450px;
+        height: 450px;
+        background: var(--primary-color, #fd9636);
+        top: 5%;
+        left: -120px;
+        animation: floatBlob 14s infinite alternate ease-in-out;
+      }
+      .blob-blue {
+        width: 500px;
+        height: 500px;
+        background: var(--secondary-color, #8c9ec5);
+        bottom: -150px;
+        right: -80px;
+        animation: floatBlob 18s infinite alternate-reverse ease-in-out;
+      }
+      @keyframes floatBlob {
+        0% {
+          transform: translate(0, 0) scale(1);
+        }
+        50% {
+          transform: translate(60px, 40px) scale(1.1);
+        }
+        100% {
+          transform: translate(-30px, -50px) scale(0.95);
+        }
+      }
+
+      /* Digital technical grid pattern */
+      .grid-pattern {
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+          rgba(253, 150, 54, 0.07) 1px,
+          transparent 1px
+        );
+        background-size: 32px 32px;
+        mask-image: radial-gradient(
+          ellipse 70% 70% at 50% 50%,
+          black 40%,
+          transparent 100%
+        );
+        -webkit-mask-image: radial-gradient(
+          ellipse 70% 70% at 50% 50%,
+          black 40%,
+          transparent 100%
+        );
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .err-content-container {
+        position: relative;
+        z-index: 5;
+      }
+
+      /* ── Left Column Styling ── */
+      .err-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(253, 150, 54, 0.1);
+        color: var(--primary-color, #fd9636);
+        border: 1px solid rgba(253, 150, 54, 0.25);
+        padding: 6px 16px;
+        border-radius: 100px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin-bottom: 24px;
+        text-transform: uppercase;
+      }
+      .err-tag-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--primary-color, #fd9636);
+        box-shadow: 0 0 10px var(--primary-color, #fd9636);
+        animation: tagDotPulse 1.8s infinite;
+      }
+      @keyframes tagDotPulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.3);
+          opacity: 0.6;
+        }
+      }
+
+      .err-headline {
+        font-family: var(--font-heading, "Outfit", sans-serif);
+        font-size: clamp(2.2rem, 5vw, 3.4rem);
+        font-weight: 800;
+        line-height: 1.15;
+        margin-bottom: 18px;
+        color: #ffffff;
+      }
+      .text-accent {
+        background: var(
+          --gradient-primary,
+          linear-gradient(135deg, #fd9636 0%, #e07d1e 100%)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: inline-block;
+      }
+
+      .err-description {
+        font-size: 16px;
+        color: #94a3b8;
+        line-height: 1.7;
+        margin-bottom: 36px;
+        max-width: 520px;
+      }
+
+      /* ── Modern Working Search Bar ── */
+      .search-box-wrap {
+        margin-bottom: 36px;
+        max-width: 480px;
+        width: 100%;
+      }
+      .search-input-group {
+        position: relative;
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1.5px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 6px 6px 6px 18px;
+        transition: var(--transition-smooth, all 0.3s ease);
+        backdrop-filter: blur(10px);
+      }
+      .search-input-group:focus-within {
+        border-color: var(--primary-color, #fd9636);
+        box-shadow: 0 0 18px rgba(253, 150, 54, 0.2);
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .search-icon {
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 16px;
+        margin-right: 12px;
+      }
+      .form-control-search {
+        background: transparent;
+        border: none;
+        outline: none;
+        color: #ffffff;
+        font-size: 15px;
+        flex: 1;
+        padding: 8px 0;
+      }
+      .form-control-search::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+      .btn-search {
+        background: var(
+          --gradient-primary,
+          linear-gradient(135deg, #fd9636 0%, #e07d1e 100%)
+        );
+        border: none;
+        border-radius: 12px;
+        color: #ffffff;
+        padding: 10px 24px;
+        font-weight: 600;
+        font-size: 14px;
+        transition: var(--transition-smooth, all 0.3s ease);
+        box-shadow: 0 4px 12px rgba(253, 150, 54, 0.3);
+      }
+      .btn-search:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(253, 150, 54, 0.45);
+      }
+
+      /* ── Action Buttons ── */
+      .action-buttons-wrap {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+      }
+      .btn-home {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: var(
+          --gradient-primary,
+          linear-gradient(135deg, #fd9636 0%, #e07d1e 100%)
+        );
+        color: #ffffff;
+        font-family: var(--font-heading, "Outfit", sans-serif);
+        font-weight: 700;
+        font-size: 15px;
+        padding: 14px 28px;
+        border-radius: 14px;
+        text-decoration: none;
+        transition: var(--transition-smooth, all 0.3s ease);
+        box-shadow: 0 6px 20px rgba(253, 150, 54, 0.35);
+      }
+      .btn-home:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(253, 150, 54, 0.5);
+        color: #ffffff;
+      }
+      .btn-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        color: #ffffff;
+        font-family: var(--font-heading, "Outfit", sans-serif);
+        font-weight: 700;
+        font-size: 15px;
+        padding: 13px 26px;
+        border-radius: 14px;
+        text-decoration: none;
+        border: 1.5px solid rgba(255, 255, 255, 0.1);
+        transition: var(--transition-smooth, all 0.3s ease);
+      }
+      .btn-back:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: translateY(-3px);
+        color: #ffffff;
+      }
+
+      /* ── Quick Categories Grid ── */
+      .quick-categories {
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        padding-top: 28px;
+      }
+      .quick-label {
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: rgba(255, 255, 255, 0.45);
+        margin-bottom: 16px;
+      }
+      .category-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .category-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 12px;
+        padding: 8px 18px;
+        font-size: 13px;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: var(--transition-smooth, all 0.3s ease);
+      }
+      .category-pill i {
+        color: var(--primary-color, #fd9636);
+      }
+      .category-pill:hover {
+        background: rgba(253, 150, 54, 0.08);
+        border-color: rgba(253, 150, 54, 0.3);
+        color: #ffffff;
+        transform: translateY(-3px);
+      }
+
+      /* ── Right Column: CSS 3D Floating Package Visual ── */
+      .visual-container {
+        position: relative;
+        width: 100%;
+        height: 480px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        perspective: 1200px;
+      }
+
+      /* Concentric Orbiting Paths */
+      .orbit {
+        position: absolute;
+        border: 1px dashed rgba(253, 150, 54, 0.12);
+        border-radius: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(0deg);
+        pointer-events: none;
+      }
+      .orbit-1 {
+        width: 300px;
+        height: 300px;
+        animation: spinOrbit 35s infinite linear;
+      }
+      .orbit-2 {
+        width: 400px;
+        height: 400px;
+        border-color: rgba(140, 158, 197, 0.1);
+        animation: spinOrbit 50s infinite linear reverse;
+      }
+      .orbit-3 {
+        width: 500px;
+        height: 500px;
+        animation: spinOrbit 65s infinite linear;
+      }
+      @keyframes spinOrbit {
+        100% {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
+      }
+
+      /* Floating Digital Icons */
+      .floating-item {
+        position: absolute;
+        width: 44px;
+        height: 44px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary-color, #fd9636);
+        font-size: 15px;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 8;
+        pointer-events: auto;
+        transition: var(--transition-smooth, all 0.3s ease);
+      }
+      .floating-item:hover {
+        background: var(
+          --gradient-primary,
+          linear-gradient(135deg, #fd9636 0%, #e07d1e 100%)
+        );
+        color: #ffffff;
+        transform: scale(1.15) translateY(-5px);
+        box-shadow: 0 10px 24px rgba(253, 150, 54, 0.4);
+      }
+
+      .item-cart {
+        top: 15%;
+        left: 12%;
+        animation: floatItemCart 6s infinite ease-in-out;
+      }
+      .item-tag {
+        bottom: 20%;
+        left: 8%;
+        color: var(--secondary-color, #8c9ec5);
+        animation: floatItemTag 8s infinite ease-in-out;
+      }
+      .item-heart {
+        top: 20%;
+        right: 12%;
+        animation: floatItemHeart 7s infinite ease-in-out;
+      }
+      .item-box {
+        bottom: 18%;
+        right: 10%;
+        color: var(--secondary-color, #8c9ec5);
+        animation: floatItemBox 9s infinite ease-in-out;
+      }
+
+      @keyframes floatItemCart {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-16px) rotate(15deg);
+        }
+      }
+      @keyframes floatItemTag {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(14px) rotate(-20deg);
+        }
+      }
+      @keyframes floatItemHeart {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-12px) rotate(-12deg);
+        }
+      }
+      @keyframes floatItemBox {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(18px) rotate(18deg);
+        }
+      }
+
+      /* Holographic Laser Projector */
+      .holo-projection {
+        position: absolute;
+        top: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 10;
+        pointer-events: none;
+        animation: holoFloat 3.8s infinite ease-in-out;
+      }
+      @keyframes holoFloat {
+        0%,
+        100% {
+          transform: translateX(-50%) translateY(0);
+        }
+        50% {
+          transform: translateX(-50%) translateY(-14px);
+        }
+      }
+      .holo-text {
+        font-family: var(--font-heading, "Outfit", sans-serif);
+        font-size: 80px;
+        font-weight: 800;
+        color: #ffffff;
+        line-height: 0.9;
+        letter-spacing: -2px;
+        text-shadow:
+          0 0 10px rgba(253, 150, 54, 0.8),
+          0 0 20px rgba(253, 150, 54, 0.4),
+          0 0 30px rgba(253, 150, 54, 0.2);
+        background: linear-gradient(180deg, #ffffff 40%, #fd9636 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .holo-sub {
+        font-family: var(--font-heading, "Outfit", sans-serif);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 4px;
+        color: var(--primary-color, #fd9636);
+        text-shadow: 0 0 8px rgba(253, 150, 54, 0.6);
+        text-transform: uppercase;
+        margin-top: 6px;
+      }
+      .holo-beam {
+        width: 140px;
+        height: 150px;
+        background: linear-gradient(
+          to top,
+          rgba(253, 150, 54, 0.32) 0%,
+          rgba(253, 150, 54, 0.02) 75%,
+          transparent 100%
+        );
+        clip-path: polygon(15% 100%, 85% 100%, 100% 0%, 0% 0%);
+        margin-top: -15px;
+        transform: rotate(180deg);
+        opacity: 0.6;
+        animation: holoBeamPulse 2s infinite ease-in-out;
+      }
+      @keyframes holoBeamPulse {
+        0%,
+        100% {
+          opacity: 0.4;
+          transform: rotate(180deg) scaleX(0.85);
+        }
+        50% {
+          opacity: 0.65;
+          transform: rotate(180deg) scaleX(1.1);
+        }
+      }
+
+      /* The 3D Cube Container */
+      .cube-wrapper {
+        position: relative;
+        width: 180px;
+        height: 180px;
+        transform-style: preserve-3d;
+        animation: hoverCube 4s infinite ease-in-out;
+        z-index: 5;
+        margin-top: 100px;
+      }
+      @keyframes hoverCube {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-16px);
+        }
+      }
+
+      .cube {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transform: rotateX(25deg) rotateY(45deg);
+        animation: rotateCube 24s infinite linear;
+      }
+      @keyframes rotateCube {
+        0% {
+          transform: rotateX(20deg) rotateY(0deg);
+        }
+        100% {
+          transform: rotateX(20deg) rotateY(360deg);
+        }
+      }
+
+      /* 3D Cube Faces */
+      .face {
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        background: #fd9636;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.2);
+      }
+      .front {
+        transform: rotateY(0deg) translateZ(90px);
+        background: #e07d1e;
+        border-color: #f7922d;
+      }
+      .back {
+        transform: rotateY(180deg) translateZ(90px);
+        background: #c6650c;
+        border-color: #e07d1e;
+      }
+      .right {
+        transform: rotateY(90deg) translateZ(90px);
+        background: #e07d1e;
+        border-color: #f7922d;
+      }
+      .left {
+        transform: rotateY(-90deg) translateZ(90px);
+        background: #c6650c;
+        border-color: #e07d1e;
+      }
+      .top {
+        transform: rotateX(90deg) translateZ(90px);
+        background: #fd9636;
+        border-color: #ffb86f;
+      }
+      .bottom {
+        transform: rotateX(-90deg) translateZ(90px);
+        background: #b05404;
+        border-color: #c6650c;
+      }
+
+      /* Cube details (Stickers, stamps) */
+      .box-brand {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-family: var(--font-heading, "Outfit", sans-serif);
+        font-size: 44px;
+        font-weight: 800;
+        color: rgba(26, 31, 46, 0.65);
+        border: 4px solid rgba(26, 31, 46, 0.55);
+        border-radius: 14px;
+        width: 76px;
+        height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .box-tape-front,
+      .box-tape-back {
+        position: absolute;
+        width: 34px;
+        height: 50px;
+        background: #1e293b;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0;
+        opacity: 0.95;
+      }
+      .box-tape-top {
+        position: absolute;
+        width: 34px;
+        height: 100%;
+        background: #1e293b;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 0;
+        opacity: 0.95;
+      }
+      .box-sticker {
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        width: 65px;
+        height: 85px;
+        background: #ffffff;
+        border-radius: 4px;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+        padding: 6px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .box-sticker::before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 4px;
+        background: #ef4444;
+        border-radius: 2px;
+      }
+      .box-sticker::after {
+        content: "|| ||| | |||";
+        font-family: monospace;
+        font-size: 11px;
+        color: #000000;
+        letter-spacing: 1px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 1;
+      }
+      .box-stamp {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-15deg);
+        border: 2px dashed #dc2626;
+        color: #dc2626;
+        padding: 4px 8px;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        border-radius: 4px;
+        opacity: 0.85;
+      }
+
+      /* 3D Box Shadow */
+      .cube-shadow {
+        position: absolute;
+        width: 150px;
+        height: 25px;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+        bottom: -50px;
+        left: 50%;
+        transform: translateX(-50%) scale(1);
+        filter: blur(12px);
+        animation: shadowScale 4s infinite ease-in-out;
+        pointer-events: none;
+      }
+      @keyframes shadowScale {
+        0%,
+        100% {
+          transform: translateX(-50%) scale(1);
+          opacity: 0.8;
+        }
+        50% {
+          transform: translateX(-50%) scale(0.85);
+          opacity: 0.4;
+          filter: blur(14px);
+        }
+      }
+
+      /* ── Slide-up Micro-animations ── */
+      .animate-slide-up {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+      }
+      .delay-1 {
+        animation-delay: 0.1s;
+      }
+      .delay-2 {
+        animation-delay: 0.2s;
+      }
+      .delay-3 {
+        animation-delay: 0.3s;
+      }
+      .delay-4 {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes slideUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 991px) {
+        .err-main {
+          text-align: center;
+          padding: 40px 0;
+        }
+        .err-headline {
+          margin-top: 20px;
+        }
+        .err-description {
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .search-box-wrap,
+        .action-buttons-wrap {
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .action-buttons-wrap {
+          justify-content: center;
+        }
+        .category-pills {
+          justify-content: center;
+        }
+        .visual-container {
+          height: 380px;
+          margin-bottom: 40px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Main Content wrapper containing the revamped 404 block -->
+    <main class="main">
+      <section class="err-main">
+        <!-- Floating ambient light blobs -->
+        <div class="blob blob-orange"></div>
+        <div class="blob blob-blue"></div>
+
+        <!-- Tech grid lines background -->
+        <div class="grid-pattern"></div>
+
+        <div class="container err-content-container">
+          <div class="row align-items-center g-5">
+            <!-- Left content column -->
+            <div class="col-lg-6 order-2 order-lg-1">
+              <!-- Eyebrow -->
+              <div class="err-tag animate-slide-up">
+                <span class="err-tag-dot"></span>
+                Error Code: 404
+              </div>
+
+              <!-- Headline -->
+              <h1 class="err-headline animate-slide-up delay-1">
+                Oops! This page is <br /><span class="text-accent"
+                  >Lost in Transit</span
+                >
+              </h1>
+
+              <!-- Supportive text description -->
+              <p class="err-description animate-slide-up delay-1">
+                We've scanned our digital warehouses, listings, and vendor
+                shelves, but the item you requested is currently out of stock or
+                relocated. Let's redirect your shipment back on track!
+              </p>
+
+              <!-- Call to Action Buttons -->
+              <div class="action-buttons-wrap animate-slide-up delay-3">
+                <a href="../index.html" class="btn-home">
+                  <i class="fa-solid fa-house"></i> Return to Homepage
+                </a>
+                <a href="javascript:history.back()" class="btn-back">
+                  <i class="fa-solid fa-arrow-left"></i> Go Back
+                </a>
+              </div>
+
+              <!-- Popular Section Links -->
+              <div class="quick-categories animate-slide-up delay-4">
+                <p class="quick-label">Or explore our top sections</p>
+                <div class="category-pills">
+                  <a href="../pages/shop.html" class="category-pill">
+                    <i class="fa-solid fa-tv"></i> Electronics
+                  </a>
+                  <a href="../pages/shop.html" class="category-pill">
+                    <i class="fa-solid fa-blender"></i> Appliances
+                  </a>
+                  <a href="../pages/shop.html" class="category-pill">
+                    <i class="fa-solid fa-tags"></i> Deals
+                  </a>
+                  <a href="../pages/vendors.html" class="category-pill">
+                    <i class="fa-solid fa-store"></i> Vendors
+                  </a>
+                  <a href="../pages/contact.html" class="category-pill">
+                    <i class="fa-regular fa-envelope"></i> Support
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right visual column (CSS 3D Floating parcel) -->
+            <div class="col-lg-6 order-1 order-lg-2">
+              <div class="visual-container">
+                <!-- Concentric orbital guides -->
+                <div class="orbit orbit-1"></div>
+                <div class="orbit orbit-2"></div>
+                <div class="orbit orbit-3"></div>
+
+                <!-- Floating items orbiting around -->
+                <div class="floating-item item-cart">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+                <div class="floating-item item-tag">
+                  <i class="fa-solid fa-tag"></i>
+                </div>
+                <div class="floating-item item-heart">
+                  <i class="fa-solid fa-heart"></i>
+                </div>
+                <div class="floating-item item-box">
+                  <i class="fa-solid fa-box-open"></i>
+                </div>
+
+                <!-- Holographic projection projector -->
+                <div class="holo-projection">
+                  <div class="holo-text">404</div>
+                  <div class="holo-sub">Package Missing</div>
+                  <div class="holo-beam"></div>
+                </div>
+
+                <!-- 3D Cube parcel -->
+                <div class="cube-wrapper">
+                  <div class="cube">
+                    <!-- Front face -->
+                    <div class="face front">
+                      <div class="box-brand">S</div>
+                      <div class="box-tape-front"></div>
+                    </div>
+                    <!-- Back face -->
+                    <div class="face back">
+                      <div class="box-tape-back"></div>
+                    </div>
+                    <!-- Right face with barcode sticker -->
+                    <div class="face right">
+                      <div class="box-sticker"></div>
+                    </div>
+                    <!-- Left face with fragile stamp -->
+                    <div class="face left">
+                      <div class="box-stamp">FRAGILE</div>
+                    </div>
+                    <!-- Top face -->
+                    <div class="face top">
+                      <div class="box-tape-top"></div>
+                    </div>
+                    <!-- Bottom face -->
+                    <div class="face bottom"></div>
+                  </div>
+                  <!-- Shadow projected under the floating cube -->
+                  <div class="cube-shadow"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bootstrap 5 Bundle JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom Theme Script that loads headers and footers -->
+    <script src="../assets/js/script.js"></script>
+
+    <!-- Page Search Logic -->
+    <script>
+      function handleErrSearch() {
+        const q = document.getElementById("errSearch").value.trim();
+        if (q) {
+          window.location.href =
+            "../pages/shop.html?q=" + encodeURIComponent(q);
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("errSearch");
+        if (searchInput) {
+          searchInput.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") {
+              handleErrSearch();
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
