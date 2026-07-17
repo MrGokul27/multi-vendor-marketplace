@@ -81,8 +81,8 @@
                 <div>
                   <h5 class="font-sm-bold text-dark mb-2">Call Us</h5>
                   <p class="font-xs text-muted mb-0">
-                    General support: (+01) 123-456-789<br />Vendor partnerships:
-                    (+01) 987-654-321
+                    General support: (+91) 123-456-789<br />Vendor partnerships:
+                    (+91) 987-654-321
                   </p>
                 </div>
               </div>
@@ -95,7 +95,7 @@
                 <div>
                   <h5 class="font-sm-bold text-dark mb-2">Email Support</h5>
                   <p class="font-xs text-muted mb-0">
-                    support@stackly-market.com<br />vendors@stackly-market.com
+                    contact@stackly-market.com <br />vendors@stackly-market.com
                   </p>
                 </div>
               </div>
@@ -120,6 +120,8 @@
                       type="text"
                       class="form-control premium-form-control"
                       placeholder="John"
+                      id="contactFirstName"
+                      maxlength="16"
                       required
                     />
                   </div>
@@ -131,6 +133,8 @@
                       type="text"
                       class="form-control premium-form-control"
                       placeholder="Doe"
+                      id="contactLastName"
+                      maxlength="16"
                       required
                     />
                   </div>
@@ -428,6 +432,7 @@
                         type="hidden"
                         id="selected-time-input"
                         name="booking_time"
+                        maxlength="16"
                         value="Mon, July 20 - 10:00 AM"
                       />
                       <div class="mb-3">
@@ -435,6 +440,7 @@
                           type="text"
                           class="form-control premium-form-control"
                           placeholder="Company Name"
+                          id="consultationCompanyName"
                           required
                         />
                       </div>
@@ -819,6 +825,43 @@
             .forEach((s) => s.classList.remove("selected"));
           this.classList.add("selected");
           document.getElementById("selected-time-input").value = this.innerText;
+        });
+      });
+
+      // 3. Block numbers & special chars in Name & Company Name fields (letters and spaces only)
+      const restrictedFields = [
+        "contactFirstName",
+        "contactLastName",
+        "consultationCompanyName",
+      ];
+      restrictedFields.forEach((id) => {
+        const inputEl = document.getElementById(id);
+        if (!inputEl) return;
+
+        inputEl.addEventListener("keydown", function (e) {
+          const allowed = /^[a-zA-Z ]$/;
+          const controlKeys = [
+            "Backspace",
+            "Delete",
+            "ArrowLeft",
+            "ArrowRight",
+            "Tab",
+            "Home",
+            "End",
+          ];
+          if (!allowed.test(e.key) && !controlKeys.includes(e.key)) {
+            e.preventDefault();
+          }
+        });
+
+        // Also block paste of invalid chars
+        inputEl.addEventListener("paste", function (e) {
+          e.preventDefault();
+          const text = (e.clipboardData || window.clipboardData).getData(
+            "text",
+          );
+          const cleaned = text.replace(/[^a-zA-Z ]/g, "");
+          document.execCommand("insertText", false, cleaned);
         });
       });
     </script>

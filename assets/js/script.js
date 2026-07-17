@@ -26,6 +26,30 @@ document.addEventListener("DOMContentLoaded", function () {
   })();
   // ─────────────────────────────────────────────────────────────────────────
 
+  // ── Redirect forms on home, shop and contact pages to 404 page on submit ──
+  (function redirectFormSubmissions() {
+    const isSubpage = window.location.pathname.includes("/pages/");
+    const notFoundPath = isSubpage ? "404.html" : "pages/404.html";
+    const path = window.location.pathname.toLowerCase();
+
+    // Determine current page: index.html (home page), shop.html, contact.html
+    const isHomePage =
+      !isSubpage ||
+      path.endsWith("/index.html") ||
+      path === "" ||
+      path.endsWith("/");
+    const isShopPage = isSubpage && path.includes("shop.html");
+    const isContactPage = isSubpage && path.includes("contact.html");
+
+    if (isHomePage || isShopPage || isContactPage) {
+      document.addEventListener("submit", function (e) {
+        e.preventDefault();
+        window.location.href = notFoundPath;
+      });
+    }
+  })();
+  // ─────────────────────────────────────────────────────────────────────────
+
   // Determine if we are on a subpage (inside the /pages/ directory)
   const isSubpage = window.location.pathname.includes("/pages/");
   const basePath = isSubpage ? "../" : "";
