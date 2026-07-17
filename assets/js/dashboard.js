@@ -752,7 +752,7 @@ document.addEventListener("DOMContentLoaded", function () {
                       <span>High-grade ergonomics & gadgets</span>
                     </div>
                     <div class="dash-activity-time">
-                      <button class="btn btn-outline-primary btn-sm rounded-pill font-xxs px-2 border-0" onclick="alert('Apex Store Selected')">Visit</button>
+                      <button class="btn btn-outline-primary btn-sm rounded-pill font-xxs px-2 border-0" onclick="window.location.href='404.html'">Visit</button>
                     </div>
                   </li>
                   <li class="dash-activity-item py-2">
@@ -764,7 +764,7 @@ document.addEventListener("DOMContentLoaded", function () {
                       <span>Premium organic cotton apparel</span>
                     </div>
                     <div class="dash-activity-time">
-                      <button class="btn btn-outline-primary btn-sm rounded-pill font-xxs px-2 border-0" onclick="alert('Horizon Clothing Selected')">Visit</button>
+                      <button class="btn btn-outline-primary btn-sm rounded-pill font-xxs px-2 border-0" onclick="window.location.href='404.html'">Visit</button>
                     </div>
                   </li>
                 </div>
@@ -775,17 +775,19 @@ document.addEventListener("DOMContentLoaded", function () {
       `;
 
       // Event Links
-      document
-        .getElementById("btnBrowseShop")
-        .addEventListener("click", () =>
-          alert("Routing to Main Shop Catalog..."),
-        );
+      document.getElementById("btnBrowseShop").addEventListener("click", () => {
+        window.location.href = "404.html";
+      });
       document
         .getElementById("btnEditSettings")
-        .addEventListener("click", () => switchSection("settings"));
+        .addEventListener("click", () => {
+          window.location.href = "404.html";
+        });
       document
         .getElementById("btnViewAllOrders")
-        .addEventListener("click", () => switchSection("orders"));
+        .addEventListener("click", () => {
+          window.location.href = "404.html";
+        });
     } else if (sectionId === "orders") {
       container.innerHTML = `
         <div class="row g-4">
@@ -951,7 +953,7 @@ document.addEventListener("DOMContentLoaded", function () {
                       </div>
                       <div class="mt-3">
                         <div class="d-flex justify-content-center gap-2">
-                          <button class="btn btn-theme-primary" onclick="alert('Added ${w.name} to Cart!')">
+                          <button class="btn btn-theme-primary" onclick="window.location.href='404.html'">
                             <i class="fa-solid fa-cart-plus me-1"></i> Add to Cart
                           </button>
                           <button class="btn btn-theme-danger" onclick="document.getElementById('wish-item-${w.id}').remove();">
@@ -1005,7 +1007,7 @@ document.addEventListener("DOMContentLoaded", function () {
                       <input type="text" class="form-control" value="${buyerProfile.paymentMethod}" id="profPayment">
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-theme-primary mt-4">Save Profile Configuration</button>
+                  <button class="btn btn-theme-primary mt-4" onclick="window.location.href='404.html'">Save Profile Configuration</button>
                 </form>
               </div>
             </div>
@@ -1020,7 +1022,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="display-6 text-warning mb-2"><i class="fa-solid fa-shield-halved"></i></div>
                 <h6 class="fw-bold">Password Reset</h6>
                 <p class="font-xs text-muted">We strongly recommend updating security passwords regularly to prevent account hijack.</p>
-                <button class="btn btn-theme-warning w-100 mt-2" onclick="alert('Triggering change password request popup...')">
+                <button class="btn btn-theme-warning w-100 mt-2" onclick="window.location.href='404.html'">
                   Configure Password
                 </button>
               </div>
@@ -1054,8 +1056,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
           // Sync visual name
           if (nameEl) nameEl.textContent = buyerProfile.name;
-
-          alert("Success: Profile saved successfully!");
         });
     }
   }
@@ -1186,15 +1186,19 @@ document.addEventListener("DOMContentLoaded", function () {
       `;
 
       // Event Links
-      document
-        .getElementById("btnQuickAdd")
-        .addEventListener("click", () => switchSection("products"));
+      document.getElementById("btnQuickAdd").addEventListener("click", () => {
+        window.location.href = "404.html";
+      });
       document
         .getElementById("btnStoreConfig")
-        .addEventListener("click", () => switchSection("profile"));
+        .addEventListener("click", () => {
+          window.location.href = "404.html";
+        });
       document
         .getElementById("btnManageOrders")
-        .addEventListener("click", () => switchSection("orders"));
+        .addEventListener("click", () => {
+          window.location.href = "404.html";
+        });
     } else if (sectionId === "products") {
       container.innerHTML = `
         <div class="dash-section-card mb-4">
@@ -1305,16 +1309,11 @@ document.addEventListener("DOMContentLoaded", function () {
             renderVendorProductsTableRows();
           addContainer.style.display = "none";
           this.reset();
-          alert("Listing added successfully!");
         });
 
       // Delete handler hook
       window.deleteVendorProduct = function (id) {
-        if (confirm("Are you sure you want to remove this product listing?")) {
-          vendorProducts = vendorProducts.filter((p) => p.id !== id);
-          document.querySelector("#tblVendorProducts tbody").innerHTML =
-            renderVendorProductsTableRows();
-        }
+        window.location.href = "404.html";
       };
     } else if (sectionId === "orders") {
       container.innerHTML = `
@@ -1386,7 +1385,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         order.status = nextState;
         switchSection("orders");
-        alert(`Order ${id} updated to status: ${nextState.toUpperCase()}`);
       };
     } else if (sectionId === "profile") {
       container.innerHTML = `
@@ -1432,7 +1430,7 @@ document.addEventListener("DOMContentLoaded", function () {
                       <textarea class="form-control" id="storeDesc" rows="3">${storeSettings.desc}</textarea>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-theme-primary mt-3">Save Store details</button>
+                  <button class="btn btn-theme-primary mt-3" onclick="window.location.href='404.html'">Save Store details</button>
                 </form>
               </div>
             </div>
@@ -1448,7 +1446,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <h6 class="fw-bold">Automatic payouts</h6>
                 <p class="font-xs text-muted mb-1">Commission Tier: <strong>${storeSettings.commissionTier}</strong></p>
                 <p class="font-xs text-muted">Weekly earnings are deposited to your linked bank account every Monday at 00:00 UTC.</p>
-                <button class="btn btn-theme-success w-100 mt-2" onclick="alert('Routing to stripe secure settings portal.')">
+                <button class="btn btn-theme-success w-100 mt-2" onclick="window.location.href='404.html'">
                   Manage Bank Details
                 </button>
               </div>
@@ -1478,8 +1476,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
           // Sync header name
           if (nameEl) nameEl.textContent = storeSettings.name;
-
-          alert("Success: Store configurations saved successfully!");
         });
     }
   }
@@ -1643,13 +1639,19 @@ document.addEventListener("DOMContentLoaded", function () {
       // Event handlers
       document
         .getElementById("btnAdminApprovals")
-        .addEventListener("click", () => switchSection("approvals"));
+        .addEventListener("click", () => {
+          window.location.href = "404.html";
+        });
       document
         .getElementById("btnAdminSettings")
-        .addEventListener("click", () => switchSection("system"));
+        .addEventListener("click", () => {
+          window.location.href = "404.html";
+        });
       document
         .getElementById("btnLinkApprovals")
-        .addEventListener("click", () => switchSection("approvals"));
+        .addEventListener("click", () => {
+          window.location.href = "404.html";
+        });
     } else if (sectionId === "users") {
       container.innerHTML = `
         <div class="dash-section-card">
@@ -1751,7 +1753,7 @@ document.addEventListener("DOMContentLoaded", function () {
                       </div>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-theme-primary mt-4">Save Platform Configurations</button>
+                  <button class="btn btn-theme-primary mt-4" onclick="window.location.href='404.html'">Save Platform Configurations</button>
                 </form>
               </div>
             </div>
@@ -1794,7 +1796,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <h6 class="fw-bold">Connected Nodes</h6>
                 <p class="font-xs text-muted mb-1">SMTP Server: <strong>${systemSettings.smtpStatus}</strong></p>
                 <p class="font-xs text-muted">Database Server Status: Operational (Ping: 1.4ms)</p>
-                <button class="btn btn-theme-danger w-100 mt-2" onclick="alert('Re-routing to AWS/Cloud infrastructure console...')">
+                <button class="btn btn-theme-danger w-100 mt-2" onclick="window.location.href='404.html'">
                   Reboot Nodes
                 </button>
               </div>
@@ -1817,7 +1819,6 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("sysIPBlock").value;
           systemSettings.maintenanceMode =
             document.getElementById("sysMaintenance").checked;
-          alert("Platform settings saved successfully!");
         });
     }
   }
@@ -1887,7 +1888,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Approval action logic
   window.processAdminApproval = function (id, isApproved) {
     const actionText = isApproved ? "Approved" : "Rejected";
-    alert(`Product #${id} has been successfully ${actionText}!`);
 
     // Remove from array
     adminApprovals = adminApprovals.filter((a) => a.id !== id);
@@ -1918,6 +1918,34 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   };
+
+  // ── Redirect empty/hash links & placeholder button clicks to 404 ───────────────────
+  document.addEventListener("click", function (e) {
+    const target = e.target.closest("a, button");
+    if (!target) return;
+
+    // Intercept empty/hash links
+    if (target.tagName === "A") {
+      const href = target.getAttribute("href");
+      if (!href || href === "#" || href.trim() === "") {
+        e.preventDefault();
+        window.location.href = "404.html";
+        return;
+      }
+    }
+
+    // Intercept non-functional placeholder buttons (like notification bell)
+    if (target.tagName === "BUTTON") {
+      if (
+        target.classList.contains("dash-icon-btn") &&
+        target.querySelector(".fa-bell")
+      ) {
+        e.preventDefault();
+        window.location.href = "404.html";
+        return;
+      }
+    }
+  });
 
   // ── Initial Render Run ───────────────────────────────────────
   switchSection("overview");
