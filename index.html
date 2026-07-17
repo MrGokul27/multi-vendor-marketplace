@@ -25,394 +25,6 @@
 
     <!-- Custom CSS -->
     <link href="assets/css/styles.css" rel="stylesheet" />
-
-    <style>
-      #stackly-preloader {
-        position: fixed;
-        inset: 0;
-        z-index: 99999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        background: #080e1a;
-        transition:
-          opacity 0.65s cubic-bezier(0.4, 0, 0.2, 1),
-          visibility 0.65s;
-      }
-      #stackly-preloader.hide {
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-      }
-
-      .pre-blob {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(90px);
-        pointer-events: none;
-        opacity: 0;
-        animation: preBlobIn 1s ease forwards;
-      }
-      .pre-blob-1 {
-        width: 520px;
-        height: 520px;
-        background: radial-gradient(
-          circle,
-          rgba(253, 150, 54, 0.22) 0%,
-          transparent 70%
-        );
-        top: -160px;
-        left: -160px;
-        animation-delay: 0.1s;
-      }
-      .pre-blob-2 {
-        width: 420px;
-        height: 420px;
-        background: radial-gradient(
-          circle,
-          rgba(99, 102, 241, 0.18) 0%,
-          transparent 70%
-        );
-        bottom: -120px;
-        right: -100px;
-        animation-delay: 0.25s;
-      }
-      .pre-blob-3 {
-        width: 300px;
-        height: 300px;
-        background: radial-gradient(
-          circle,
-          rgba(253, 150, 54, 0.1) 0%,
-          transparent 70%
-        );
-        bottom: 10%;
-        left: 20%;
-        animation-delay: 0.4s;
-      }
-      @keyframes preBlobIn {
-        to {
-          opacity: 1;
-        }
-      }
-
-      .pre-grid {
-        position: absolute;
-        inset: 0;
-        background-image: radial-gradient(
-          rgba(255, 255, 255, 0.04) 1px,
-          transparent 1px
-        );
-        background-size: 28px 28px;
-        mask-image: radial-gradient(
-          ellipse 65% 65% at 50% 50%,
-          black 30%,
-          transparent 100%
-        );
-        -webkit-mask-image: radial-gradient(
-          ellipse 65% 65% at 50% 50%,
-          black 30%,
-          transparent 100%
-        );
-        pointer-events: none;
-      }
-
-      .pre-card {
-        position: relative;
-        z-index: 2;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.07);
-        border-radius: 28px;
-        padding: 48px 56px 40px;
-        backdrop-filter: blur(24px);
-        -webkit-backdrop-filter: blur(24px);
-        box-shadow:
-          0 32px 80px rgba(0, 0, 0, 0.55),
-          inset 0 0 0 1px rgba(253, 150, 54, 0.07);
-        animation: preCardIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-      }
-      .pre-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 55%;
-        height: 1px;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(253, 150, 54, 0.75),
-          transparent
-        );
-        border-radius: 99px;
-      }
-      @keyframes preCardIn {
-        from {
-          opacity: 0;
-          transform: scale(0.88) translateY(28px);
-        }
-        to {
-          opacity: 1;
-          transform: scale(1) translateY(0);
-        }
-      }
-
-      .pre-logo {
-        margin-bottom: 28px;
-        animation: preFadeDown 0.5s 0.3s ease both;
-      }
-      .pre-logo img {
-        width: 148px;
-        display: block;
-        filter: drop-shadow(0 4px 20px rgba(253, 150, 54, 0.3));
-      }
-
-      .pre-orbit-wrap {
-        position: relative;
-        width: 88px;
-        height: 88px;
-        margin-bottom: 28px;
-        animation: preFadeUp 0.5s 0.4s ease both;
-      }
-      .pre-orbit-wrap::before {
-        content: "";
-        position: absolute;
-        inset: -8px;
-        border-radius: 50%;
-        border: 1px dashed rgba(253, 150, 54, 0.18);
-        animation: preOrbitSpin 10s linear infinite;
-      }
-      .pre-orbit-wrap::after {
-        content: "";
-        position: absolute;
-        top: -12px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: #fd9636;
-        box-shadow: 0 0 10px 3px rgba(253, 150, 54, 0.55);
-        animation: preOrbitSpin 2.6s linear infinite;
-        transform-origin: 50% calc(50% + 52px);
-      }
-      @keyframes preOrbitSpin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      .pre-orbit-svg {
-        position: absolute;
-        inset: 0;
-        transform: rotate(-90deg);
-      }
-      .pre-arc-track {
-        fill: none;
-        stroke: rgba(255, 255, 255, 0.06);
-        stroke-width: 3;
-      }
-      .pre-arc-fill {
-        fill: none;
-        stroke: url(#preGrad);
-        stroke-width: 3;
-        stroke-linecap: round;
-        stroke-dasharray: 251;
-        stroke-dashoffset: 251;
-        animation: preArcFill 1.7s 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        filter: drop-shadow(0 0 5px rgba(253, 150, 54, 0.8));
-      }
-      @keyframes preArcFill {
-        to {
-          stroke-dashoffset: 0;
-        }
-      }
-
-      .pre-core {
-        position: absolute;
-        inset: 10px;
-        border-radius: 50%;
-        background: radial-gradient(
-          circle at 40% 35%,
-          rgba(253, 150, 54, 0.16),
-          rgba(253, 150, 54, 0.03)
-        );
-        border: 1px solid rgba(253, 150, 54, 0.14);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        animation: prePulse 2.2s ease-in-out infinite;
-      }
-      .pre-core i {
-        font-size: 22px;
-        color: #fd9636;
-        filter: drop-shadow(0 0 8px rgba(253, 150, 54, 0.9));
-      }
-      @keyframes prePulse {
-        0%,
-        100% {
-          box-shadow: 0 0 0 0 rgba(253, 150, 54, 0.22);
-        }
-        50% {
-          box-shadow: 0 0 0 12px rgba(253, 150, 54, 0);
-        }
-      }
-
-      .pre-brand {
-        font-family: "Outfit", sans-serif;
-        font-size: 30px;
-        font-weight: 800;
-        color: #fff;
-        letter-spacing: -0.5px;
-        margin-bottom: 6px;
-        animation: preFadeUp 0.5s 0.5s ease both;
-      }
-      .pre-brand em {
-        font-style: normal;
-        color: #fd9636;
-      }
-
-      .pre-tagline {
-        font-family: "Inter", sans-serif;
-        font-size: 10.5px;
-        font-weight: 600;
-        color: rgba(255, 255, 255, 0.32);
-        letter-spacing: 3.5px;
-        text-transform: uppercase;
-        margin-bottom: 32px;
-        animation: preFadeUp 0.5s 0.6s ease both;
-      }
-
-      .pre-progress-wrap {
-        width: 220px;
-        animation: preFadeUp 0.5s 0.65s ease both;
-      }
-      .pre-progress-labels {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 8px;
-      }
-      .pre-progress-labels span {
-        font-family: "Inter", sans-serif;
-        font-size: 10px;
-        color: rgba(255, 255, 255, 0.28);
-        letter-spacing: 1px;
-        text-transform: uppercase;
-      }
-      .pre-pct {
-        color: #fd9636 !important;
-        font-weight: 700 !important;
-        font-size: 11px !important;
-      }
-      .pre-bar-track {
-        height: 4px;
-        background: rgba(255, 255, 255, 0.07);
-        border-radius: 99px;
-        overflow: hidden;
-        position: relative;
-      }
-      .pre-bar-fill {
-        height: 100%;
-        width: 0;
-        background: linear-gradient(
-          90deg,
-          #e07d1e 0%,
-          #fd9636 50%,
-          #ffb347 100%
-        );
-        border-radius: 99px;
-        animation: preBarFill 1.7s 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        box-shadow: 0 0 10px rgba(253, 150, 54, 0.55);
-        position: relative;
-      }
-      .pre-bar-fill::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -60px;
-        width: 60px;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(255, 255, 255, 0.4),
-          transparent
-        );
-        animation: preShimmer 1.7s 0.5s ease forwards;
-      }
-      @keyframes preBarFill {
-        to {
-          width: 100%;
-        }
-      }
-      @keyframes preShimmer {
-        to {
-          left: 260px;
-        }
-      }
-
-      .pre-dots {
-        display: flex;
-        gap: 7px;
-        margin-top: 22px;
-        animation: preFadeUp 0.5s 0.75s ease both;
-      }
-      .pre-dot {
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.12);
-      }
-      .pre-dot.active {
-        background: #fd9636;
-        box-shadow: 0 0 8px rgba(253, 150, 54, 0.65);
-      }
-      .pre-dot:nth-child(1).active {
-        animation: preDotPulse 1.2s 0s ease-in-out infinite;
-      }
-      .pre-dot:nth-child(2).active {
-        animation: preDotPulse 1.2s 0.2s ease-in-out infinite;
-      }
-      .pre-dot:nth-child(3).active {
-        animation: preDotPulse 1.2s 0.4s ease-in-out infinite;
-      }
-      @keyframes preDotPulse {
-        0%,
-        100% {
-          transform: scale(1);
-          opacity: 1;
-        }
-        50% {
-          transform: scale(1.6);
-          opacity: 0.5;
-        }
-      }
-
-      @keyframes preFadeDown {
-        from {
-          opacity: 0;
-          transform: translateY(-14px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      @keyframes preFadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-    </style>
   </head>
   <body>
     <!-- Preloader -->
@@ -474,7 +86,7 @@
                 <div
                   class="swiper-slide banner-slide-item"
                   style="
-                    background: url(&quot;https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1600&q=80&quot;)
+                    background: url(&quot;./assets/images/home/home-hero-banner-image-1.webp&quot;)
                       no-repeat center center;
                   "
                 >
@@ -522,7 +134,7 @@
                 <div
                   class="swiper-slide banner-slide-item"
                   style="
-                    background: url(&quot;https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=1600&q=80&quot;)
+                    background: url(&quot;./assets/images/home/home-hero-banner-image-2.webp&quot;)
                       no-repeat center center;
                   "
                 >
@@ -665,7 +277,7 @@
                 <div class="box-category-card">
                   <div class="image">
                     <img
-                      src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=120&q=80"
+                      src="./assets/images/home/home-most-popular-categories-1.webp"
                       alt="Drills"
                     />
                   </div>
@@ -678,7 +290,7 @@
                 <div class="box-category-card">
                   <div class="image">
                     <img
-                      src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=120&q=80"
+                      src="./assets/images/home/home-most-popular-categories-2.webp"
                       alt="Cordless"
                     />
                   </div>
@@ -691,7 +303,7 @@
                 <div class="box-category-card">
                   <div class="image">
                     <img
-                      src="https://images.unsplash.com/photo-1534224039826-c7a0eda0e6b3?auto=format&fit=crop&w=120&q=80"
+                      src="./assets/images/home/home-most-popular-categories-3.webp"
                       alt="Blades"
                     />
                   </div>
@@ -704,7 +316,7 @@
                 <div class="box-category-card">
                   <div class="image">
                     <img
-                      src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=120&q=80"
+                      src="./assets/images/home/home-most-popular-categories-4.webp"
                       alt="Abrasives"
                     />
                   </div>
@@ -717,7 +329,7 @@
                 <div class="box-category-card">
                   <div class="image">
                     <img
-                      src="https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?auto=format&fit=crop&w=120&q=80"
+                      src="./assets/images/home/home-most-popular-categories-5.webp"
                       alt="Appliances"
                     />
                   </div>
@@ -730,7 +342,7 @@
                 <div class="box-category-card">
                   <div class="image">
                     <img
-                      src="https://images.unsplash.com/photo-1473081556163-2a17de81fc97?auto=format&fit=crop&w=120&q=80"
+                      src="./assets/images/home/home-most-popular-categories-6.webp"
                       alt="Outdoor"
                     />
                   </div>
@@ -743,7 +355,7 @@
                 <div class="box-category-card">
                   <div class="image">
                     <img
-                      src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=120&q=80"
+                      src="./assets/images/home/home-most-popular-categories-7.webp"
                       alt="Watches"
                     />
                   </div>
@@ -756,7 +368,7 @@
                 <div class="box-category-card">
                   <div class="image">
                     <img
-                      src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=120&q=80"
+                      src="./assets/images/home/home-most-popular-categories-8.webp"
                       alt="Computers"
                     />
                   </div>
@@ -774,7 +386,7 @@
         <div class="container">
           <a href="#" class="promo-banner-card">
             <img
-              src="https://images.unsplash.com/photo-1572981779307-38b8cabb2407?auto=format&fit=crop&w=1200&h=180&q=80"
+              src="./assets/images/home/home-ad-banner-1.webp"
               alt="Ad Banner"
             />
             <div class="promo-banner-content">
@@ -853,7 +465,7 @@
                     <div class="image-box">
                       <span class="label bg-danger">-35%</span>
                       <img
-                        src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=300&q=80"
+                        src="./assets/images/home/home-daily-deal-product1.webp"
                         alt="Tool Set"
                       />
                     </div>
@@ -920,7 +532,7 @@
                     <div class="image-box">
                       <span class="label bg-danger">-40%</span>
                       <img
-                        src="https://images.unsplash.com/photo-1534224039826-c7a0eda0e6b3?auto=format&fit=crop&w=300&q=80"
+                        src="./assets/images/home/home-daily-deal-product2.webp"
                         alt="Angle Grinder"
                       />
                     </div>
@@ -987,7 +599,7 @@
                     <div class="image-box">
                       <span class="label bg-danger">-20%</span>
                       <img
-                        src="https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?auto=format&fit=crop&w=300&q=80"
+                        src="./assets/images/home/home-daily-deal-product3.webp"
                         alt="Pressure Washer"
                       />
                     </div>
@@ -1054,7 +666,7 @@
                     <div class="image-box">
                       <span class="label bg-danger">-50%</span>
                       <img
-                        src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=300&q=80"
+                        src="./assets/images/home/home-daily-deal-product4.webp"
                         alt="Socket Wrench"
                       />
                     </div>
@@ -1230,7 +842,7 @@
                       <div class="image-box">
                         <span class="label label-sale">-15%</span>
                         <img
-                          src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=300&q=80"
+                          src="./assets/images/home/home-feature-product-1.webp"
                           alt="iMac"
                         />
                       </div>
@@ -1290,7 +902,7 @@
                       <div class="image-box">
                         <span class="label label-sale">-10%</span>
                         <img
-                          src="https://images.unsplash.com/photo-1504148455328-c376907d081c?auto=format&fit=crop&w=300&q=80"
+                          src="./assets/images/home/home-feature-product-2.webp"
                           alt="Drill"
                         />
                       </div>
@@ -1350,7 +962,7 @@
                       <div class="image-box">
                         <span class="label label-new">New</span>
                         <img
-                          src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=300&q=80"
+                          src="./assets/images/home/home-feature-product-3.webp"
                           alt="Headphones"
                         />
                       </div>
@@ -1410,7 +1022,7 @@
                       <div class="image-box">
                         <span class="label label-sale">-20%</span>
                         <img
-                          src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=300&q=80"
+                          src="./assets/images/home/home-feature-product-4.webp"
                           alt="Watch"
                         />
                       </div>
@@ -1470,7 +1082,7 @@
                       <div class="image-box">
                         <span class="label label-sale">-8%</span>
                         <img
-                          src="https://images.unsplash.com/photo-1558317374-067fb5f30001?auto=format&fit=crop&w=300&q=80"
+                          src="./assets/images/home/home-feature-product-5.webp"
                           alt="Vacuum"
                         />
                       </div>
@@ -1543,7 +1155,7 @@
                       <div class="image-box">
                         <span class="label label-sale">-17%</span>
                         <img
-                          src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&w=300&q=80"
+                          src="./assets/images/home/home-feature-product-6.webp"
                           alt="TV"
                         />
                       </div>
@@ -1617,7 +1229,7 @@
                       <div class="image-box">
                         <span class="label label-new">Hot</span>
                         <img
-                          src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=300&q=80"
+                          src="./assets/images/home/home-feature-product-7.webp"
                           alt="HP Laptop"
                         />
                       </div>
@@ -1674,7 +1286,7 @@
             <div class="col-md-6">
               <a href="#" class="promo-banner-card">
                 <img
-                  src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=600&h=180&q=80"
+                  src="./assets/images/home/home-ad-banner-2.webp"
                   alt="Promo Banner"
                 />
                 <div class="promo-banner-content">
@@ -1693,7 +1305,7 @@
             <div class="col-md-6">
               <a href="#" class="promo-banner-card">
                 <img
-                  src="https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&w=600&h=180&q=80"
+                  src="./assets/images/home/home-ad-banner-3.webp"
                   alt="Promo Banner 2"
                 />
                 <div class="promo-banner-content">
