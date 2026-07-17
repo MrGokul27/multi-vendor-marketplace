@@ -109,6 +109,63 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
     }
+
+    // Highlight Active Navigation Link dynamically based on the current page URL
+    function highlightActiveLinks() {
+      const path = window.location.pathname;
+      let currentPage = path.split("/").pop();
+      if (
+        currentPage === "" ||
+        currentPage === "index.html" ||
+        currentPage === "index"
+      ) {
+        currentPage = "index.html";
+      }
+
+      // Specific target selectors for navigation links and dropdown items
+      const links = document.querySelectorAll(
+        ".main-nav-bar .nav-link, .main-nav-bar .dropdown-item, .mobile-nav-menu .nav-link, .nav-links a",
+      );
+
+      links.forEach((link) => {
+        // Remove existing active states first
+        link.classList.remove("active");
+
+        const href = link.getAttribute("href");
+        if (!href) return;
+
+        // Skip placeholder links, email, phone links
+        if (
+          href.startsWith("#") ||
+          href.startsWith("tel:") ||
+          href.startsWith("mailto:") ||
+          href.startsWith("javascript:")
+        ) {
+          return;
+        }
+
+        let linkPage = href.split("/").pop();
+        if (linkPage === "" || linkPage === "index.html") {
+          linkPage = "index.html";
+        }
+
+        if (linkPage === currentPage) {
+          link.classList.add("active");
+
+          // For nested dropdown items, also highlight the parent dropdown menu toggle
+          const dropdownMenu = link.closest(".dropdown-menu");
+          if (dropdownMenu) {
+            const dropdownToggle =
+              dropdownMenu.parentElement.querySelector(".dropdown-toggle");
+            if (dropdownToggle) {
+              dropdownToggle.classList.add("active");
+            }
+          }
+        }
+      });
+    }
+
+    highlightActiveLinks();
   }
 
   // Scroll To Top Button
@@ -477,6 +534,8 @@ document.addEventListener("DOMContentLoaded", function () {
             <li class="nav-item"><a class="nav-link font-sm-bold text-dark py-1" href="#"><i class="fa-solid fa-tags me-2 text-primary"></i> New Arrivals</a></li>
             <li class="nav-item"><a class="nav-link font-sm-bold text-dark py-1" href="${shopLink}"><i class="fa-solid fa-shop me-2 text-primary"></i> Shop Grid</a></li>
             <li class="nav-item"><a class="nav-link font-sm-bold text-dark py-1" href="${shopLink}"><i class="fa-solid fa-cart-shopping me-2 text-primary"></i> Shop Cart</a></li>
+            <li class="nav-item"><a class="nav-link font-sm-bold text-dark py-1" href="${aboutLink}"><i class="fa-solid fa-circle-info me-2 text-primary"></i> About Us</a></li>
+            <li class="nav-item"><a class="nav-link font-sm-bold text-dark py-1" href="${careerLink}"><i class="fa-solid fa-briefcase me-2 text-primary"></i> Careers</a></li>
             <li class="nav-item"><a class="nav-link font-sm-bold text-dark py-1" href="${vendorsLink}"><i class="fa-solid fa-users me-2 text-primary"></i> Vendors</a></li>
             <li class="nav-item"><a class="nav-link font-sm-bold text-dark py-1" href="${contactLink}"><i class="fa-regular fa-envelope me-2 text-primary"></i> Contact</a></li>
           </ul>
