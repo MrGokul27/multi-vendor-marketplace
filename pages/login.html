@@ -569,8 +569,14 @@
 
           if (!form.checkValidity() || !valid) return;
 
-          // Success — proceed
-          alert("Login successful! Redirecting to dashboard...");
+          // Success — store data and redirect
+          const userData = {
+            role: document.getElementById("loginRole").value,
+            email: document.getElementById("loginEmail").value,
+            remember: document.getElementById("rememberMe").checked,
+          };
+          sessionStorage.setItem("stackly_user", JSON.stringify(userData));
+          window.location.href = "dashboard.html";
         });
     </script>
   </body>
