@@ -11,6 +11,14 @@ document.addEventListener("DOMContentLoaded", function () {
       const href = anchor.getAttribute("href");
       // Intercept: href is exactly "#", empty, or missing
       if (!href || href.trim() === "#") {
+        // Do not redirect if it is a toggle trigger (like bootstrap dropdown or tab)
+        if (
+          anchor.hasAttribute("data-bs-toggle") ||
+          anchor.getAttribute("role") === "button" ||
+          anchor.classList.contains("prevent-redirect")
+        ) {
+          return;
+        }
         e.preventDefault();
         window.location.href = notFoundPath;
       }
@@ -175,9 +183,18 @@ document.addEventListener("DOMContentLoaded", function () {
         1200: { slidesPerView: 5 },
       },
     };
-    new Swiper(".swiper-products-featured", productSwiperConfig);
-    new Swiper(".swiper-products-bestseller", productSwiperConfig);
-    new Swiper(".swiper-products-mostviewed", productSwiperConfig);
+    const featuredSwiper = new Swiper(
+      ".swiper-products-featured",
+      productSwiperConfig,
+    );
+    const bestsellerSwiper = new Swiper(
+      ".swiper-products-bestseller",
+      productSwiperConfig,
+    );
+    const mostviewedSwiper = new Swiper(
+      ".swiper-products-mostviewed",
+      productSwiperConfig,
+    );
 
     // Dynamic Navigation controller for Product Tabs Swipers
     const tabPrevBtn = document.querySelector(".swiper-button-prev-products");
@@ -185,7 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (tabPrevBtn && tabNextBtn) {
       tabPrevBtn.addEventListener("click", function () {
         const activeSwiperEl = document.querySelector(
-          ".tab-content .tab-pane.active .swiper",
+          "#productTabsContent .tab-pane.active .swiper",
         );
         if (activeSwiperEl && activeSwiperEl.swiper) {
           activeSwiperEl.swiper.slidePrev();
@@ -193,7 +210,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
       tabNextBtn.addEventListener("click", function () {
         const activeSwiperEl = document.querySelector(
-          ".tab-content .tab-pane.active .swiper",
+          "#productTabsContent .tab-pane.active .swiper",
         );
         if (activeSwiperEl && activeSwiperEl.swiper) {
           activeSwiperEl.swiper.slideNext();
@@ -201,12 +218,12 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
-    // Force layout update on shown tab event to prevent collapse
+    // Force full layout update on shown tab event to fix hidden-pane init issue
     const tabElList = document.querySelectorAll('button[data-bs-toggle="tab"]');
     tabElList.forEach((tabEl) => {
       tabEl.addEventListener("shown.bs.tab", function () {
         const activeSwiperEl = document.querySelector(
-          ".tab-content .tab-pane.active .swiper",
+          "#productTabsContent .tab-pane.active .swiper",
         );
         if (activeSwiperEl && activeSwiperEl.swiper) {
           activeSwiperEl.swiper.update();
@@ -283,10 +300,6 @@ document.addEventListener("DOMContentLoaded", function () {
       autoplay: {
         delay: 5000,
         disableOnInteraction: false,
-      },
-      pagination: {
-        el: ".swiper-pagination-testimonials",
-        clickable: true,
       },
       breakpoints: {
         768: { slidesPerView: 2 },
@@ -455,13 +468,23 @@ document.addEventListener("DOMContentLoaded", function () {
     const secsEl = document.getElementById("countdown-seconds");
     if (!hoursEl || !minsEl || !secsEl) return;
 
-    // Set countdown to 14 hours from now
-    let targetTime = localStorage.getItem("flash_deal_target");
+    // Set countdown to 14 hours from now safely
+    let targetTime = null;
+    try {
+      targetTime = localStorage.getItem("flash_deal_target");
+    } catch (e) {
+      console.warn(
+        "localStorage is not accessible, using temporary memory:",
+        e,
+      );
+    }
     const now = new Date().getTime();
 
     if (!targetTime || parseInt(targetTime) < now) {
       targetTime = now + 14 * 60 * 60 * 1000; // 14 hours in milliseconds
-      localStorage.setItem("flash_deal_target", targetTime);
+      try {
+        localStorage.setItem("flash_deal_target", targetTime);
+      } catch (e) {}
     } else {
       targetTime = parseInt(targetTime);
     }
@@ -471,7 +494,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const difference = targetTime - currentTime;
 
       if (difference <= 0) {
-        localStorage.removeItem("flash_deal_target");
+        try {
+          localStorage.removeItem("flash_deal_target");
+        } catch (e) {}
         initCountdown();
         return;
       }

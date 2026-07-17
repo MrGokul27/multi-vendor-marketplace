@@ -144,12 +144,14 @@ h6 {
 }
 
 .logo-img {
-  filter: brightness(0) saturate(100%) invert(62%) sepia(78%) saturate(600%) hue-rotate(345deg) brightness(103%) contrast(98%);
+  filter: brightness(0) saturate(100%) invert(62%) sepia(78%) saturate(600%)
+    hue-rotate(345deg) brightness(103%) contrast(98%);
   transition: var(--transition-smooth);
 }
 
 .logo-link:hover .logo-img {
-  filter: brightness(0) saturate(100%) invert(52%) sepia(85%) saturate(700%) hue-rotate(345deg) brightness(95%) contrast(100%);
+  filter: brightness(0) saturate(100%) invert(52%) sepia(85%) saturate(700%)
+    hue-rotate(345deg) brightness(95%) contrast(100%);
 }
 
 .sticky-top {
@@ -454,20 +456,29 @@ h6 {
 /* Features Grid */
 .features-grid-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
   padding: 0;
   list-style: none;
 }
 
+.features-grid-list li {
+  display: flex;
+}
+
 .feature-box-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  min-height: 110px;
   background-color: var(--white);
   border-radius: 16px;
   padding: 20px 18px;
-  display: flex;
-  align-items: center;
   border: 1.5px solid var(--border-color);
   transition: var(--transition-smooth);
+  border-radius: 10px;
+  box-sizing: border-box;
 }
 
 .feature-box-item:hover {
@@ -492,13 +503,19 @@ h6 {
 
 /* Popular Categories */
 .box-category-card {
-  background-color: var(--white);
+  width: 100%;
+  min-height: 220px; /* Equal height for all cards */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  background: var(--white);
   border: 1.5px solid var(--border-color);
   border-radius: 18px;
   padding: 22px 16px;
   text-align: center;
   transition: var(--transition-smooth);
-  height: 100%;
 }
 
 .box-category-card:hover {
@@ -509,7 +526,8 @@ h6 {
 }
 
 .box-category-card .image {
-  height: 80px;
+  width: 100%;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -990,6 +1008,10 @@ body {
   background: linear-gradient(135deg, #fffcf9 0%, #fff5e6 100%);
   border-radius: 28px;
   border: 1.5px solid rgba(253, 150, 54, 0.15);
+}
+
+.swiper-products-deals {
+  position: relative;
 }
 
 .countdown-container {
@@ -1595,9 +1617,22 @@ body {
    Custom Swiper Navigation & Layout Adjustments
    ========================================================================== */
 
-/* Force all swiper slides to have equal height so layouts don't collapse */
+/* Force all swiper slides to have equal height so layouts don't collapse, but allow Swiper to override when needed (e.g. for fade effect) */
 .swiper-slide {
-  height: auto !important;
+  height: auto;
+}
+
+/* Set explicit min-height for hero slider to prevent container collapse during fade effect absolute positioning */
+.swiper-hero {
+  min-height: 560px;
+  height: 560px;
+}
+
+@media (max-width: 768px) {
+  .swiper-hero {
+    min-height: 420px;
+    height: 420px;
+  }
 }
 
 /* Globally disable default Swiper font arrows to prevent double icon bug */
