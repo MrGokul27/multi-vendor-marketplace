@@ -70,9 +70,34 @@ document.addEventListener("DOMContentLoaded", function () {
     return adjusted;
   }
 
-  // Header Interactions & Fixed Sticky Effect
+  // Header Interactions & Dynamic Layout Adjustments
   function initializeHeaderEvents() {
     const header = document.querySelector(".header");
+    const topbar = document.querySelector(".topbar");
+
+    function adjustHeaderSpacing() {
+      let totalHeight = 0;
+      let topbarHeight = 0;
+
+      if (topbar && window.getComputedStyle(topbar).display !== "none") {
+        topbarHeight = topbar.offsetHeight;
+        totalHeight += topbarHeight;
+      }
+
+      if (header) {
+        header.style.top = topbarHeight + "px";
+        if (window.getComputedStyle(header).display !== "none") {
+          totalHeight += header.offsetHeight;
+        }
+      }
+
+      document.body.style.paddingTop = totalHeight + "px";
+    }
+
+    // Run layout adjustments once elements are fully rendered
+    setTimeout(adjustHeaderSpacing, 50);
+    window.addEventListener("resize", adjustHeaderSpacing);
+
     if (header) {
       window.addEventListener("scroll", function () {
         if (window.scrollY > 50) {
@@ -345,7 +370,7 @@ document.addEventListener("DOMContentLoaded", function () {
       : "assets/images/logoStackly.webp";
 
     return `
-    <div class="topbar bg-dark py-2 border-bottom border-secondary text-light">
+    <div class="topbar bg-dark py-2 border-bottom border-secondary text-light d-none d-lg-block">
       <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center">
         <div class="menu-topbar-left mb-2 mb-md-0">
           <ul class="nav-small list-inline m-0">
@@ -368,12 +393,12 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="row align-items-center g-3">
           <div class="col-6 col-lg-2">
             <a href="${indexLink}" class="logo-link d-flex align-items-center text-decoration-none">
-              <img src="${logoPath}" alt="Stackly Logo" class="logo-img" style="height: 38px; width: auto; object-fit: contain;" />
+              <img src="${logoPath}" alt="Stackly Logo" class="logo-img" style="height: 38px; max-width: 100%; width: auto; object-fit: contain;" />
             </a>
           </div>
           <div class="col-12 col-lg-5 order-3 order-lg-2">
             <div class="input-group">
-              <input class="form-control bg-light border-0" type="text" placeholder="Search for items...">
+              <input class="form-control bg-light" type="text" placeholder="Search for items..." style="border: 1px solid var(--border-color) !important; border-top-left-radius: 0.375rem !important; border-bottom-left-radius: 0.375rem !important;">
               <button class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
           </div>
@@ -381,10 +406,13 @@ document.addEventListener("DOMContentLoaded", function () {
             <a class="header-action-btn text-decoration-none text-muted" href="#"><i class="fa-solid fa-code-compare fa-lg"></i></a>
             <a class="header-action-btn text-decoration-none text-muted position-relative" href="#"><i class="fa-regular fa-heart fa-lg"></i><span class="badge rounded-pill bg-primary position-absolute top-0 start-100 translate-middle font-xxs">5</span></a>
             <a class="header-action-btn text-decoration-none text-muted position-relative" href="#"><i class="fa-solid fa-cart-shopping fa-lg"></i><span class="badge rounded-pill bg-danger position-absolute top-0 start-100 translate-middle font-xxs">2</span></a>
-            <div class="d-none d-sm-flex align-items-center gap-2 ms-2">
+            <div class="d-none d-xl-flex align-items-center gap-2 ms-2">
               <a href="${loginLink}" class="btn btn-sm btn-outline-primary font-xs-bold px-3 py-2 rounded-3 text-decoration-none" style="transition: all 0.3s ease;">Log In</a>
               <a href="${registerLink}" class="btn btn-sm btn-primary font-xs-bold px-3 py-2 rounded-3 text-decoration-none text-white" style="transition: all 0.3s ease;">Register</a>
             </div>
+            <button class="btn btn-outline-secondary d-xl-none py-1 px-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenuOffcanvas" aria-controls="mobileMenuOffcanvas">
+              <i class="fa-solid fa-bars fa-lg"></i>
+            </button>
           </div>
         </div>
       </div>
@@ -404,6 +432,100 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
       </div>
     </header>
+
+    <!-- Mobile Navigation Offcanvas Sidebar -->
+    <div class="offcanvas offcanvas-start border-0 shadow" tabindex="-1" id="mobileMenuOffcanvas" aria-labelledby="mobileMenuOffcanvasLabel">
+      <div class="offcanvas-header bg-light border-bottom border-light">
+        <h5 class="offcanvas-title font-bold text-dark d-flex align-items-center" id="mobileMenuOffcanvasLabel">
+          <i class="fa-solid fa-store text-primary me-2"></i> Stackly<span class="text-primary">.</span>
+        </h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body perfect-scrollbar p-3">
+        <!-- User Account Header -->
+        <div class="user-account-mobile d-flex align-items-center p-3 bg-light border rounded mb-3">
+          <div class="avatar border rounded-circle bg-white d-flex align-items-center justify-content-center me-3" style="width: 48px; height: 48px;">
+            <i class="fa-regular fa-user text-muted fa-lg"></i>
+          </div>
+          <div>
+            <h6 class="mb-0 font-sm-bold text-dark">Hello, <span class="text-primary">Steven!</span></h6>
+            <p class="font-xxs text-muted mb-0">You have 3 new messages</p>
+          </div>
+        </div>
+
+        <!-- Mobile Auth Buttons -->
+        <div class="d-flex gap-2 mb-3">
+          <a href="${loginLink}" class="btn btn-outline-primary btn-sm w-50 font-xs-bold py-2 rounded-3 text-center text-decoration-none">Log In</a>
+          <a href="${registerLink}" class="btn btn-primary btn-sm w-50 font-xs-bold py-2 rounded-3 text-white text-center text-decoration-none">Register</a>
+        </div>
+
+        <!-- Search Mobile -->
+        <form class="search-form mb-4" action="#" method="post">
+          <div class="input-group input-group-sm">
+            <input class="form-control" type="text" placeholder="Search for items...">
+            <button class="btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+        </form>
+
+        <!-- Mobile Menu Navigation Links -->
+        <h6 class="text-uppercase font-xs-bold text-muted border-bottom pb-2 mb-3">Menu</h6>
+        <nav class="mobile-nav-menu mb-4">
+          <ul class="nav flex-column gap-2">
+            <li class="nav-item"><a class="nav-link font-sm-bold text-dark py-1 active" href="${indexLink}"><i class="fa-solid fa-house me-2 text-primary"></i> Home</a></li>
+            <li class="nav-item"><a class="nav-link font-sm-bold text-dark py-1" href="#"><i class="fa-solid fa-tv me-2 text-primary"></i> Electronics</a></li>
+            <li class="nav-item"><a class="nav-link font-sm-bold text-dark py-1" href="#"><i class="fa-solid fa-plug me-2 text-primary"></i> Appliances</a></li>
+            <li class="nav-item"><a class="nav-link font-sm-bold text-dark py-1" href="#"><i class="fa-solid fa-tags me-2 text-primary"></i> New Arrivals</a></li>
+            <li class="nav-item"><a class="nav-link font-sm-bold text-dark py-1" href="${shopLink}"><i class="fa-solid fa-shop me-2 text-primary"></i> Shop Grid</a></li>
+            <li class="nav-item"><a class="nav-link font-sm-bold text-dark py-1" href="${shopLink}"><i class="fa-solid fa-cart-shopping me-2 text-primary"></i> Shop Cart</a></li>
+            <li class="nav-item"><a class="nav-link font-sm-bold text-dark py-1" href="${vendorsLink}"><i class="fa-solid fa-users me-2 text-primary"></i> Vendors</a></li>
+            <li class="nav-item"><a class="nav-link font-sm-bold text-dark py-1" href="${contactLink}"><i class="fa-regular fa-envelope me-2 text-primary"></i> Contact</a></li>
+          </ul>
+        </nav>
+
+        <!-- Mobile Account Links -->
+        <h6 class="text-uppercase font-xs-bold text-muted border-bottom pb-2 mb-3">Account Settings</h6>
+        <ul class="nav flex-column gap-2 mb-4">
+          <li class="nav-item"><a class="nav-link font-xs text-dark py-1" href="${aboutLink}"><i class="fa-regular fa-user me-2"></i> My Profile</a></li>
+          <li class="nav-item"><a class="nav-link font-xs text-dark py-1" href="${aboutLink}"><i class="fa-solid fa-location-arrow me-2"></i> Order Tracking</a></li>
+          <li class="nav-item"><a class="nav-link font-xs text-dark py-1" href="${aboutLink}"><i class="fa-solid fa-box-open me-2"></i> My Orders</a></li>
+          <li class="nav-item"><a class="nav-link font-xs text-dark py-1" href="${aboutLink}"><i class="fa-regular fa-heart me-2"></i> My Wishlist</a></li>
+          <li class="nav-item"><a class="nav-link font-xs text-dark py-1" href="${aboutLink}"><i class="fa-solid fa-cog me-2"></i> Settings</a></li>
+        </ul>
+
+        <!-- Mobile Language, Currency & Contact Info -->
+        <h6 class="text-uppercase font-xs-bold text-muted border-bottom pb-2 mb-3">Settings & Support</h6>
+        <div class="d-flex flex-column gap-3 mb-4">
+          <div class="d-flex align-items-center justify-content-between">
+            <span class="font-xs text-dark"><i class="fa-solid fa-globe me-2 text-primary"></i>Language</span>
+            <select class="form-select form-select-sm bg-light border-0 font-xs py-1 px-2" style="width: auto; max-width: 120px;">
+              <option selected>English</option>
+              <option>Français</option>
+              <option>Español</option>
+              <option>Português</option>
+              <option>中国人</option>
+            </select>
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+            <span class="font-xs text-dark"><i class="fa-solid fa-money-bill-1 me-2 text-primary"></i>Currency</span>
+            <select class="form-select form-select-sm bg-light border-0 font-xs py-1 px-2" style="width: auto; max-width: 120px;">
+              <option selected>USD</option>
+              <option>EUR</option>
+              <option>AUD</option>
+              <option>SGP</option>
+            </select>
+          </div>
+          <div class="d-flex align-items-center justify-content-between bg-light p-2 rounded">
+            <span class="font-xs text-muted">Need help? Call Us:</span>
+            <a href="tel:+919876543210" class="font-sm-bold text-success text-decoration-none">+91 98765 43210</a>
+          </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="site-copyright font-xxs text-muted text-center pt-3 border-top mt-4">
+          Copyright 2026 &copy; Stackly - Marketplace.<br>Designed by AliThemes.
+        </div>
+      </div>
+    </div>
     `;
   }
 

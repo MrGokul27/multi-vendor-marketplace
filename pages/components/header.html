@@ -1,5 +1,7 @@
 <!-- Topbar -->
-<div class="topbar bg-dark py-2 border-bottom border-secondary text-light">
+<div
+  class="topbar bg-dark py-2 border-bottom border-secondary text-light d-none d-lg-block"
+>
   <div
     class="container d-flex flex-column flex-md-row justify-content-between align-items-center"
   >
@@ -91,7 +93,12 @@
             src="assets/images/logoStackly.webp"
             alt="Stackly Logo"
             class="logo-img"
-            style="height: 38px; width: auto; object-fit: contain"
+            style="
+              height: 38px;
+              max-width: 100%;
+              width: auto;
+              object-fit: contain;
+            "
           />
         </a>
       </div>
@@ -247,7 +254,7 @@
         </div>
 
         <!-- Auth Buttons (Login / Register) -->
-        <div class="d-none d-sm-flex align-items-center gap-2 ms-2">
+        <div class="d-none d-xl-flex align-items-center gap-2 ms-2">
           <a
             href="pages/login.html"
             class="btn btn-sm btn-outline-primary font-xs-bold px-3 py-2 rounded-3 text-decoration-none"
@@ -543,52 +550,6 @@
     ></button>
   </div>
   <div class="offcanvas-body perfect-scrollbar p-3">
-    <!-- User Account Header -->
-    <div
-      class="user-account-mobile d-flex align-items-center p-3 bg-light border rounded mb-3"
-    >
-      <div
-        class="avatar border rounded-circle bg-white d-flex align-items-center justify-content-center me-3"
-        style="width: 48px; height: 48px"
-      >
-        <i class="fa-regular fa-user text-muted fa-lg"></i>
-      </div>
-      <div>
-        <h6 class="mb-0 font-sm-bold text-dark">
-          Hello, <span class="text-primary">Steven!</span>
-        </h6>
-        <p class="font-xxs text-muted mb-0">You have 3 new messages</p>
-      </div>
-    </div>
-
-    <!-- Mobile Auth Buttons -->
-    <div class="d-flex gap-2 mb-3">
-      <a
-        href="pages/login.html"
-        class="btn btn-outline-primary btn-sm w-50 font-xs-bold py-2 rounded-3 text-center text-decoration-none"
-        >Log In</a
-      >
-      <a
-        href="pages/register.html"
-        class="btn btn-primary btn-sm w-50 font-xs-bold py-2 rounded-3 text-white text-center text-decoration-none"
-        >Register</a
-      >
-    </div>
-
-    <!-- Search Mobile -->
-    <form class="search-form mb-4" action="#" method="post">
-      <div class="input-group input-group-sm">
-        <input
-          class="form-control"
-          type="text"
-          placeholder="Search for items..."
-        />
-        <button class="btn btn-primary" type="submit">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-      </div>
-    </form>
-
     <!-- Mobile Menu Navigation Links -->
     <h6 class="text-uppercase font-xs-bold text-muted border-bottom pb-2 mb-3">
       Menu
@@ -623,7 +584,7 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link font-sm-bold text-dark py-1" href="pages/shop.html"
+          <a class="nav-link font-sm-bold text-dark py-1" href="#"
             ><i class="fa-solid fa-cart-shopping me-2 text-primary"></i> Shop
             Cart</a
           >
@@ -645,42 +606,78 @@
       </ul>
     </nav>
 
-    <!-- Mobile Account Links -->
+    <!-- Mobile Auth Buttons -->
+    <div class="d-flex gap-2 mb-3">
+      <a
+        href="pages/login.html"
+        class="btn btn-outline-primary btn-sm w-50 font-xs-bold py-2 rounded-3 text-center text-decoration-none"
+        >Log In</a
+      >
+      <a
+        href="pages/register.html"
+        class="btn btn-primary btn-sm w-50 font-xs-bold py-2 rounded-3 text-white text-center text-decoration-none"
+        >Register</a
+      >
+    </div>
+
+    <!-- Search Mobile -->
+    <form class="search-form mb-4">
+      <div class="input-group input-group-sm">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Search for items..."
+        />
+        <button class="btn btn-primary" type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+    </form>
+
+    <!-- Mobile Language, Currency & Contact Info -->
     <h6 class="text-uppercase font-xs-bold text-muted border-bottom pb-2 mb-3">
-      Account Settings
+      Settings & Support
     </h6>
-    <ul class="nav flex-column gap-2 mb-4">
-      <li class="nav-item">
-        <a class="nav-link font-xs text-dark py-1" href="pages/about.html"
-          ><i class="fa-regular fa-user me-2"></i> My Profile</a
+    <div class="d-flex flex-column gap-3 mb-4">
+      <div class="d-flex align-items-center justify-content-between">
+        <span class="font-xs text-dark"
+          ><i class="fa-solid fa-globe me-2 text-primary"></i>Language</span
         >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link font-xs text-dark py-1" href="pages/about.html"
-          ><i class="fa-solid fa-location-arrow me-2"></i> Order Tracking</a
+        <select
+          class="form-select form-select-sm bg-light border-0 font-xs py-1 px-2"
+          style="width: auto; max-width: 120px"
         >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link font-xs text-dark py-1" href="pages/about.html"
-          ><i class="fa-solid fa-box-open me-2"></i> My Orders</a
+          <option selected>English</option>
+          <option>Français</option>
+          <option>Español</option>
+          <option>Português</option>
+          <option>中国人</option>
+        </select>
+      </div>
+      <div class="d-flex align-items-center justify-content-between">
+        <span class="font-xs text-dark"
+          ><i class="fa-solid fa-money-bill-1 me-2 text-primary"></i
+          >Currency</span
         >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link font-xs text-dark py-1" href="pages/about.html"
-          ><i class="fa-regular fa-heart me-2"></i> My Wishlist</a
+        <select
+          class="form-select form-select-sm bg-light border-0 font-xs py-1 px-2"
+          style="width: auto; max-width: 120px"
         >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link font-xs text-dark py-1" href="pages/about.html"
-          ><i class="fa-solid fa-cog me-2"></i> Settings</a
+          <option selected>USD</option>
+          <option>EUR</option>
+          <option>AUD</option>
+          <option>SGP</option>
+        </select>
+      </div>
+      <div
+        class="d-flex align-items-center justify-content-between bg-light p-2 rounded"
+      >
+        <span class="font-xs text-muted">Need help? Call Us:</span>
+        <a href="#" class="font-sm-bold text-success text-decoration-none"
+          >+91 98765 43210</a
         >
-      </li>
-      <li class="nav-item">
-        <a class="nav-link font-xs text-danger py-1" href="pages/about.html"
-          ><i class="fa-solid fa-sign-out-alt me-2"></i> Sign Out</a
-        >
-      </li>
-    </ul>
+      </div>
+    </div>
 
     <!-- Mobile Sidebar Banner Advertisement -->
     <div
@@ -690,16 +687,7 @@
       <span class="badge bg-warning text-dark font-xxs mb-2">HOT SALE</span>
       <h5 class="font-md-bold mb-1">iPhone 12 Pro</h5>
       <p class="font-xs opacity-75 mb-3">Starting from $899</p>
-      <a href="pages/shop.html" class="btn btn-light btn-sm font-xs px-3"
-        >Learn More</a
-      >
-    </div>
-
-    <!-- Copyright -->
-    <div
-      class="site-copyright font-xxs text-muted text-center pt-3 border-top mt-4"
-    >
-      Copyright 2026 &copy; Stackly - Marketplace.<br />Designed by AliThemes.
+      <a href="#" class="btn btn-light btn-sm font-xs px-3">Learn More</a>
     </div>
   </div>
 </div>
