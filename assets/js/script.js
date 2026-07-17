@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const notFoundPath = isSubpage ? "404.html" : "pages/404.html";
     const path = window.location.pathname.toLowerCase();
 
-    // Determine current page: index.html (home page), shop.html, contact.html
+    // Determine current page: index.html (home page), shop.html, contact.html, blog.html
     const isHomePage =
       !isSubpage ||
       path.endsWith("/index.html") ||
@@ -40,8 +40,9 @@ document.addEventListener("DOMContentLoaded", function () {
       path.endsWith("/");
     const isShopPage = isSubpage && path.includes("shop.html");
     const isContactPage = isSubpage && path.includes("contact.html");
+    const isBlogPage = isSubpage && path.includes("blog.html");
 
-    if (isHomePage || isShopPage || isContactPage) {
+    if (isHomePage || isShopPage || isContactPage || isBlogPage) {
       document.addEventListener("submit", function (e) {
         e.preventDefault();
         window.location.href = notFoundPath;

@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hardware Insights & DIY Guides - Stackly Blog</title>
+    <meta
+      name="description"
+      content="Stay updated with the latest in hardware manufacturing, smart tool technologies, home appliance reviews, B2B wholesale logistics, and expert DIY woodworking guides."
+    />
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/webp"
+      href="../assets/images/logoStackly.webp"
+    />
+
+    <!-- Bootstrap 5 CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- FontAwesome 6 CDN -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link href="../assets/css/styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Dynamic Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hero Page Banner -->
+    <section
+      class="page-hero-banner"
+      style="
+        background-image: url(&quot;../assets/images/blog/blog-hero.webp&quot;);
+        background-position: bottom;
+      "
+    >
+      <div class="banner-content">
+        <h1>Stackly Industry Insights</h1>
+        <p>
+          Sourcing secrets, manufacturing audits, and expert tool maintenance
+          guides compiled by our engineering and vendor success teams.
+        </p>
+        <ul class="banner-breadcrumbs">
+          <li><a href="../index.html">Home</a></li>
+          <li>Blog</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <main class="main py-5 bg-light">
+      <div class="container">
+        <!-- Section 1: Featured Article Spot (Hero Callout) -->
+        <div class="row mb-5">
+          <div class="col-12">
+            <div
+              class="card border-0 rounded-4 overflow-hidden shadow-sm"
+              style="
+                background-image:
+                  linear-gradient(
+                    to right,
+                    rgba(0, 0, 0, 0.85) 40%,
+                    rgba(0, 0, 0, 0.3) 100%
+                  ),
+                  url(&quot;../assets/images/blog/blog-hero.webp&quot;);
+                background-size: cover;
+                background-position: center;
+                min-height: 400px;
+                display: flex;
+                align-items: center;
+              "
+            >
+              <div class="card-body p-4 p-md-5 text-white max-w-700">
+                <span
+                  class="badge bg-primary px-3 py-2 text-uppercase mb-3 font-xxs"
+                  >Featured / Industrial IoT</span
+                >
+                <h2 class="display-6 font-bold text-white mb-3">
+                  The Rise of Smart Tools: How IoT is Revolutionizing Hardware
+                  Manufacturing
+                </h2>
+                <p class="text-white-50 mb-4 font-sm">
+                  From torque-tracking digital wrenches to cloud-connected
+                  calibrators, discover how modern factories integrate sensors
+                  into hand and power tools to guarantee precision, safety, and
+                  compliance on global jobsites.
+                </p>
+                <div class="d-flex align-items-center gap-3 mb-4">
+                  <img
+                    src="../assets/images/about/about-who-we-are-img.webp"
+                    alt="Marcus Vance"
+                    class="rounded-circle"
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      object-fit: cover;
+                      border: 2px solid var(--primary-color);
+                    "
+                  />
+                  <div>
+                    <h6 class="font-sm-bold text-white mb-0">Marcus Vance</h6>
+                    <span class="font-xs text-white-50"
+                      >June 15, 2026 &bull; 8 min read</span
+                    >
+                  </div>
+                </div>
+                <a
+                  href="#"
+                  class="btn btn-primary btn-md px-4 py-2 font-sm-bold rounded-3"
+                >
+                  Explore Insights <i class="fa-solid fa-arrow-down ms-2"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: Quick Filter Pills -->
+        <div class="row mb-4 align-items-center">
+          <div class="col-12">
+            <h4 class="font-md-bold text-dark mb-3">
+              <i class="fa-solid fa-tags text-primary me-2"></i>Filter by
+              Category
+            </h4>
+            <div class="blog-category-container">
+              <button
+                class="blog-category-btn active"
+                onclick="filterCategory('all', this)"
+              >
+                All Articles
+              </button>
+              <button
+                class="blog-category-btn"
+                onclick="filterCategory('power', this)"
+              >
+                Power Tools & Forging
+              </button>
+              <button
+                class="blog-category-btn"
+                onclick="filterCategory('diy', this)"
+              >
+                DIY Home Improvement
+              </button>
+              <button
+                class="blog-category-btn"
+                onclick="filterCategory('b2b', this)"
+              >
+                Wholesale & B2B Logistics
+              </button>
+              <button
+                class="blog-category-btn"
+                onclick="filterCategory('electronics', this)"
+              >
+                Smart Energy & Appliances
+              </button>
+              <button
+                class="blog-category-btn"
+                onclick="filterCategory('safety', this)"
+              >
+                Safety & Compliance
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4" id="recent-articles">
+          <!-- Section 3: Blog Posts Grid (Left Column) -->
+          <div class="col-lg-8">
+            <div class="row g-4" id="blog-posts-row">
+              <!-- Post 1: DIY Crafts -->
+              <div class="col-md-6 blog-card-col" data-category="diy">
+                <article class="blog-card">
+                  <div class="blog-card-img-wrapper">
+                    <span class="blog-card-badge">DIY Crafts</span>
+                    <img
+                      src="../assets/images/blog/blog-diy.webp"
+                      alt="Woodworking Garage Tools"
+                      class="blog-card-img"
+                    />
+                  </div>
+                  <div class="blog-card-body">
+                    <div class="blog-card-meta">
+                      <span
+                        ><i class="fa-regular fa-calendar me-1"></i> July 12,
+                        2026</span
+                      >
+                      <span
+                        ><i class="fa-regular fa-clock me-1"></i> 5 Min
+                        Read</span
+                      >
+                    </div>
+                    <h4 class="blog-card-title">
+                      <a href="#"
+                        >Woodworking 101: Essential Tools for Your Home
+                        Garage</a
+                      >
+                    </h4>
+                    <p class="blog-card-excerpt">
+                      Building a home workshop doesn't require industrial
+                      budgets. Learn the core 7 hand tools, measuring grids, and
+                      workspace safety practices to kickstart your carpentry
+                      journey.
+                    </p>
+                    <div class="blog-card-footer">
+                      <div class="blog-author">
+                        <img
+                          src="../assets/images/about/about-who-we-are-img.webp"
+                          alt="Sarah Jenkins"
+                          class="blog-author-img"
+                        />
+                        <span class="blog-author-name">Sarah Jenkins</span>
+                      </div>
+                      <a href="#" class="blog-read-more"
+                        >Read <i class="fa-solid fa-arrow-right-long"></i
+                      ></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Post 2: Wholesale & B2B -->
+              <div class="col-md-6 blog-card-col" data-category="b2b">
+                <article class="blog-card">
+                  <div class="blog-card-img-wrapper">
+                    <span class="blog-card-badge">Wholesale & B2B</span>
+                    <img
+                      src="../assets/images/blog/blog-b2b.webp"
+                      alt="B2B Hardware wholesale trading"
+                      class="blog-card-img"
+                    />
+                  </div>
+                  <div class="blog-card-body">
+                    <div class="blog-card-meta">
+                      <span
+                        ><i class="fa-regular fa-calendar me-1"></i> July 08,
+                        2026</span
+                      >
+                      <span
+                        ><i class="fa-regular fa-clock me-1"></i> 10 Min
+                        Read</span
+                      >
+                    </div>
+                    <h4 class="blog-card-title">
+                      <a href="#"
+                        >Scaling Wholesale Hardware Imports: The B2B Strategy</a
+                      >
+                    </h4>
+                    <p class="blog-card-excerpt">
+                      Global supply chains are shifting rapidly. Discover how
+                      Stackly's integrated B2B customs clearance model
+                      eliminates shipping markups and handles bulk cargo
+                      logistics.
+                    </p>
+                    <div class="blog-card-footer">
+                      <div class="blog-author">
+                        <img
+                          src="../assets/images/about/about-who-we-are-img.webp"
+                          alt="David Sterling"
+                          class="blog-author-img"
+                        />
+                        <span class="blog-author-name">David Sterling</span>
+                      </div>
+                      <a href="#" class="blog-read-more"
+                        >Read <i class="fa-solid fa-arrow-right-long"></i
+                      ></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Post 3: Power Tools -->
+              <div class="col-md-6 blog-card-col" data-category="power">
+                <article class="blog-card">
+                  <div class="blog-card-img-wrapper">
+                    <span class="blog-card-badge">Power Tools</span>
+                    <img
+                      src="../assets/images/blog/blog-craftsman.webp"
+                      alt="Tool Tempering Process"
+                      class="blog-card-img"
+                    />
+                  </div>
+                  <div class="blog-card-body">
+                    <div class="blog-card-meta">
+                      <span
+                        ><i class="fa-regular fa-calendar me-1"></i> June 28,
+                        2026</span
+                      >
+                      <span
+                        ><i class="fa-regular fa-clock me-1"></i> 7 Min
+                        Read</span
+                      >
+                    </div>
+                    <h4 class="blog-card-title">
+                      <a href="#"
+                        >The Forging Process: How Carbon Steel is Tempered</a
+                      >
+                    </h4>
+                    <p class="blog-card-excerpt">
+                      Not all steel tools are engineered equal. We audit the
+                      high-heat forging and chemical quenching processes our
+                      verified manufacturers employ to achieve absolute
+                      durability.
+                    </p>
+                    <div class="blog-card-footer">
+                      <div class="blog-author">
+                        <img
+                          src="../assets/images/about/about-who-we-are-img.webp"
+                          alt="Vikram Mehta"
+                          class="blog-author-img"
+                        />
+                        <span class="blog-author-name">Vikram Mehta</span>
+                      </div>
+                      <a href="#" class="blog-read-more"
+                        >Read <i class="fa-solid fa-arrow-right-long"></i
+                      ></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Post 4: Smart Electronics -->
+              <div class="col-md-6 blog-card-col" data-category="electronics">
+                <article class="blog-card">
+                  <div class="blog-card-img-wrapper">
+                    <span class="blog-card-badge">Electronics</span>
+                    <img
+                      src="../assets/images/blog/blog-solar.webp"
+                      alt="Smart energy appliances"
+                      class="blog-card-img"
+                    />
+                  </div>
+                  <div class="blog-card-body">
+                    <div class="blog-card-meta">
+                      <span
+                        ><i class="fa-regular fa-calendar me-1"></i> June 20,
+                        2026</span
+                      >
+                      <span
+                        ><i class="fa-regular fa-clock me-1"></i> 6 Min
+                        Read</span
+                      >
+                    </div>
+                    <h4 class="blog-card-title">
+                      <a href="#"
+                        >Transitioning to Solar Inverters & Energy Efficient
+                        Appliances</a
+                      >
+                    </h4>
+                    <p class="blog-card-excerpt">
+                      Minimize your utility bills. Learn the technical
+                      difference between hybrid and off-grid solar inverters,
+                      and how smart sensors automate peak load shedding.
+                    </p>
+                    <div class="blog-card-footer">
+                      <div class="blog-author">
+                        <img
+                          src="../assets/images/about/about-who-we-are-img.webp"
+                          alt="Elena Rostova"
+                          class="blog-author-img"
+                        />
+                        <span class="blog-author-name">Elena Rostova</span>
+                      </div>
+                      <a href="#" class="blog-read-more"
+                        >Read <i class="fa-solid fa-arrow-right-long"></i
+                      ></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Post 5: Safety & Compliance -->
+              <div class="col-md-6 blog-card-col" data-category="safety">
+                <article class="blog-card">
+                  <div class="blog-card-img-wrapper">
+                    <span class="blog-card-badge">Safety</span>
+                    <img
+                      src="../assets/images/blog/blog-logistics.webp"
+                      alt="Heavy freight cargo safety"
+                      class="blog-card-img"
+                    />
+                  </div>
+                  <div class="blog-card-body">
+                    <div class="blog-card-meta">
+                      <span
+                        ><i class="fa-regular fa-calendar me-1"></i> June 12,
+                        2026</span
+                      >
+                      <span
+                        ><i class="fa-regular fa-clock me-1"></i> 9 Min
+                        Read</span
+                      >
+                    </div>
+                    <h4 class="blog-card-title">
+                      <a href="#"
+                        >Safety Protocols in Heavy Cargo Freight Warehousing</a
+                      >
+                    </h4>
+                    <p class="blog-card-excerpt">
+                      Zero mishaps is the core goal. Explore the strict
+                      warehouse sorting rules and automated overhead rigging
+                      machinery certifications enforced at Stackly fulfillment
+                      hubs.
+                    </p>
+                    <div class="blog-card-footer">
+                      <div class="blog-author">
+                        <img
+                          src="../assets/images/about/about-who-we-are-img.webp"
+                          alt="Arthur Pendelton"
+                          class="blog-author-img"
+                        />
+                        <span class="blog-author-name">Arthur Pendelton</span>
+                      </div>
+                      <a href="#" class="blog-read-more"
+                        >Read <i class="fa-solid fa-arrow-right-long"></i
+                      ></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+
+              <!-- Post 6: DIY Crafts -->
+              <div class="col-md-6 blog-card-col" data-category="diy">
+                <article class="blog-card">
+                  <div class="blog-card-img-wrapper">
+                    <span class="blog-card-badge">DIY Crafts</span>
+                    <img
+                      src="../assets/images/blog/blog-hero.webp"
+                      alt="Precision digital calipers calibration"
+                      class="blog-card-img"
+                    />
+                  </div>
+                  <div class="blog-card-body">
+                    <div class="blog-card-meta">
+                      <span
+                        ><i class="fa-regular fa-calendar me-1"></i> June 05,
+                        2026</span
+                      >
+                      <span
+                        ><i class="fa-regular fa-clock me-1"></i> 4 Min
+                        Read</span
+                      >
+                    </div>
+                    <h4 class="blog-card-title">
+                      <a href="#"
+                        >Precision Calibration: The Art of Digital Calipers</a
+                      >
+                    </h4>
+                    <p class="blog-card-excerpt">
+                      A fraction of a millimeter determines structural
+                      integrity. Learn how to reset, lubricate, and read digital
+                      calipers for engineering repairs.
+                    </p>
+                    <div class="blog-card-footer">
+                      <div class="blog-author">
+                        <img
+                          src="../assets/images/about/about-who-we-are-img.webp"
+                          alt="Marcus Vance"
+                          class="blog-author-img"
+                        />
+                        <span class="blog-author-name">Marcus Vance</span>
+                      </div>
+                      <a href="#" class="blog-read-more"
+                        >Read <i class="fa-solid fa-arrow-right-long"></i
+                      ></a>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4: Blog Sidebar (Right Column) -->
+          <div class="col-lg-4">
+            <!-- Sidebar Search Widget -->
+            <div class="blog-sidebar-widget">
+              <h5 class="widget-title">Search Articles</h5>
+              <form class="sidebar-search-form" onsubmit="searchBlog(event)">
+                <input
+                  type="text"
+                  id="blog-search-input"
+                  placeholder="Type keywords..."
+                  aria-label="Search blog"
+                />
+                <button type="submit" class="sidebar-search-btn">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+              </form>
+            </div>
+
+            <!-- Interactive Conversion Calculator Widget -->
+            <div class="blog-sidebar-widget">
+              <div class="iq-widget">
+                <div class="iq-widget-badge">Tool IQ</div>
+                <h5 class="font-md-bold text-dark mb-3">
+                  <i class="fa-solid fa-calculator text-primary me-2"></i>Unit
+                  Converter
+                </h5>
+                <p class="font-xs text-muted mb-3">
+                  Convert hardware metrics, torque units, and drill-bit
+                  diameters instantly.
+                </p>
+
+                <div class="mb-3">
+                  <label class="form-label font-xs-bold text-dark"
+                    >Metric Category</label
+                  >
+                  <select
+                    id="converter-type"
+                    class="form-select font-sm"
+                    onchange="runConversion()"
+                  >
+                    <option value="nm-to-ftlbs">Torque: Nm to Ft-lbs</option>
+                    <option value="ftlbs-to-nm">Torque: Ft-lbs to Nm</option>
+                    <option value="mm-to-inch">
+                      Drill Size: Metric (mm) to Inch
+                    </option>
+                    <option value="inch-to-mm">
+                      Drill Size: Inch to Metric (mm)
+                    </option>
+                  </select>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label font-xs-bold text-dark"
+                    >Input Value</label
+                  >
+                  <input
+                    type="number"
+                    id="converter-input"
+                    class="form-control font-sm text-dark font-bold"
+                    value="10"
+                    oninput="runConversion()"
+                    placeholder="Enter magnitude..."
+                  />
+                </div>
+
+                <div class="iq-result-box mt-3">
+                  <div>
+                    <span class="iq-result-unit" id="result-label">Ft-lbs</span>
+                  </div>
+                  <div class="iq-result-val text-primary" id="result-value">
+                    7.38
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recent Articles Sidebar List -->
+            <div class="blog-sidebar-widget">
+              <h5 class="widget-title">Trending Now</h5>
+              <ul class="recent-posts-list">
+                <li class="recent-post-item">
+                  <img
+                    src="../assets/images/blog/blog-hero.webp"
+                    alt="Smart tools"
+                    class="recent-post-thumb"
+                  />
+                  <div class="recent-post-info">
+                    <a href="#" class="recent-post-link"
+                      >The Rise of Smart Tools: IoT in Manufacturing</a
+                    >
+                    <span class="recent-post-date">June 15, 2026</span>
+                  </div>
+                </li>
+                <li class="recent-post-item">
+                  <img
+                    src="../assets/images/blog/blog-diy.webp"
+                    alt="Woodworking"
+                    class="recent-post-thumb"
+                  />
+                  <div class="recent-post-info">
+                    <a href="#" class="recent-post-link"
+                      >Woodworking 101: Essential Home Tools</a
+                    >
+                    <span class="recent-post-date">July 12, 2026</span>
+                  </div>
+                </li>
+                <li class="recent-post-item">
+                  <img
+                    src="../assets/images/blog/blog-b2b.webp"
+                    alt="Supply chains"
+                    class="recent-post-thumb"
+                  />
+                  <div class="recent-post-info">
+                    <a href="#" class="recent-post-link"
+                      >Scaling Hardware Imports Globally</a
+                    >
+                    <span class="recent-post-date">July 08, 2026</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Tags Cloud Widget -->
+            <div class="blog-sidebar-widget">
+              <h5 class="widget-title">Popular Tags</h5>
+              <div class="tag-cloud">
+                <a
+                  href="#"
+                  onclick="
+                    filterCategory('diy', this);
+                    return false;
+                  "
+                  >Carpentry</a
+                >
+                <a
+                  href="#"
+                  onclick="
+                    filterCategory('power', this);
+                    return false;
+                  "
+                  >Steel Forging</a
+                >
+                <a
+                  href="#"
+                  onclick="
+                    filterCategory('b2b', this);
+                    return false;
+                  "
+                  >Logistics</a
+                >
+                <a
+                  href="#"
+                  onclick="
+                    filterCategory('electronics', this);
+                    return false;
+                  "
+                  >Solar Energy</a
+                >
+                <a
+                  href="#"
+                  onclick="
+                    filterCategory('safety', this);
+                    return false;
+                  "
+                  >ISO Certs</a
+                >
+                <a
+                  href="#"
+                  onclick="
+                    filterCategory('diy', this);
+                    return false;
+                  "
+                  >Calibration</a
+                >
+                <a
+                  href="#"
+                  onclick="
+                    filterCategory('electronics', this);
+                    return false;
+                  "
+                  >IoT Tools</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 5: Vendor Spotlight Case Studies -->
+        <div class="my-5 py-5 border-top border-light">
+          <div class="text-center mb-5 max-w-700 mx-auto">
+            <span
+              class="badge bg-primary px-3 py-2 text-uppercase mb-3 font-xxs"
+              >Empowering Growth</span
+            >
+            <h3 class="display-6 font-bold text-dark">
+              Marketplace Vendor Spotlights
+            </h3>
+            <p class="text-muted font-sm">
+              See how regional manufacturers and blacksmith workshops scaled
+              their international export volumes leveraging the Stackly
+              platform.
+            </p>
+          </div>
+
+          <div class="row g-4">
+            <!-- Case Study 1 -->
+            <div class="col-md-6">
+              <div class="case-study-card">
+                <div class="case-study-header">
+                  <div
+                    class="case-study-logo d-flex align-items-center justify-content-center"
+                  >
+                    <i
+                      class="fa-solid fa-screwdriver-wrench text-primary fs-3"
+                    ></i>
+                  </div>
+                  <div>
+                    <h5 class="font-md-bold text-dark mb-0">
+                      Apex Forging & Tools Ltd.
+                    </h5>
+                    <span class="font-xs text-muted"
+                      >Ludhiana, India &bull; Hand Tools Manufacturer</span
+                    >
+                  </div>
+                </div>
+                <p class="font-sm text-muted">
+                  "Stackly enabled Apex Forge to digitalize our legacy catalog
+                  of forged hammers and pliers. By joining the B2B marketplace
+                  dashboard, we connected with 40+ building supply distributors
+                  in North America, scaling exports without hiring agents."
+                </p>
+                <div class="case-study-stats">
+                  <div class="case-study-stat-num">+340%</div>
+                  <div class="case-study-stat-lbl">Annual Export Growth</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Case Study 2 -->
+            <div class="col-md-6">
+              <div class="case-study-card">
+                <div class="case-study-header">
+                  <div
+                    class="case-study-logo d-flex align-items-center justify-content-center"
+                  >
+                    <i class="fa-solid fa-solar-panel text-primary fs-3"></i>
+                  </div>
+                  <div>
+                    <h5 class="font-md-bold text-dark mb-0">
+                      Lumina Eco Appliances
+                    </h5>
+                    <span class="font-xs text-muted"
+                      >Shenzhen, China &bull; Green Energy Solutions</span
+                    >
+                  </div>
+                </div>
+                <p class="font-sm text-muted">
+                  "Transitioning from local consumer retail to global B2B
+                  distributions was our main challenge. Stackly's cross-border
+                  logistics program allowed us to pre-stock inventory in region
+                  hubs, reducing customer shipping timelines from 20 days to 48
+                  hours."
+                </p>
+                <div class="case-study-stats">
+                  <div class="case-study-stat-num">50K+</div>
+                  <div class="case-study-stat-lbl">Monthly Units Fulfilled</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 6: Newsletter Subscribe Banner -->
+        <div class="row mt-5">
+          <div class="col-12">
+            <div class="newsletter-banner-card text-center text-lg-start">
+              <div class="row align-items-center g-4 p-lg-4">
+                <div class="col-lg-7">
+                  <h3 class="display-6 font-bold text-white mb-2">
+                    Subscribe to Hardware Briefs
+                  </h3>
+                  <p class="text-white-50 mb-0 font-sm">
+                    Get manufacturing market updates, copper price forecasts,
+                    and inventory management strategies delivered straight to
+                    your inbox weekly.
+                  </p>
+                </div>
+                <div class="col-lg-5">
+                  <form
+                    class="d-flex flex-column flex-sm-row gap-2 justify-content-lg-end"
+                  >
+                    <input
+                      type="email"
+                      class="form-control px-4 py-3 rounded-3 font-sm"
+                      placeholder="Enter your business email..."
+                      required
+                      style="max-width: 400px"
+                    />
+                    <button
+                      type="submit"
+                      class="btn btn-primary px-4 py-3 font-sm-bold rounded-3 text-white border-0"
+                      style="background: var(--gradient-primary) !important"
+                    >
+                      Subscribe Now
+                    </button>
+                  </form>
+                  <p
+                    class="font-xxs text-white-50 mt-2 mb-0 text-center text-sm-start"
+                  >
+                    <i class="fa-solid fa-shield-halved text-warning me-1"></i>
+                    No spam. Unsubscribe anytime.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Dynamic Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Bootstrap 5 Bundle JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Interactive Logic & Page Filtering Scripts -->
+    <script>
+      // 1. Tool Converter IQ logic
+      function runConversion() {
+        const type = document.getElementById("converter-type").value;
+        const inputVal =
+          parseFloat(document.getElementById("converter-input").value) || 0;
+        let result = 0;
+        let label = "";
+
+        if (type === "nm-to-ftlbs") {
+          result = inputVal * 0.73756;
+          label = "Ft-lbs";
+        } else if (type === "ftlbs-to-nm") {
+          result = inputVal * 1.35582;
+          label = "Newton-Meters (Nm)";
+        } else if (type === "mm-to-inch") {
+          result = inputVal * 0.03937;
+          label = "Inches (in)";
+        } else if (type === "inch-to-mm") {
+          result = inputVal * 25.4;
+          label = "Millimeters (mm)";
+        }
+
+        document.getElementById("result-value").innerText = result.toFixed(2);
+        document.getElementById("result-label").innerText = label;
+      }
+
+      // 2. Category selection dynamic filtering
+      function filterCategory(category, buttonElement) {
+        // Update active class on category buttons
+        const buttons = document.querySelectorAll(".blog-category-btn");
+        buttons.forEach((btn) => btn.classList.remove("active"));
+
+        // Find match in categories menu to handle tag cloud redirects
+        let foundBtn = false;
+        buttons.forEach((btn) => {
+          if (
+            btn.innerText.toLowerCase().includes(category) ||
+            (category === "all" && btn.innerText.toLowerCase().includes("all"))
+          ) {
+            btn.classList.add("active");
+            foundBtn = true;
+          }
+        });
+
+        if (!foundBtn && buttonElement) {
+          buttonElement.classList.add("active");
+        }
+
+        // Hide/Show cards
+        const cards = document.querySelectorAll(".blog-card-col");
+        cards.forEach((card) => {
+          const cardCategory = card.getAttribute("data-category");
+          if (category === "all" || cardCategory === category) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      }
+
+      // 3. Simple Search functionality
+      function searchBlog(event) {
+        event.preventDefault();
+        const query = document
+          .getElementById("blog-search-input")
+          .value.toLowerCase()
+          .trim();
+        const cards = document.querySelectorAll(".blog-card-col");
+
+        // Reset filter active buttons to "All"
+        const buttons = document.querySelectorAll(".blog-category-btn");
+        buttons.forEach((btn) => btn.classList.remove("active"));
+        buttons[0].classList.add("active");
+
+        cards.forEach((card) => {
+          const title = card
+            .querySelector(".blog-card-title")
+            .innerText.toLowerCase();
+          const excerpt = card
+            .querySelector(".blog-card-excerpt")
+            .innerText.toLowerCase();
+
+          if (title.includes(query) || excerpt.includes(query)) {
+            card.style.display = "block";
+          } else {
+            card.style.display = "none";
+          }
+        });
+      }
+
+      // Trigger initial converter render
+      document.addEventListener("DOMContentLoaded", function () {
+        runConversion();
+      });
+    </script>
+
+    <!-- Custom Global Scripts (Loads Header & Footer Placeholder) -->
+    <script src="../assets/js/script.js"></script>
+  </body>
+</html>
