@@ -2108,3 +2108,716 @@ body {
 .swiper-nav-btn-absolute:active {
   transform: translateY(-50%) scale(0.95);
 }
+
+/* Universal Layout Fix for Mobile Scrolling */
+html,
+body {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+/* Page Hero Banner styling */
+.page-hero-banner {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: var(--white);
+  padding: 60px 0;
+  margin-bottom: 0;
+}
+
+.page-hero-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 31, 46, 0.65) 0%,
+    rgba(26, 31, 46, 0.85) 100%
+  );
+  z-index: 1;
+}
+
+.page-hero-banner .banner-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.page-hero-banner h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 12px;
+  text-transform: capitalize;
+  letter-spacing: -0.5px;
+}
+
+.page-hero-banner p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 20px;
+  font-weight: 400;
+}
+
+/* Breadcrumbs inside Banner */
+.banner-breadcrumbs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+}
+
+.banner-breadcrumbs li {
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.banner-breadcrumbs li a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+.banner-breadcrumbs li a:hover {
+  color: var(--white);
+}
+
+.banner-breadcrumbs li::after {
+  content: "\f105";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-left: 8px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.banner-breadcrumbs li:last-child::after {
+  content: none;
+}
+
+.banner-breadcrumbs li:last-child {
+  color: var(--white);
+  font-weight: 500;
+}
+
+/* Responsive banner height */
+@media (max-width: 768px) {
+  .page-hero-banner {
+    height: 240px;
+    padding: 40px 0;
+  }
+  .page-hero-banner h1 {
+    font-size: 1.8rem;
+  }
+  .page-hero-banner p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Elegant Premium Cards */
+.premium-card {
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 30px 24px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+  height: 100%;
+}
+
+.premium-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(253, 150, 54, 0.4);
+  box-shadow:
+    0 15px 35px rgba(253, 150, 54, 0.08),
+    0 5px 15px rgba(0, 0, 0, 0.03);
+}
+
+/* Icon Badge styling */
+.icon-badge {
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  transition: var(--transition-smooth);
+}
+
+.premium-card:hover .icon-badge {
+  background-color: var(--primary-color);
+  color: var(--white);
+  transform: scale(1.05);
+}
+
+/* Zoom Image Container for Team Cards */
+.zoom-img-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px 16px 0 0;
+}
+
+.zoom-img-container img {
+  transition: var(--transition-smooth);
+}
+
+.zoom-img-container:hover img {
+  transform: scale(1.08);
+}
+
+/* Timeline Custom Styles */
+.timeline-card {
+  position: relative;
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+  height: 100%;
+  overflow: hidden;
+}
+
+.timeline-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--gradient-primary);
+}
+
+.timeline-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(253, 150, 54, 0.2);
+}
+
+.timeline-year {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+/* Stats Premium Card */
+.stat-premium-card {
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 30px 20px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+}
+
+.stat-premium-card:hover {
+  transform: scale(1.03);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-color);
+}
+
+/* ==========================================================================
+   7. Antigravity UI Upgrades & Additional Sections Stylesheet
+   ========================================================================== */
+
+/* Circular Icon Wrappers with Soft Backgrounds */
+.icon-circle-wrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  transition: var(--transition-smooth);
+}
+.hover-up:hover .icon-circle-wrapper {
+  background-color: var(--primary-color);
+  color: var(--white);
+  transform: scale(1.1);
+}
+
+/* Sleek Premium Contact Form Focus State */
+.premium-form-control {
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 14px;
+  transition: var(--transition-smooth);
+  color: var(--dark-color);
+}
+.premium-form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(253, 150, 54, 0.15);
+  background-color: var(--white);
+}
+
+/* Gradient Primary Button */
+.btn-premium-gradient {
+  background: var(--gradient-primary);
+  border: none;
+  color: var(--white);
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 14px rgba(253, 150, 54, 0.3);
+  transition: var(--transition-smooth);
+}
+.btn-premium-gradient:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(253, 150, 54, 0.45);
+  opacity: 0.95;
+  color: var(--white);
+}
+
+/* Interactive Location Hub Map Widget */
+.map-widget-container {
+  position: relative;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-radius: 24px;
+  padding: 40px;
+  color: var(--white);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.map-grid-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.15;
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.15) 1.5px,
+    transparent 1.5px
+  );
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+.map-world-svg {
+  width: 100%;
+  height: auto;
+  opacity: 0.3;
+  pointer-events: none;
+}
+.map-hotspot {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  cursor: pointer;
+  z-index: 10;
+  transition: var(--transition-smooth);
+  border: 3px solid var(--white);
+  box-shadow: 0 0 12px var(--primary-color);
+}
+.map-hotspot::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-color);
+  opacity: 0;
+  animation: hotspot-pulse 2s infinite;
+}
+@keyframes hotspot-pulse {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+.map-hotspot.active {
+  background-color: var(--white);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 20px var(--white);
+  transform: scale(1.2);
+}
+.map-hotspot-sf {
+  top: 38%;
+  left: 18%;
+}
+.map-hotspot-lon {
+  top: 25%;
+  left: 47%;
+}
+.map-hotspot-tok {
+  top: 40%;
+  left: 82%;
+}
+.map-hotspot-mel {
+  top: 82%;
+  left: 88%;
+}
+
+.map-hub-card {
+  background: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 24px;
+  transition: var(--transition-smooth);
+}
+
+/* Merchant Booking Scheduler */
+.booking-slot {
+  background-color: var(--light-color);
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--dark-color);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+.booking-slot:hover {
+  border-color: var(--primary-color);
+  background-color: var(--primary-light);
+  color: var(--primary-hover);
+  transform: translateY(-2px);
+}
+.booking-slot.selected {
+  background: var(--gradient-primary);
+  border-color: var(--primary-color);
+  color: var(--white);
+  box-shadow: 0 4px 12px rgba(253, 150, 54, 0.3);
+}
+
+/* Escalation SLA Matrix Grid */
+.sla-badge-tag {
+  background-color: rgba(253, 150, 54, 0.1);
+  color: var(--primary-color);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 30px;
+  display: inline-block;
+  font-family: var(--font-heading);
+  letter-spacing: 0.5px;
+}
+.sla-progress-track {
+  height: 6px;
+  width: 100%;
+  background-color: var(--border-color);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 15px;
+}
+.sla-progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--gradient-primary);
+}
+
+/* Download Media assets */
+.download-kit-card {
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 24px;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+.download-kit-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+.download-icon-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: var(--transition-smooth);
+}
+.download-kit-card:hover .download-icon-btn {
+  background: var(--gradient-primary);
+  color: var(--white);
+  animation: download-bounce 1s infinite alternate;
+}
+@keyframes download-bounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-4px);
+  }
+}
+
+/* Careers Filter Dashboard */
+.filter-tabs-wrapper {
+  background: var(--light-color);
+  padding: 6px;
+  border-radius: 35px;
+  display: inline-flex;
+  gap: 4px;
+  border: 1px solid var(--border-color);
+}
+.filter-tab-btn {
+  border: none;
+  background: transparent;
+  padding: 8px 24px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-heading);
+  color: #64748b;
+  transition: var(--transition-smooth);
+}
+.filter-tab-btn.active {
+  background-color: var(--primary-color);
+  color: var(--white);
+  box-shadow: 0 4px 10px rgba(253, 150, 54, 0.2);
+}
+.job-item-card {
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 24px;
+  transition: var(--transition-smooth);
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.job-item-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-md);
+  transform: translateX(4px);
+}
+
+/* Leadership Profiles */
+.team-leader-card {
+  position: relative;
+  background-color: var(--white);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  transition: var(--transition-smooth);
+}
+.team-leader-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+}
+.team-leader-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.team-leader-socials-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(26, 31, 46, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  transition: var(--transition-smooth);
+}
+.team-leader-card:hover .team-leader-image {
+  transform: scale(1.08);
+}
+.team-leader-card:hover .team-leader-socials-overlay {
+  opacity: 1;
+}
+.team-leader-social-link {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--dark-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: var(--transition-smooth);
+  text-decoration: none;
+}
+.team-leader-social-link:hover {
+  background-color: var(--primary-color);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+.team-leader-details {
+  padding: 20px;
+  text-align: center;
+}
+
+/* Remote Stipend Cards */
+.stipend-amount-tag {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin: 10px 0;
+  line-height: 1;
+}
+
+/* Career Progression Stepper Timeline */
+.progression-stepper-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background-color: var(--border-color);
+  transform: translateX(-50%);
+  z-index: 1;
+}
+@media (max-width: 768px) {
+  .progression-stepper-line {
+    left: 20px;
+    transform: none;
+  }
+}
+.progression-node-bubble {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px rgba(253, 150, 54, 0.4);
+  z-index: 2;
+  margin: 0 auto;
+}
+@media (max-width: 768px) {
+  .progression-node-bubble {
+    margin: 0;
+    left: -5px;
+  }
+}
+
+/* Tech Stack Badges */
+.tech-item-badge {
+  background-color: var(--light-color);
+  border: 1px solid var(--border-color);
+  padding: 10px 16px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: var(--transition-smooth);
+}
+.tech-item-badge:hover {
+  border-color: var(--primary-color);
+  background-color: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+/* FAQ Elegant Layout Custom Accents */
+.faq-card-item {
+  border: 1px solid var(--border-color) !important;
+  border-radius: 16px !important;
+  margin-bottom: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-smooth);
+}
+.faq-card-item:hover {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 8px 24px rgba(253, 150, 54, 0.08);
+}
+.faq-btn {
+  font-family: var(--font-heading) !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  color: var(--dark-color) !important;
+  background: var(--white) !important;
+  padding: 20px 24px !important;
+  border: none !important;
+  box-shadow: none !important;
+  text-align: left;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--transition-smooth);
+}
+.faq-btn:not(.collapsed) {
+  color: var(--primary-hover) !important;
+  background: var(--primary-light) !important;
+}
+.faq-btn::after {
+  content: "\f078";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 12px;
+  color: #64748b;
+  transition: transform 0.3s ease;
+  background-image: none !important;
+  width: auto;
+  height: auto;
+}
+.faq-btn:not(.collapsed)::after {
+  transform: rotate(180deg);
+  color: var(--primary-color);
+}
+.faq-body {
+  padding: 20px 24px !important;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #475569;
+  border-top: 1px solid var(--border-color);
+  background-color: #fafbfc;
+}

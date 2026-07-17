@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contact Us - Stackly Marketplace</title>
     <!-- Favicon -->
-    <link rel="icon" type="image/webp" href="../assets/images/logoStackly.webp" />
+    <link
+      rel="icon"
+      type="image/webp"
+      href="../assets/images/logoStackly.webp"
+    />
 
     <!-- Bootstrap 5 CSS CDN -->
     <link
@@ -26,48 +30,55 @@
     <!-- Dynamic Header Placeholder -->
     <div id="header-placeholder"></div>
 
+    <!-- Hero Page Banner -->
+    <section
+      class="page-hero-banner"
+      style="
+        background-image: url(&quot;https://images.unsplash.com/photo-1521791136364-7098ec389f5f?auto=format&fit=crop&w=1600&q=80&quot;);
+      "
+    >
+      <div class="banner-content">
+        <h1>Let's Connect & Collaborate</h1>
+        <p>
+          Have questions? Our support, vendor success, and corporate teams are
+          here to help you.
+        </p>
+        <ul class="banner-breadcrumbs">
+          <li><a href="../index.html">Home</a></li>
+          <li>Contact Us</li>
+        </ul>
+      </div>
+    </section>
+
     <!-- Main Content -->
     <main class="main py-5 bg-light">
       <div class="container">
-        <!-- Intro -->
-        <div class="text-center mb-5">
-          <span class="badge bg-primary px-3 py-2 font-xxs text-uppercase"
-            >Get in touch</span
-          >
-          <h1 class="display-6 font-bold mt-2 mb-3">
-            We'd Love to Hear From You
-          </h1>
-          <p class="text-muted lead mx-auto" style="max-width: 600px">
-            Have questions about vendor registration, order tracking, or
-            partnership opportunities? Reach out to us below.
-          </p>
-        </div>
-
         <div class="row g-4 mb-5">
           <!-- Contact Cards (Left side) -->
           <div class="col-lg-4">
-            <div class="d-flex flex-column gap-3">
+            <div class="d-flex flex-column gap-4">
               <div
-                class="p-4 border bg-white rounded-3 shadow-sm d-flex align-items-start"
+                class="p-4 border-0 bg-white rounded-4 shadow-sm d-flex align-items-start hover-up"
               >
-                <div class="fs-3 text-primary me-3">
+                <div class="icon-circle-wrapper me-3">
                   <i class="fa-solid fa-map-location-dot"></i>
                 </div>
                 <div>
-                  <h6 class="font-sm-bold text-dark mb-1">Corporate HQ</h6>
+                  <h5 class="font-sm-bold text-dark mb-2">Corporate HQ</h5>
                   <p class="font-xs text-muted mb-0">
-                    502 New Design Str, Melbourne, San Francisco, CA 94110, US
+                    502 New Design Str, Melbourne,<br />San Francisco, CA 94110,
+                    US
                   </p>
                 </div>
               </div>
               <div
-                class="p-4 border bg-white rounded-3 shadow-sm d-flex align-items-start"
+                class="p-4 border-0 bg-white rounded-4 shadow-sm d-flex align-items-start hover-up"
               >
-                <div class="fs-3 text-primary me-3">
+                <div class="icon-circle-wrapper me-3">
                   <i class="fa-solid fa-phone-volume"></i>
                 </div>
                 <div>
-                  <h6 class="font-sm-bold text-dark mb-1">Call Us</h6>
+                  <h5 class="font-sm-bold text-dark mb-2">Call Us</h5>
                   <p class="font-xs text-muted mb-0">
                     General support: (+01) 123-456-789<br />Vendor partnerships:
                     (+01) 987-654-321
@@ -75,13 +86,13 @@
                 </div>
               </div>
               <div
-                class="p-4 border bg-white rounded-3 shadow-sm d-flex align-items-start"
+                class="p-4 border-0 bg-white rounded-4 shadow-sm d-flex align-items-start hover-up"
               >
-                <div class="fs-3 text-primary me-3">
+                <div class="icon-circle-wrapper me-3">
                   <i class="fa-solid fa-envelope-open-text"></i>
                 </div>
                 <div>
-                  <h6 class="font-sm-bold text-dark mb-1">Email Support</h6>
+                  <h5 class="font-sm-bold text-dark mb-2">Email Support</h5>
                   <p class="font-xs text-muted mb-0">
                     support@stackly-market.com<br />vendors@stackly-market.com
                   </p>
@@ -92,8 +103,12 @@
 
           <!-- Contact Form (Right side) -->
           <div class="col-lg-8">
-            <div class="p-4 p-md-5 border bg-white rounded-4 shadow-sm">
-              <h4 class="font-md-bold mb-4">Send Us a Message</h4>
+            <div class="p-4 p-md-5 border-0 bg-white rounded-4 shadow-sm">
+              <h4 class="font-md-bold mb-2">Send Us a Message</h4>
+              <p class="font-xs text-muted mb-4">
+                Feel free to contact us with any inquiries. Our teams will get
+                back to you shortly.
+              </p>
               <form action="#" method="post">
                 <div class="row g-3">
                   <div class="col-md-6">
@@ -102,7 +117,7 @@
                     >
                     <input
                       type="text"
-                      class="form-control"
+                      class="form-control premium-form-control"
                       placeholder="John"
                       required
                     />
@@ -113,7 +128,7 @@
                     >
                     <input
                       type="text"
-                      class="form-control"
+                      class="form-control premium-form-control"
                       placeholder="Doe"
                       required
                     />
@@ -124,7 +139,7 @@
                     >
                     <input
                       type="email"
-                      class="form-control"
+                      class="form-control premium-form-control"
                       placeholder="john.doe@example.com"
                       required
                     />
@@ -135,7 +150,7 @@
                     >
                     <input
                       type="text"
-                      class="form-control"
+                      class="form-control premium-form-control"
                       placeholder="How can we help you?"
                       required
                     />
@@ -145,7 +160,7 @@
                       >Message</label
                     >
                     <textarea
-                      class="form-control"
+                      class="form-control premium-form-control"
                       rows="5"
                       placeholder="Write your query here..."
                       required
@@ -154,9 +169,9 @@
                   <div class="col-12 mt-4">
                     <button
                       type="submit"
-                      class="btn btn-primary px-4 py-2 font-sm-bold text-uppercase"
+                      class="btn btn-premium-gradient px-5 py-3 font-sm-bold text-uppercase"
                     >
-                      Send Message <i class="fa-solid fa-paper-plane ms-1"></i>
+                      Send Message <i class="fa-solid fa-paper-plane ms-2"></i>
                     </button>
                   </div>
                 </div>
@@ -168,40 +183,284 @@
         <!-- Department Contacts Section -->
         <div class="my-5 py-5 border-top">
           <div class="text-center mb-5">
-            <span class="badge bg-primary px-3 py-2 font-xxs text-uppercase">Departments</span>
+            <span class="badge bg-primary px-3 py-2 font-xxs text-uppercase"
+              >Departments</span
+            >
             <h3 class="font-lg-bold mt-2">Direct Contact Lines</h3>
           </div>
           <div class="row g-4">
             <div class="col-md-3 col-sm-6">
-              <div class="p-4 border bg-white rounded-3 shadow-sm text-center h-100 hover-up">
-                <div class="text-primary fs-3 mb-2"><i class="fa-solid fa-headset"></i></div>
-                <h6 class="font-sm-bold mb-1">Customer Care</h6>
-                <p class="font-xs text-muted mb-3">Order tracking, return claims, and payment protection issues.</p>
-                <a href="mailto:support@stackly-market.com" class="font-xs-bold text-primary text-decoration-none">support@stackly.com</a>
+              <div
+                class="p-4 border-0 bg-white rounded-4 shadow-sm text-center h-100 hover-up"
+              >
+                <div class="icon-circle-wrapper mx-auto mb-3">
+                  <i class="fa-solid fa-headset"></i>
+                </div>
+                <h6 class="font-sm-bold mb-2">Customer Care</h6>
+                <p class="font-xs text-muted mb-3">
+                  Order tracking, return claims, and payment protection issues.
+                </p>
+                <a
+                  href="mailto:support@stackly-market.com"
+                  class="font-xs-bold text-primary text-decoration-none"
+                  >support@stackly.com</a
+                >
               </div>
             </div>
             <div class="col-md-3 col-sm-6">
-              <div class="p-4 border bg-white rounded-3 shadow-sm text-center h-100 hover-up">
-                <div class="text-primary fs-3 mb-2"><i class="fa-solid fa-briefcase"></i></div>
-                <h6 class="font-sm-bold mb-1">Merchant Onboarding</h6>
-                <p class="font-xs text-muted mb-3">Questions about selling, listing tools, API integrations.</p>
-                <a href="mailto:vendors@stackly-market.com" class="font-xs-bold text-primary text-decoration-none">vendors@stackly.com</a>
+              <div
+                class="p-4 border-0 bg-white rounded-4 shadow-sm text-center h-100 hover-up"
+              >
+                <div class="icon-circle-wrapper mx-auto mb-3">
+                  <i class="fa-solid fa-briefcase"></i>
+                </div>
+                <h6 class="font-sm-bold mb-2">Merchant Onboarding</h6>
+                <p class="font-xs text-muted mb-3">
+                  Questions about selling, listing tools, API integrations.
+                </p>
+                <a
+                  href="mailto:vendors@stackly-market.com"
+                  class="font-xs-bold text-primary text-decoration-none"
+                  >vendors@stackly.com</a
+                >
               </div>
             </div>
             <div class="col-md-3 col-sm-6">
-              <div class="p-4 border bg-white rounded-3 shadow-sm text-center h-100 hover-up">
-                <div class="text-primary fs-3 mb-2"><i class="fa-solid fa-bullhorn"></i></div>
-                <h6 class="font-sm-bold mb-1">Public Relations</h6>
-                <p class="font-xs text-muted mb-3">Press inquiries, media kits, corporate updates.</p>
-                <a href="mailto:press@stackly-market.com" class="font-xs-bold text-primary text-decoration-none">press@stackly.com</a>
+              <div
+                class="p-4 border-0 bg-white rounded-4 shadow-sm text-center h-100 hover-up"
+              >
+                <div class="icon-circle-wrapper mx-auto mb-3">
+                  <i class="fa-solid fa-bullhorn"></i>
+                </div>
+                <h6 class="font-sm-bold mb-2">Public Relations</h6>
+                <p class="font-xs text-muted mb-3">
+                  Press inquiries, media kits, corporate updates.
+                </p>
+                <a
+                  href="mailto:press@stackly-market.com"
+                  class="font-xs-bold text-primary text-decoration-none"
+                  >press@stackly.com</a
+                >
               </div>
             </div>
             <div class="col-md-3 col-sm-6">
-              <div class="p-4 border bg-white rounded-3 shadow-sm text-center h-100 hover-up">
-                <div class="text-primary fs-3 mb-2"><i class="fa-solid fa-shield-halved"></i></div>
-                <h6 class="font-sm-bold mb-1">Security & Abuse</h6>
-                <p class="font-xs text-muted mb-3">Report suspicious activity, listings, or technical vulnerabilities.</p>
-                <a href="mailto:security@stackly-market.com" class="font-xs-bold text-primary text-decoration-none">security@stackly.com</a>
+              <div
+                class="p-4 border-0 bg-white rounded-4 shadow-sm text-center h-100 hover-up"
+              >
+                <div class="icon-circle-wrapper mx-auto mb-3">
+                  <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <h6 class="font-sm-bold mb-2">Security & Abuse</h6>
+                <p class="font-xs text-muted mb-3">
+                  Report suspicious activity, listings, or technical
+                  vulnerabilities.
+                </p>
+                <a
+                  href="mailto:security@stackly-market.com"
+                  class="font-xs-bold text-primary text-decoration-none"
+                  >security@stackly.com</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- NEW SECTION 1: Interactive Operations Hub & Location Map -->
+        <div class="my-5 py-5 border-top">
+          <div class="text-center mb-5">
+            <span class="badge bg-primary px-3 py-2 font-xxs text-uppercase"
+              >Interactive Map</span
+            >
+            <h3 class="font-lg-bold mt-2">Interactive Location Hub</h3>
+            <p class="font-xs text-muted max-width-600 mx-auto">
+              Click on a glowing hotspot to view office hub schedules, contact
+              details, and direct support lines.
+            </p>
+          </div>
+          <div class="row g-4 align-items-center">
+            <div class="col-lg-7">
+              <div class="map-widget-container">
+                <div class="map-grid-bg"></div>
+                <!-- Simplified SVG World Map outlines -->
+                <svg
+                  class="map-world-svg"
+                  viewBox="0 0 1000 500"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M120 180 C150 140, 220 120, 280 160 C320 190, 290 280, 220 300 C150 320, 100 240, 120 180 Z"
+                    fill="rgba(255,255,255,0.06)"
+                    stroke="rgba(255,255,255,0.12)"
+                    stroke-width="1.5"
+                  />
+                  <path
+                    d="M400 120 C460 90, 520 110, 560 170 C590 220, 520 280, 460 260 C420 250, 390 170, 400 120 Z"
+                    fill="rgba(255,255,255,0.06)"
+                    stroke="rgba(255,255,255,0.12)"
+                    stroke-width="1.5"
+                  />
+                  <path
+                    d="M720 150 C780 130, 850 160, 880 220 C900 270, 830 320, 780 300 C730 285, 700 210, 720 150 Z"
+                    fill="rgba(255,255,255,0.06)"
+                    stroke="rgba(255,255,255,0.12)"
+                    stroke-width="1.5"
+                  />
+                  <path
+                    d="M800 380 C840 360, 890 380, 870 420 C850 450, 780 440, 800 380 Z"
+                    fill="rgba(255,255,255,0.06)"
+                    stroke="rgba(255,255,255,0.12)"
+                    stroke-width="1.5"
+                  />
+                </svg>
+                <!-- Hotspots -->
+                <div
+                  class="map-hotspot map-hotspot-sf active"
+                  data-city="San Francisco"
+                  data-hours="9:00 AM - 5:00 PM PST"
+                  data-address="502 New Design Str, San Francisco, CA 94110"
+                  data-phone="+1 (415) 555-0199"
+                  data-image="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=400&q=80"
+                ></div>
+                <div
+                  class="map-hotspot map-hotspot-lon"
+                  data-city="London"
+                  data-hours="9:00 AM - 5:00 PM GMT"
+                  data-address="30 St Mary Axe (The Gherkin), London, EC3A 8EP"
+                  data-phone="+44 (20) 7946 0958"
+                  data-image="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=400&q=80"
+                ></div>
+                <div
+                  class="map-hotspot map-hotspot-tok"
+                  data-city="Tokyo"
+                  data-hours="9:00 AM - 6:00 PM JST"
+                  data-address="Roppongi Hills Mori Tower, Minato-ku, Tokyo 106-6108"
+                  data-phone="+81 (3) 5555-0143"
+                  data-image="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=400&q=80"
+                ></div>
+                <div
+                  class="map-hotspot map-hotspot-mel"
+                  data-city="Melbourne"
+                  data-hours="9:00 AM - 5:00 PM AEST"
+                  data-address="88 Exhibition St, Melbourne VIC 3000"
+                  data-phone="+61 (3) 9650 4410"
+                  data-image="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=400&q=80"
+                ></div>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="map-hub-card text-white">
+                <img
+                  id="hub-image"
+                  src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=400&q=80"
+                  alt="Hub City"
+                  class="img-fluid rounded-3 mb-4 w-100 object-fit-cover"
+                  style="height: 180px"
+                />
+                <h4 id="hub-city-name" class="text-white font-md-bold mb-3">
+                  San Francisco HQ
+                </h4>
+                <div
+                  class="font-xs d-flex flex-column gap-2 text-light opacity-90"
+                >
+                  <p id="hub-address" class="mb-0">
+                    <strong>Address:</strong> 502 New Design Str, San Francisco,
+                    CA 94110
+                  </p>
+                  <p id="hub-hours" class="mb-0">
+                    <strong>Working Hours:</strong> 9:00 AM - 5:00 PM PST
+                  </p>
+                  <p id="hub-phone" class="mb-0">
+                    <strong>Direct Line:</strong> +1 (415) 555-0199
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- NEW SECTION 2: Merchant Consultation Scheduler -->
+        <div class="my-5 py-5 border-top">
+          <div class="text-center mb-5">
+            <span class="badge bg-primary px-3 py-2 font-xxs text-uppercase"
+              >Grow With Us</span
+            >
+            <h3 class="font-lg-bold mt-2">Schedule a Seller Consultation</h3>
+            <p class="font-xs text-muted max-width-600 mx-auto">
+              High-volume merchants and brand distributors can schedule a 1-on-1
+              virtual call with our onboarding team.
+            </p>
+          </div>
+          <div class="row g-4 justify-content-center">
+            <div class="col-lg-10">
+              <div class="p-4 p-md-5 bg-white border-0 rounded-4 shadow-sm">
+                <div class="row g-4">
+                  <div class="col-md-6">
+                    <h5 class="font-sm-bold mb-3">1. Select a Date & Time</h5>
+                    <div class="row g-2 mb-3">
+                      <div class="col-6">
+                        <div class="booking-slot selected">
+                          Mon, July 20 - 10:00 AM
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="booking-slot">Mon, July 20 - 02:00 PM</div>
+                      </div>
+                      <div class="col-6">
+                        <div class="booking-slot">Tue, July 21 - 11:00 AM</div>
+                      </div>
+                      <div class="col-6">
+                        <div class="booking-slot">Tue, July 21 - 04:00 PM</div>
+                      </div>
+                      <div class="col-6">
+                        <div class="booking-slot">Wed, July 22 - 09:00 AM</div>
+                      </div>
+                      <div class="col-6">
+                        <div class="booking-slot">Wed, July 22 - 03:00 PM</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <h5 class="font-sm-bold mb-3">2. Enter Business Details</h5>
+                    <form action="#" method="post">
+                      <input
+                        type="hidden"
+                        id="selected-time-input"
+                        name="booking_time"
+                        value="Mon, July 20 - 10:00 AM"
+                      />
+                      <div class="mb-3">
+                        <input
+                          type="text"
+                          class="form-control premium-form-control"
+                          placeholder="Company Name"
+                          required
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <select
+                          class="form-select premium-form-control"
+                          required
+                        >
+                          <option value="" disabled selected>
+                            Estimated Monthly GMV
+                          </option>
+                          <option value="under_10k">Under $10,000</option>
+                          <option value="10k_50k">$10,000 - $50,000</option>
+                          <option value="50k_250k">$50,000 - $250,000</option>
+                          <option value="over_250k">Over $250,000</option>
+                        </select>
+                      </div>
+                      <button
+                        type="submit"
+                        class="btn btn-premium-gradient w-100 py-3 font-sm-bold text-uppercase"
+                      >
+                        Confirm Session
+                        <i class="fa-solid fa-calendar-check ms-2"></i>
+                      </button>
+                    </form>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -210,45 +469,110 @@
         <!-- FAQ Section -->
         <div class="my-5 py-5 border-top">
           <div class="text-center mb-5">
-            <span class="badge bg-primary px-3 py-2 font-xxs text-uppercase">Help Desk</span>
+            <span class="badge bg-primary px-3 py-2 font-xxs text-uppercase"
+              >Help Desk</span
+            >
             <h3 class="font-lg-bold mt-2">Instant Answer Center</h3>
           </div>
           <div class="row justify-content-center">
             <div class="col-lg-8">
-              <div class="accordion shadow-sm" id="contactAccordion">
-                <div class="accordion-item border-light">
+              <div class="accordion" id="contactAccordion">
+                <!-- FAQ Item 1 -->
+                <div class="faq-card-item">
                   <h2 class="accordion-header" id="cHeadingOne">
-                    <button class="accordion-button font-sm-bold" type="button" data-bs-toggle="collapse" data-bs-target="#cCollapseOne" aria-expanded="true" aria-controls="cCollapseOne">
-                      How do I cancel my order?
+                    <button
+                      class="faq-btn"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#cCollapseOne"
+                      aria-expanded="true"
+                      aria-controls="cCollapseOne"
+                    >
+                      <span
+                        ><i
+                          class="fa-solid fa-cart-shopping text-primary me-2"
+                        ></i>
+                        How do I cancel my order?</span
+                      >
                     </button>
                   </h2>
-                  <div id="cCollapseOne" class="accordion-collapse collapse show" aria-labelledby="cHeadingOne" data-bs-parent="#contactAccordion">
-                    <div class="accordion-body font-xs text-muted">
-                      You can cancel an order within 1 hour of placing it directly from your Account Dashboard under "My Orders". After 1 hour, the vendor may have packaged the item, and you will need to initiate a return request instead.
+                  <div
+                    id="cCollapseOne"
+                    class="accordion-collapse collapse show"
+                    aria-labelledby="cHeadingOne"
+                    data-bs-parent="#contactAccordion"
+                  >
+                    <div class="faq-body">
+                      You can cancel an order within 1 hour of placing it
+                      directly from your Account Dashboard under "My Orders".
+                      After 1 hour, the vendor may have packaged the item, and
+                      you will need to initiate a return request instead.
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item border-light">
+                <!-- FAQ Item 2 -->
+                <div class="faq-card-item">
                   <h2 class="accordion-header" id="cHeadingTwo">
-                    <button class="accordion-button collapsed font-sm-bold" type="button" data-bs-toggle="collapse" data-bs-target="#cCollapseTwo" aria-expanded="false" aria-controls="cCollapseTwo">
-                      Where do vendors ship from?
+                    <button
+                      class="faq-btn collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#cCollapseTwo"
+                      aria-expanded="false"
+                      aria-controls="cCollapseTwo"
+                    >
+                      <span
+                        ><i class="fa-solid fa-truck text-primary me-2"></i>
+                        Where do vendors ship from?</span
+                      >
                     </button>
                   </h2>
-                  <div id="cCollapseTwo" class="accordion-collapse collapse" aria-labelledby="cHeadingTwo" data-bs-parent="#contactAccordion">
-                    <div class="accordion-body font-xs text-muted">
-                      Stackly is a marketplace connecting thousands of independent vendors. Each vendor ships from their own regional warehouse. You can check the estimated delivery times and dispatch locations on each specific product details page.
+                  <div
+                    id="cCollapseTwo"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="cHeadingTwo"
+                    data-bs-parent="#contactAccordion"
+                  >
+                    <div class="faq-body">
+                      Stackly is a marketplace connecting thousands of
+                      independent vendors. Each vendor ships from their own
+                      regional warehouse. You can check the estimated delivery
+                      times and dispatch locations on each specific product
+                      details page.
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item border-light">
+                <!-- FAQ Item 3 -->
+                <div class="faq-card-item">
                   <h2 class="accordion-header" id="cHeadingThree">
-                    <button class="accordion-button collapsed font-sm-bold" type="button" data-bs-toggle="collapse" data-bs-target="#cCollapseThree" aria-expanded="false" aria-controls="cCollapseThree">
-                      What is Stackly's return policy?
+                    <button
+                      class="faq-btn collapsed"
+                      type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#cCollapseThree"
+                      aria-expanded="false"
+                      aria-controls="cCollapseThree"
+                    >
+                      <span
+                        ><i
+                          class="fa-solid fa-rotate-left text-primary me-2"
+                        ></i>
+                        What is Stackly's return policy?</span
+                      >
                     </button>
                   </h2>
-                  <div id="cCollapseThree" class="accordion-collapse collapse" aria-labelledby="cHeadingThree" data-bs-parent="#contactAccordion">
-                    <div class="accordion-body font-xs text-muted">
-                      All verified vendors on Stackly are bound by our platform-wide 30-day return policy. Items must be in their original packaging, unused, and showing no signs of wear. Return shipping labels are printable from your account center.
+                  <div
+                    id="cCollapseThree"
+                    class="accordion-collapse collapse"
+                    aria-labelledby="cHeadingThree"
+                    data-bs-parent="#contactAccordion"
+                  >
+                    <div class="faq-body">
+                      All verified vendors on Stackly are bound by our
+                      platform-wide 30-day return policy. Items must be in their
+                      original packaging, unused, and showing no signs of wear.
+                      Return shipping labels are printable from your account
+                      center.
                     </div>
                   </div>
                 </div>
@@ -257,41 +581,145 @@
           </div>
         </div>
 
-        <!-- Global Offices Section -->
+        <!-- NEW SECTION 3: Trust & SLA Escalation Matrix -->
         <div class="my-5 py-5 border-top">
           <div class="text-center mb-5">
-            <span class="badge bg-primary px-3 py-2 font-xxs text-uppercase">Offices</span>
-            <h3 class="font-lg-bold mt-2">Our Global Hubs</h3>
+            <span class="badge bg-primary px-3 py-2 font-xxs text-uppercase"
+              >Trust Commitments</span
+            >
+            <h3 class="font-lg-bold mt-2">Platform Service Level Agreements</h3>
+            <p class="font-xs text-muted max-width-600 mx-auto">
+              We maintain strict support response times to protect buyers and
+              power vendor growth.
+            </p>
           </div>
           <div class="row g-4">
-            <div class="col-md-4">
-              <div class="p-4 border bg-white rounded-3 shadow-sm h-100 hover-up">
-                <span class="badge bg-success font-xxs text-uppercase mb-2">North America</span>
-                <h5 class="font-sm-bold mb-2">San Francisco Office</h5>
+            <div class="col-md-6 col-lg-3">
+              <div
+                class="p-4 border-0 bg-white rounded-4 shadow-sm h-100 hover-up"
+              >
+                <span class="sla-badge-tag mb-3">Buyer Security</span>
+                <h5 class="font-sm-bold mb-2">Order Disputes</h5>
                 <p class="font-xs text-muted mb-0">
-                  502 New Design Str, Melbourne,<br>San Francisco, CA 94110<br>
-                  <strong>Hours:</strong> 9:00 AM - 5:00 PM PST
+                  Disputes regarding refunds, packages, or damaged products are
+                  picked up by specialist agents immediately.
                 </p>
+                <div class="sla-progress-track">
+                  <div class="sla-progress-fill" style="width: 90%"></div>
+                </div>
+                <div class="d-flex justify-content-between mt-2">
+                  <span class="font-xxs text-muted">SLA Limit</span
+                  ><span class="font-xxs-bold text-primary">&lt; 12 Hours</span>
+                </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="p-4 border bg-white rounded-3 shadow-sm h-100 hover-up">
-                <span class="badge bg-success font-xxs text-uppercase mb-2">Asia Pacific</span>
-                <h5 class="font-sm-bold mb-2">Melbourne Office</h5>
+            <div class="col-md-6 col-lg-3">
+              <div
+                class="p-4 border-0 bg-white rounded-4 shadow-sm h-100 hover-up"
+              >
+                <span class="sla-badge-tag mb-3">Vendor Tech</span>
+                <h5 class="font-sm-bold mb-2">API Integration</h5>
                 <p class="font-xs text-muted mb-0">
-                  88 Exhibition St,<br>Melbourne VIC 3000, Australia<br>
-                  <strong>Hours:</strong> 9:00 AM - 5:00 PM AEST
+                  Lead integration engineers review vendor webhook connections,
+                  custom portals, and CSV listing tools.
                 </p>
+                <div class="sla-progress-track">
+                  <div class="sla-progress-fill" style="width: 95%"></div>
+                </div>
+                <div class="d-flex justify-content-between mt-2">
+                  <span class="font-xxs text-muted">SLA Limit</span
+                  ><span class="font-xxs-bold text-primary">&lt; 2 Hours</span>
+                </div>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="p-4 border bg-white rounded-3 shadow-sm h-100 hover-up">
-                <span class="badge bg-success font-xxs text-uppercase mb-2">Europe</span>
-                <h5 class="font-sm-bold mb-2">London Office</h5>
+            <div class="col-md-6 col-lg-3">
+              <div
+                class="p-4 border-0 bg-white rounded-4 shadow-sm h-100 hover-up"
+              >
+                <span class="sla-badge-tag mb-3">Finance</span>
+                <h5 class="font-sm-bold mb-2">Billing & Payouts</h5>
                 <p class="font-xs text-muted mb-0">
-                  30 St Mary Axe (The Gherkin),<br>London, EC3A 8EP, UK<br>
-                  <strong>Hours:</strong> 9:00 AM - 5:00 PM GMT
+                  Merchant payouts, escrow clearance reviews, tax documentation
+                  adjustments, and wallet inquiries.
                 </p>
+                <div class="sla-progress-track">
+                  <div class="sla-progress-fill" style="width: 80%"></div>
+                </div>
+                <div class="d-flex justify-content-between mt-2">
+                  <span class="font-xxs text-muted">SLA Limit</span
+                  ><span class="font-xxs-bold text-primary">&lt; 6 Hours</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div
+                class="p-4 border-0 bg-white rounded-4 shadow-sm h-100 hover-up"
+              >
+                <span class="sla-badge-tag mb-3">Safety First</span>
+                <h5 class="font-sm-bold mb-2">Abuse & Fraud</h5>
+                <p class="font-xs text-muted mb-0">
+                  Reporting suspicious products, copyright issues, seller policy
+                  violations, or credential theft threats.
+                </p>
+                <div class="sla-progress-track">
+                  <div class="sla-progress-fill" style="width: 98%"></div>
+                </div>
+                <div class="d-flex justify-content-between mt-2">
+                  <span class="font-xxs text-muted">SLA Limit</span
+                  ><span class="font-xxs-bold text-primary">&lt; 1 Hour</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- NEW SECTION 4: Media & Press Kit Center -->
+        <div class="my-5 py-5 border-top">
+          <div class="text-center mb-5">
+            <span class="badge bg-primary px-3 py-2 font-xxs text-uppercase"
+              >Press Hub</span
+            >
+            <h3 class="font-lg-bold mt-2">Media & Branding Kits</h3>
+            <p class="font-xs text-muted max-width-600 mx-auto">
+              Access official marketplace assets, guidelines, and press
+              materials for news releases.
+            </p>
+          </div>
+          <div class="row g-4 justify-content-center">
+            <div class="col-md-6 col-lg-5">
+              <div
+                class="download-kit-card d-flex align-items-center justify-content-between"
+              >
+                <div>
+                  <h5 class="font-sm-bold text-dark mb-1">
+                    Stackly Brand Vector Kit
+                  </h5>
+                  <p class="font-xs text-muted mb-0">
+                    High-res SVG, PNG logos, typography guidelines, and
+                    stylebooks. (ZIP, 14 MB)
+                  </p>
+                </div>
+                <a href="#" class="download-icon-btn text-decoration-none ms-3">
+                  <i class="fa-solid fa-cloud-arrow-down"></i>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-5">
+              <div
+                class="download-kit-card d-flex align-items-center justify-content-between"
+              >
+                <div>
+                  <h5 class="font-sm-bold text-dark mb-1">
+                    Developer API Integration Pack
+                  </h5>
+                  <p class="font-xs text-muted mb-0">
+                    Vendor store sync specs, webhook testing guides, and SDK
+                    code examples. (PDF, 6 MB)
+                  </p>
+                </div>
+                <a href="#" class="download-icon-btn text-decoration-none ms-3">
+                  <i class="fa-solid fa-cloud-arrow-down"></i>
+                </a>
               </div>
             </div>
           </div>
@@ -299,14 +727,25 @@
 
         <!-- Vendor Support Section -->
         <div class="my-5 py-5 border-top">
-          <div class="p-4 p-md-5 rounded-4 bg-light border shadow-sm">
+          <div class="p-4 p-md-5 rounded-4 bg-white border-0 shadow-sm">
             <div class="row align-items-center g-4">
               <div class="col-lg-8">
-                <h4 class="font-md-bold mb-2"><i class="fa-solid fa-store text-primary me-2"></i>Are You an Active Vendor?</h4>
-                <p class="font-xs text-muted mb-0">Get priority seller support, read the API developer documentation, learn how to run campaigns, or access your payout dashboards.</p>
+                <h4 class="font-md-bold mb-2">
+                  <i class="fa-solid fa-store text-primary me-2"></i>Are You an
+                  Active Vendor?
+                </h4>
+                <p class="font-xs text-muted mb-0">
+                  Get priority seller support, read the API developer
+                  documentation, learn how to run campaigns, or access your
+                  payout dashboards.
+                </p>
               </div>
               <div class="col-lg-4 text-lg-end">
-                <a href="#" class="btn btn-outline-primary px-4 py-2 font-xs-bold text-uppercase">Access Seller Portal</a>
+                <a
+                  href="#"
+                  class="btn btn-outline-primary px-4 py-2 font-xs-bold text-uppercase"
+                  >Access Seller Portal</a
+                >
               </div>
             </div>
           </div>
@@ -316,11 +755,21 @@
         <div class="my-5 py-5 border-top text-center">
           <div class="p-5 rounded-4 bg-gradient-primary text-white shadow-lg">
             <h3 class="font-lg-bold text-white mb-3">Need Instant Support?</h3>
-            <p class="font-xs text-light opacity-90 mx-auto mb-4" style="max-width: 500px;">Our AI-guided customer success agent and live chat team are online 24/7 to resolve tracking, delivery, and checkout issues in seconds.</p>
-            <button class="btn btn-warning px-4 py-2 font-sm-bold text-uppercase"><i class="fa-solid fa-comments me-2"></i>Start Live Chat</button>
+            <p
+              class="font-xs text-light opacity-90 mx-auto mb-4"
+              style="max-width: 500px"
+            >
+              Our AI-guided customer success agent and live chat team are online
+              24/7 to resolve tracking, delivery, and checkout issues in
+              seconds.
+            </p>
+            <button
+              class="btn btn-warning px-4 py-2 font-sm-bold text-uppercase"
+            >
+              <i class="fa-solid fa-comments me-2"></i>Start Live Chat
+            </button>
           </div>
         </div>
-
       </div>
     </main>
 
@@ -332,5 +781,43 @@
 
     <!-- Custom Script -->
     <script src="../assets/js/script.js"></script>
+
+    <!-- Antigravity Interactive Elements Script -->
+    <script>
+      // 1. Map Hub Interactivity
+      document.querySelectorAll(".map-hotspot").forEach((hotspot) => {
+        hotspot.addEventListener("click", function () {
+          document
+            .querySelectorAll(".map-hotspot")
+            .forEach((h) => h.classList.remove("active"));
+          this.classList.add("active");
+          const city = this.getAttribute("data-city");
+          const hours = this.getAttribute("data-hours");
+          const address = this.getAttribute("data-address");
+          const phone = this.getAttribute("data-phone");
+          const image = this.getAttribute("data-image");
+
+          document.getElementById("hub-city-name").innerText = city + " HQ";
+          document.getElementById("hub-hours").innerHTML =
+            "<strong>Working Hours:</strong> " + hours;
+          document.getElementById("hub-address").innerHTML =
+            "<strong>Address:</strong> " + address;
+          document.getElementById("hub-phone").innerHTML =
+            "<strong>Direct Line:</strong> " + phone;
+          document.getElementById("hub-image").src = image;
+        });
+      });
+
+      // 2. Consultation Scheduler Interactivity
+      document.querySelectorAll(".booking-slot").forEach((slot) => {
+        slot.addEventListener("click", function () {
+          document
+            .querySelectorAll(".booking-slot")
+            .forEach((s) => s.classList.remove("selected"));
+          this.classList.add("selected");
+          document.getElementById("selected-time-input").value = this.innerText;
+        });
+      });
+    </script>
   </body>
 </html>
