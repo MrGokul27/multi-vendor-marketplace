@@ -232,6 +232,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize custom countdown and product finder
   initCountdown();
   initProductFinder();
+  initScrollAnimations();
 
   // Initialize Swiper Carousels (Only if Swiper is loaded in index.html)
   if (typeof Swiper !== "undefined") {
@@ -749,5 +750,47 @@ document.addEventListener("DOMContentLoaded", function () {
         });
       });
     });
+  }
+
+  // 8. Custom Scroll entrance animations using IntersectionObserver
+  function initScrollAnimations() {
+    const path = window.location.pathname.toLowerCase();
+    if (path.includes("dashboard.html") || path.includes("404.html")) {
+      return;
+    }
+
+    const animElements = document.querySelectorAll(".animate-on-scroll");
+    if (!animElements.length) return;
+
+    const observerOptions = {
+      root: null, // viewport
+      rootMargin: "0px 0px -10% 0px", // triggers slightly before entering viewport fully
+      threshold: 0.05,
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animated");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // If preloader is present, wait until preloader is hidden before animating visible elements
+    const preloader = document.getElementById("stackly-preloader");
+    if (preloader) {
+      const checkPreloader = setInterval(() => {
+        if (
+          preloader.classList.contains("hide") ||
+          !document.body.contains(preloader)
+        ) {
+          clearInterval(checkPreloader);
+          animElements.forEach((el) => observer.observe(el));
+        }
+      }, 100);
+    } else {
+      animElements.forEach((el) => observer.observe(el));
+    }
   }
 });

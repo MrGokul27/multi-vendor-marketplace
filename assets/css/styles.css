@@ -4229,3 +4229,137 @@ body {
   font-weight: 700;
   letter-spacing: 0.5px;
 }
+
+/* ==========================================
+   SCROLL ENTRANCE ANIMATIONS
+   ========================================== */
+
+/* Animation Base CSS */
+.animate-on-scroll {
+  opacity: 0;
+  transition-duration: 0.8s;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  transition-property: transform, opacity, filter;
+  will-change: transform, opacity, filter;
+}
+
+/* Staggered Delay classes */
+.delay-50 {
+  transition-delay: 0.05s;
+}
+.delay-100 {
+  transition-delay: 0.1s;
+}
+.delay-150 {
+  transition-delay: 0.15s;
+}
+.delay-200 {
+  transition-delay: 0.2s;
+}
+.delay-250 {
+  transition-delay: 0.25s;
+}
+.delay-300 {
+  transition-delay: 0.3s;
+}
+.delay-350 {
+  transition-delay: 0.35s;
+}
+.delay-400 {
+  transition-delay: 0.4s;
+}
+.delay-450 {
+  transition-delay: 0.45s;
+}
+.delay-500 {
+  transition-delay: 0.5s;
+}
+.delay-600 {
+  transition-delay: 0.6s;
+}
+.delay-700 {
+  transition-delay: 0.7s;
+}
+.delay-800 {
+  transition-delay: 0.8s;
+}
+
+/* Staggered Duration classes */
+.duration-400 {
+  transition-duration: 0.4s;
+}
+.duration-600 {
+  transition-duration: 0.6s;
+}
+.duration-800 {
+  transition-duration: 0.8s;
+}
+.duration-1000 {
+  transition-duration: 1s;
+}
+.duration-1200 {
+  transition-duration: 1.2s;
+}
+
+/* 1. Fade In Up */
+.animate-fade-in-up {
+  transform: translateY(45px);
+}
+
+/* 2. Fade In Down */
+.animate-fade-in-down {
+  transform: translateY(-45px);
+}
+
+/* 3. Fade In Left */
+.animate-fade-in-left {
+  transform: translateX(-45px);
+}
+
+/* 4. Fade In Right */
+.animate-fade-in-right {
+  transform: translateX(45px);
+}
+
+/* 5. Zoom In */
+.animate-zoom-in {
+  transform: scale(0.92) translateY(20px);
+}
+
+/* 6. Zoom Out */
+.animate-zoom-out {
+  transform: scale(1.08) translateY(20px);
+}
+
+/* 7. Blur In */
+.animate-blur-in {
+  filter: blur(10px);
+  transform: translateY(20px);
+}
+
+/* 8. Flip Y */
+.animate-flip-y {
+  transform: perspective(1000px) rotateY(25deg) translateY(25px);
+}
+
+/* 9. Flip X */
+.animate-flip-x {
+  transform: perspective(1000px) rotateX(25deg) translateY(25px);
+}
+
+/* 10. Tilt Left */
+.animate-tilt-left {
+  transform: translateY(30px) rotate(-4deg);
+}
+
+/* 11. Tilt Right */
+.animate-tilt-right {
+  transform: translateY(30px) rotate(4deg);
+}
+
+/* Activated Animated State */
+.animate-on-scroll.animated {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1) rotate(0) rotateX(0) rotateY(0);
+  filter: blur(0);
+}
