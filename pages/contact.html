@@ -113,7 +113,9 @@
               <form action="#" method="post">
                 <div class="row g-3">
                   <div class="col-md-6">
-                    <label class="form-label font-xs-bold text-muted"
+                    <label
+                      class="form-label font-xs-bold text-muted"
+                      for="contactFirstName"
                       >First Name</label
                     >
                     <input
@@ -121,12 +123,16 @@
                       class="form-control premium-form-control"
                       placeholder="John"
                       id="contactFirstName"
+                      name="firstName"
+                      autocomplete="given-name"
                       maxlength="16"
                       required
                     />
                   </div>
                   <div class="col-md-6">
-                    <label class="form-label font-xs-bold text-muted"
+                    <label
+                      class="form-label font-xs-bold text-muted"
+                      for="contactLastName"
                       >Last Name</label
                     >
                     <input
@@ -134,40 +140,55 @@
                       class="form-control premium-form-control"
                       placeholder="Doe"
                       id="contactLastName"
+                      name="lastName"
+                      autocomplete="family-name"
                       maxlength="16"
                       required
                     />
                   </div>
                   <div class="col-12">
-                    <label class="form-label font-xs-bold text-muted"
+                    <label
+                      class="form-label font-xs-bold text-muted"
+                      for="contactEmail"
                       >Email Address</label
                     >
                     <input
                       type="email"
                       class="form-control premium-form-control"
                       placeholder="john.doe@example.com"
+                      id="contactEmail"
+                      name="email"
+                      autocomplete="email"
                       required
                     />
                   </div>
                   <div class="col-12">
-                    <label class="form-label font-xs-bold text-muted"
+                    <label
+                      class="form-label font-xs-bold text-muted"
+                      for="contactSubject"
                       >Subject</label
                     >
                     <input
                       type="text"
                       class="form-control premium-form-control"
                       placeholder="How can we help you?"
+                      id="contactSubject"
+                      name="subject"
                       required
                     />
                   </div>
                   <div class="col-12">
-                    <label class="form-label font-xs-bold text-muted"
+                    <label
+                      class="form-label font-xs-bold text-muted"
+                      for="contactMessage"
                       >Message</label
                     >
                     <textarea
                       class="form-control premium-form-control"
                       rows="5"
                       placeholder="Write your query here..."
+                      id="contactMessage"
+                      name="message"
                       required
                     ></textarea>
                   </div>
@@ -436,17 +457,29 @@
                         value="Mon, July 20 - 10:00 AM"
                       />
                       <div class="mb-3">
+                        <label
+                          class="visually-hidden"
+                          for="consultationCompanyName"
+                          >Company Name</label
+                        >
                         <input
                           type="text"
                           class="form-control premium-form-control"
                           placeholder="Company Name"
                           id="consultationCompanyName"
+                          name="company_name"
+                          autocomplete="organization"
                           required
                         />
                       </div>
                       <div class="mb-3">
+                        <label class="visually-hidden" for="consultationGMV"
+                          >Estimated Monthly GMV</label
+                        >
                         <select
                           class="form-select premium-form-control"
+                          id="consultationGMV"
+                          name="estimated_gmv"
                           required
                         >
                           <option value="" disabled selected>

@@ -72,7 +72,15 @@
         <div class="dash-topbar-right">
           <div class="dash-topbar-search d-none d-md-flex">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" placeholder="Search..." />
+            <label class="visually-hidden" for="dashboard-search-input"
+              >Search</label
+            >
+            <input
+              type="text"
+              placeholder="Search..."
+              id="dashboard-search-input"
+              name="search"
+            />
           </div>
           <button class="dash-icon-btn position-relative">
             <i class="fa-regular fa-bell"></i>

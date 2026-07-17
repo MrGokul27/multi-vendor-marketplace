@@ -480,7 +480,8 @@ document.addEventListener("DOMContentLoaded", function () {
           </div>
           <div class="col-12 col-lg-5 order-3 order-lg-2">
             <div class="input-group">
-              <input class="form-control bg-light" type="text" placeholder="Search for items..." style="border: 1px solid var(--border-color) !important; border-top-left-radius: 0.375rem !important; border-bottom-left-radius: 0.375rem !important;">
+              <label class="visually-hidden" for="fallback-search-desktop">Search for items</label>
+              <input class="form-control bg-light" type="text" placeholder="Search for items..." id="fallback-search-desktop" name="search" autocomplete="off" style="border: 1px solid var(--border-color) !important; border-top-left-radius: 0.375rem !important; border-bottom-left-radius: 0.375rem !important;">
               <button class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
           </div>
@@ -544,7 +545,8 @@ document.addEventListener("DOMContentLoaded", function () {
         <!-- Search Mobile -->
         <form class="search-form mb-4" action="#" method="post">
           <div class="input-group input-group-sm">
-            <input class="form-control" type="text" placeholder="Search for items...">
+            <label class="visually-hidden" for="fallback-search-mobile">Search for items</label>
+            <input class="form-control" type="text" placeholder="Search for items..." id="fallback-search-mobile" name="search" autocomplete="off">
             <button class="btn btn-primary" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
           </div>
         </form>
@@ -580,8 +582,8 @@ document.addEventListener("DOMContentLoaded", function () {
         <h6 class="text-uppercase font-xs-bold text-muted border-bottom pb-2 mb-3">Settings & Support</h6>
         <div class="d-flex flex-column gap-3 mb-4">
           <div class="d-flex align-items-center justify-content-between">
-            <span class="font-xs text-dark"><i class="fa-solid fa-globe me-2 text-primary"></i>Language</span>
-            <select class="form-select form-select-sm bg-light border-0 font-xs py-1 px-2" style="width: auto; max-width: 120px;">
+            <label class="font-xs text-dark" for="language-select-mobile-fallback"><i class="fa-solid fa-globe me-2 text-primary"></i>Language</label>
+            <select class="form-select form-select-sm bg-light border-0 font-xs py-1 px-2" style="width: auto; max-width: 120px;" id="language-select-mobile-fallback" name="language">
               <option selected>English</option>
               <option>Français</option>
               <option>Español</option>
@@ -590,8 +592,8 @@ document.addEventListener("DOMContentLoaded", function () {
             </select>
           </div>
           <div class="d-flex align-items-center justify-content-between">
-            <span class="font-xs text-dark"><i class="fa-solid fa-money-bill-1 me-2 text-primary"></i>Currency</span>
-            <select class="form-select form-select-sm bg-light border-0 font-xs py-1 px-2" style="width: auto; max-width: 120px;">
+            <label class="font-xs text-dark" for="currency-select-mobile-fallback"><i class="fa-solid fa-money-bill-1 me-2 text-primary"></i>Currency</label>
+            <select class="form-select form-select-sm bg-light border-0 font-xs py-1 px-2" style="width: auto; max-width: 120px;" id="currency-select-mobile-fallback" name="currency">
               <option selected>USD</option>
               <option>EUR</option>
               <option>AUD</option>
@@ -653,7 +655,8 @@ document.addEventListener("DOMContentLoaded", function () {
             <h6 class="text-white mb-3 text-uppercase">Subscribed newsletter</h6>
             <p class="font-xs text-muted">Get updates about our latest arrivals.</p>
             <div class="input-group">
-              <input type="text" class="form-control form-control-sm border-0 bg-secondary text-white" placeholder="Your email...">
+              <label class="visually-hidden" for="fallback-newsletter-email">Your email</label>
+              <input type="text" class="form-control form-control-sm border-0 bg-secondary text-white" placeholder="Your email..." id="fallback-newsletter-email" name="email" autocomplete="email">
               <button class="btn btn-primary btn-sm">Subscribe</button>
             </div>
           </div>

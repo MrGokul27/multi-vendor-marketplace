@@ -983,28 +983,28 @@ document.addEventListener("DOMContentLoaded", function () {
                 <form id="buyerProfileForm">
                   <div class="row g-3">
                     <div class="col-md-6">
-                      <label class="form-label font-xs-bold">Full Name</label>
-                      <input type="text" class="form-control" value="${buyerProfile.name}" id="profName" required>
+                      <label class="form-label font-xs-bold" for="profName">Full Name</label>
+                      <input type="text" class="form-control" value="${buyerProfile.name}" id="profName" name="fullName" autocomplete="name" required>
                     </div>
                     <div class="col-md-6">
-                      <label class="form-label font-xs-bold">Email Address</label>
-                      <input type="email" class="form-control" value="${buyerProfile.email}" id="profEmail" readonly>
+                      <label class="form-label font-xs-bold" for="profEmail">Email Address</label>
+                      <input type="email" class="form-control" value="${buyerProfile.email}" id="profEmail" name="email" autocomplete="email" readonly>
                     </div>
                     <div class="col-md-6">
-                      <label class="form-label font-xs-bold">Phone Number</label>
-                      <input type="text" class="form-control" value="${buyerProfile.phone}" id="profPhone">
+                      <label class="form-label font-xs-bold" for="profPhone">Phone Number</label>
+                      <input type="text" class="form-control" value="${buyerProfile.phone}" id="profPhone" name="phone" autocomplete="tel">
                     </div>
                     <div class="col-md-6">
-                      <label class="form-label font-xs-bold">Default Delivery Address</label>
-                      <input type="text" class="form-control" value="${buyerProfile.address}" id="profAddress" required>
+                      <label class="form-label font-xs-bold" for="profAddress">Default Delivery Address</label>
+                      <input type="text" class="form-control" value="${buyerProfile.address}" id="profAddress" name="address" autocomplete="street-address" required>
                     </div>
                     <div class="col-md-6">
-                      <label class="form-label font-xs-bold">Billing Address</label>
-                      <input type="text" class="form-control" value="${buyerProfile.billingAddress}" id="profBilling">
+                      <label class="form-label font-xs-bold" for="profBilling">Billing Address</label>
+                      <input type="text" class="form-control" value="${buyerProfile.billingAddress}" id="profBilling" name="billingAddress" autocomplete="street-address">
                     </div>
                     <div class="col-md-6">
-                      <label class="form-label font-xs-bold">Preferred Payment Method</label>
-                      <input type="text" class="form-control" value="${buyerProfile.paymentMethod}" id="profPayment">
+                      <label class="form-label font-xs-bold" for="profPayment">Preferred Payment Method</label>
+                      <input type="text" class="form-control" value="${buyerProfile.paymentMethod}" id="profPayment" name="paymentMethod" autocomplete="off">
                     </div>
                   </div>
                   <button class="btn btn-theme-primary mt-4" onclick="window.location.href='404.html'">Save Profile Configuration</button>
@@ -1215,16 +1215,16 @@ document.addEventListener("DOMContentLoaded", function () {
               <form id="frmVendorAddProduct">
                 <div class="row g-3">
                   <div class="col-md-4">
-                    <label class="form-label font-xs-bold">Product Name</label>
-                    <input type="text" class="form-control form-control-sm" id="newProdName" required placeholder="e.g. Ergonomic Footrest">
+                    <label class="form-label font-xs-bold" for="newProdName">Product Name</label>
+                    <input type="text" class="form-control form-control-sm" id="newProdName" name="productName" autocomplete="off" required placeholder="e.g. Ergonomic Footrest">
                   </div>
                   <div class="col-md-2">
-                    <label class="form-label font-xs-bold">SKU Code</label>
-                    <input type="text" class="form-control form-control-sm" id="newProdSKU" required placeholder="EL-FTR-ERG">
+                    <label class="form-label font-xs-bold" for="newProdSKU">SKU Code</label>
+                    <input type="text" class="form-control form-control-sm" id="newProdSKU" name="sku" autocomplete="off" required placeholder="EL-FTR-ERG">
                   </div>
                   <div class="col-md-2">
-                    <label class="form-label font-xs-bold">Category</label>
-                    <select class="form-select form-select-sm" id="newProdCat" required>
+                    <label class="form-label font-xs-bold" for="newProdCat">Category</label>
+                    <select class="form-select form-select-sm" id="newProdCat" name="category" required>
                       <option value="Electronics">Electronics</option>
                       <option value="Accessories">Accessories</option>
                       <option value="Furniture">Furniture</option>
@@ -1232,12 +1232,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <label class="form-label font-xs-bold">Unit Price ($)</label>
-                    <input type="number" step="0.01" class="form-control form-control-sm" id="newProdPrice" required placeholder="59.99">
+                    <label class="form-label font-xs-bold" for="newProdPrice">Unit Price ($)</label>
+                    <input type="number" step="0.01" class="form-control form-control-sm" id="newProdPrice" name="price" autocomplete="off" required placeholder="59.99">
                   </div>
                   <div class="col-md-2">
-                    <label class="form-label font-xs-bold">Stock Qty</label>
-                    <input type="number" class="form-control form-control-sm" id="newProdStock" required placeholder="10">
+                    <label class="form-label font-xs-bold" for="newProdStock">Stock Qty</label>
+                    <input type="number" class="form-control form-control-sm" id="newProdStock" name="stock" autocomplete="off" required placeholder="10">
                   </div>
                 </div>
                 <div class="mt-3">
@@ -1398,36 +1398,36 @@ document.addEventListener("DOMContentLoaded", function () {
                 <form id="frmVendorProfile">
                   <div class="row g-3">
                     <div class="col-md-6">
-                      <label class="form-label font-xs-bold">Store Brand Name</label>
-                      <input type="text" class="form-control" id="storeName" value="${storeSettings.name}" required>
+                      <label class="form-label font-xs-bold" for="storeName">Store Brand Name</label>
+                      <input type="text" class="form-control" id="storeName" name="storeName" value="${storeSettings.name}" autocomplete="organization" required>
                     </div>
                     <div class="col-md-6">
-                      <label class="form-label font-xs-bold">Vendor Support Email</label>
-                      <input type="email" class="form-control" id="storeEmail" value="${storeSettings.email}" required>
+                      <label class="form-label font-xs-bold" for="storeEmail">Vendor Support Email</label>
+                      <input type="email" class="form-control" id="storeEmail" name="storeEmail" value="${storeSettings.email}" autocomplete="email" required>
                     </div>
                     <div class="col-md-6">
-                      <label class="form-label font-xs-bold">Store Phone Line</label>
-                      <input type="text" class="form-control" id="storePhone" value="${storeSettings.phone}">
+                      <label class="form-label font-xs-bold" for="storePhone">Store Phone Line</label>
+                      <input type="text" class="form-control" id="storePhone" name="storePhone" value="${storeSettings.phone}" autocomplete="tel">
                     </div>
                     <div class="col-md-6">
-                      <label class="form-label font-xs-bold">Physical Warehouse Address</label>
-                      <input type="text" class="form-control" id="storeAddr" value="${storeSettings.address}">
+                      <label class="form-label font-xs-bold" for="storeAddr">Physical Warehouse Address</label>
+                      <input type="text" class="form-control" id="storeAddr" name="storeAddr" value="${storeSettings.address}" autocomplete="street-address">
                     </div>
                     <div class="col-md-6">
-                      <label class="form-label font-xs-bold">Flat Shipping Fee Rate ($)</label>
-                      <input type="number" step="0.01" class="form-control" id="storeShipping" value="${storeSettings.shippingRate}" required>
+                      <label class="form-label font-xs-bold" for="storeShipping">Flat Shipping Fee Rate ($)</label>
+                      <input type="number" step="0.01" class="form-control" id="storeShipping" name="storeShipping" value="${storeSettings.shippingRate}" autocomplete="off" required>
                     </div>
                     <div class="col-md-6">
-                      <label class="form-label font-xs-bold">Free Shipping Threshold ($)</label>
-                      <input type="number" step="0.01" class="form-control" id="storeFreeThresh" value="${storeSettings.freeThreshold}" required>
+                      <label class="form-label font-xs-bold" for="storeFreeThresh">Free Shipping Threshold ($)</label>
+                      <input type="number" step="0.01" class="form-control" id="storeFreeThresh" name="storeFreeThresh" value="${storeSettings.freeThreshold}" autocomplete="off" required>
                     </div>
                     <div class="col-12">
-                      <label class="form-label font-xs-bold">Refund Policy Statement</label>
-                      <textarea class="form-control" id="storeRefund" rows="2">${storeSettings.refundPolicy}</textarea>
+                      <label class="form-label font-xs-bold" for="storeRefund">Refund Policy Statement</label>
+                      <textarea class="form-control" id="storeRefund" name="storeRefund" autocomplete="off" rows="2">${storeSettings.refundPolicy}</textarea>
                     </div>
                     <div class="col-12">
-                      <label class="form-label font-xs-bold">Shop Description Tagline</label>
-                      <textarea class="form-control" id="storeDesc" rows="3">${storeSettings.desc}</textarea>
+                      <label class="form-label font-xs-bold" for="storeDesc">Shop Description Tagline</label>
+                      <textarea class="form-control" id="storeDesc" name="storeDesc" autocomplete="off" rows="3">${storeSettings.desc}</textarea>
                     </div>
                   </div>
                   <button class="btn btn-theme-primary mt-3" onclick="window.location.href='404.html'">Save Store details</button>
@@ -1730,24 +1730,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 <form id="frmAdminSystem">
                   <div class="row g-3">
                     <div class="col-md-6">
-                      <label class="form-label font-xs-bold">Platform Transaction Fee (%)</label>
-                      <input type="number" step="0.1" class="form-control" id="sysCommission" value="${systemSettings.commissionFee}" required>
+                      <label class="form-label font-xs-bold" for="sysCommission">Platform Transaction Fee (%)</label>
+                      <input type="number" step="0.1" class="form-control" id="sysCommission" name="sysCommission" value="${systemSettings.commissionFee}" autocomplete="off" required>
                     </div>
                     <div class="col-md-6">
-                      <label class="form-label font-xs-bold">Registration Approval Mode</label>
-                      <select class="form-select" id="sysRegMode" required>
+                      <label class="form-label font-xs-bold" for="sysRegMode">Registration Approval Mode</label>
+                      <select class="form-select" id="sysRegMode" name="sysRegMode" required>
                         <option value="auto-approve-buyer-verify-vendor" ${systemSettings.registrationMode === "auto-approve-buyer-verify-vendor" ? "selected" : ""}>Auto-Approve Buyers / Verify Vendors</option>
                         <option value="all-manual" ${systemSettings.registrationMode === "all-manual" ? "selected" : ""}>Manual Review for All Registrations</option>
                         <option value="auto-approve-all" ${systemSettings.registrationMode === "auto-approve-all" ? "selected" : ""}>Auto-Approve All</option>
                       </select>
                     </div>
                     <div class="col-12">
-                      <label class="form-label font-xs-bold">Blacklisted IP Address Range</label>
-                      <input type="text" class="form-control" id="sysIPBlock" value="${systemSettings.ipBlocklist}">
+                      <label class="form-label font-xs-bold" for="sysIPBlock">Blacklisted IP Address Range</label>
+                      <input type="text" class="form-control" id="sysIPBlock" name="sysIPBlock" value="${systemSettings.ipBlocklist}" autocomplete="off">
                     </div>
                     <div class="col-12 mt-3">
                       <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="sysMaintenance" ${systemSettings.maintenanceMode ? "checked" : ""}>
+                        <input class="form-check-input" type="checkbox" id="sysMaintenance" name="sysMaintenance" autocomplete="off" ${systemSettings.maintenanceMode ? "checked" : ""}>
                         <label class="form-check-label font-xs-bold text-danger" for="sysMaintenance">Enable Site-Wide Maintenance Mode</label>
                         <span class="d-block font-xs text-muted">Forces a placeholder page for all buyers & vendors during system updates.</span>
                       </div>

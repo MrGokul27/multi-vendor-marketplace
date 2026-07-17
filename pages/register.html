@@ -396,10 +396,11 @@
                   type="text"
                   class="form-control"
                   id="regUsername"
+                  name="username"
                   placeholder="e.g. JohnDoe"
                   required
                   maxlength="16"
-                  autocomplete="off"
+                  autocomplete="username"
                 />
                 <div class="invalid-feedback">
                   Username is required (letters only).
@@ -412,7 +413,7 @@
                   <i class="fa-solid fa-user-tag me-1 text-primary"></i> Role
                   <span class="text-danger">*</span>
                 </label>
-                <select class="form-select" id="regRole" required>
+                <select class="form-select" id="regRole" name="role" required>
                   <option value="" disabled selected>Select your role</option>
                   <option value="buyer">Buyer</option>
                   <option value="vendor">Vendor / Seller</option>
@@ -431,7 +432,9 @@
                   type="email"
                   class="form-control"
                   id="regEmail"
+                  name="email"
                   placeholder="you@example.com"
+                  autocomplete="email"
                   required
                 />
                 <div class="invalid-feedback">
@@ -450,7 +453,9 @@
                     type="password"
                     class="form-control"
                     id="regPassword"
+                    name="password"
                     placeholder="Create a password"
+                    autocomplete="new-password"
                     required
                   />
                   <button
@@ -484,7 +489,9 @@
                     type="password"
                     class="form-control"
                     id="regConfirmPassword"
+                    name="confirmPassword"
                     placeholder="Repeat your password"
+                    autocomplete="new-password"
                     required
                   />
                   <button
@@ -510,6 +517,7 @@
                     class="form-check-input"
                     type="checkbox"
                     id="regTerms"
+                    name="terms"
                     required
                   />
                   <label class="form-check-label font-xs" for="regTerms">

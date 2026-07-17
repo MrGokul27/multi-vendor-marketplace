@@ -377,7 +377,7 @@
                 <i class="fa-solid fa-user-tag me-1 text-primary"></i> Role
                 <span class="text-danger">*</span>
               </label>
-              <select class="form-select" id="loginRole" required>
+              <select class="form-select" id="loginRole" name="role" required>
                 <option value="" disabled selected>Select your role</option>
                 <option value="buyer">Buyer</option>
                 <option value="vendor">Vendor / Seller</option>
@@ -396,7 +396,9 @@
                 type="email"
                 class="form-control"
                 id="loginEmail"
+                name="email"
                 placeholder="you@example.com"
+                autocomplete="username"
                 required
               />
               <div class="invalid-feedback">
@@ -415,7 +417,9 @@
                   type="password"
                   class="form-control"
                   id="loginPassword"
+                  name="password"
                   placeholder="Enter your password"
+                  autocomplete="current-password"
                   required
                 />
                 <button
@@ -447,6 +451,7 @@
                   class="form-check-input"
                   type="checkbox"
                   id="rememberMe"
+                  name="rememberMe"
                   required
                 />
                 <label class="form-check-label font-xs" for="rememberMe"

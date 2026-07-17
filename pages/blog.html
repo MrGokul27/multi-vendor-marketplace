@@ -483,11 +483,16 @@
             <div class="blog-sidebar-widget">
               <h5 class="widget-title">Search Articles</h5>
               <form class="sidebar-search-form" onsubmit="searchBlog(event)">
+                <label class="visually-hidden" for="blog-search-input"
+                  >Search blog</label
+                >
                 <input
                   type="text"
                   id="blog-search-input"
+                  name="query"
                   placeholder="Type keywords..."
                   aria-label="Search blog"
+                  autocomplete="off"
                 />
                 <button type="submit" class="sidebar-search-btn">
                   <i class="fa-solid fa-magnifying-glass"></i>
@@ -509,11 +514,14 @@
                 </p>
 
                 <div class="mb-3">
-                  <label class="form-label font-xs-bold text-dark"
+                  <label
+                    class="form-label font-xs-bold text-dark"
+                    for="converter-type"
                     >Metric Category</label
                   >
                   <select
                     id="converter-type"
+                    name="converter-type"
                     class="form-select font-sm"
                     onchange="runConversion()"
                   >
@@ -529,16 +537,20 @@
                 </div>
 
                 <div class="mb-3">
-                  <label class="form-label font-xs-bold text-dark"
+                  <label
+                    class="form-label font-xs-bold text-dark"
+                    for="converter-input"
                     >Input Value</label
                   >
                   <input
                     type="number"
                     id="converter-input"
+                    name="converter-input"
                     class="form-control font-sm text-dark font-bold"
                     value="10"
                     oninput="runConversion()"
                     placeholder="Enter magnitude..."
+                    autocomplete="off"
                   />
                 </div>
 
@@ -768,10 +780,16 @@
                   <form
                     class="d-flex flex-column flex-sm-row gap-2 justify-content-lg-end"
                   >
+                    <label class="visually-hidden" for="blog-newsletter-email"
+                      >Enter your business email</label
+                    >
                     <input
                       type="email"
                       class="form-control px-4 py-3 rounded-3 font-sm"
                       placeholder="Enter your business email..."
+                      id="blog-newsletter-email"
+                      name="email"
+                      autocomplete="email"
                       required
                       style="max-width: 400px"
                     />

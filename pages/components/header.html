@@ -107,9 +107,14 @@
       <div class="col-12 col-lg-5 order-3 order-lg-2">
         <form class="search-form d-flex w-100">
           <div class="input-group">
+            <label class="visually-hidden" for="category-select-desktop"
+              >Category</label
+            >
             <select
               class="form-select bg-light border-end-0 text-muted category-select d-none d-sm-block"
               style="max-width: 160px"
+              id="category-select-desktop"
+              name="category"
             >
               <option selected>All categories</option>
               <option value="Computers Accessories">Computers &amp; Acc</option>
@@ -121,11 +126,17 @@
               <option value="Bluetooth devices">Bluetooth</option>
               <option value="Cloud Software">Cloud Software</option>
             </select>
+            <label class="visually-hidden" for="search-input-desktop"
+              >Search for items</label
+            >
             <input
               class="form-control bg-light border-start-0"
               type="text"
               placeholder="Search for items..."
               aria-label="Search"
+              id="search-input-desktop"
+              name="search"
+              autocomplete="off"
             />
             <button class="btn btn-primary" type="submit">
               <i class="fa-solid fa-magnifying-glass"></i>
@@ -642,10 +653,16 @@
     <!-- Search Mobile -->
     <form class="search-form mb-4">
       <div class="input-group input-group-sm">
+        <label class="visually-hidden" for="search-input-mobile"
+          >Search for items</label
+        >
         <input
           class="form-control"
           type="text"
           placeholder="Search for items..."
+          id="search-input-mobile"
+          name="search"
+          autocomplete="off"
         />
         <button class="btn btn-primary" type="submit">
           <i class="fa-solid fa-magnifying-glass"></i>
@@ -659,12 +676,14 @@
     </h6>
     <div class="d-flex flex-column gap-3 mb-4">
       <div class="d-flex align-items-center justify-content-between">
-        <span class="font-xs text-dark"
-          ><i class="fa-solid fa-globe me-2 text-primary"></i>Language</span
+        <label class="font-xs text-dark" for="language-select-mobile"
+          ><i class="fa-solid fa-globe me-2 text-primary"></i>Language</label
         >
         <select
           class="form-select form-select-sm bg-light border-0 font-xs py-1 px-2"
           style="width: auto; max-width: 120px"
+          id="language-select-mobile"
+          name="language"
         >
           <option selected>English</option>
           <option>Français</option>
@@ -674,13 +693,15 @@
         </select>
       </div>
       <div class="d-flex align-items-center justify-content-between">
-        <span class="font-xs text-dark"
+        <label class="font-xs text-dark" for="currency-select-mobile"
           ><i class="fa-solid fa-money-bill-1 me-2 text-primary"></i
-          >Currency</span
+          >Currency</label
         >
         <select
           class="form-select form-select-sm bg-light border-0 font-xs py-1 px-2"
           style="width: auto; max-width: 120px"
+          id="currency-select-mobile"
+          name="currency"
         >
           <option selected>USD</option>
           <option>EUR</option>
