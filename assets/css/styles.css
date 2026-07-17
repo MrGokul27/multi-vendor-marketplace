@@ -1387,13 +1387,19 @@ body {
 
 @media (max-width: 768px) {
   .banner-slide-item {
-    min-height: 420px;
+    min-height: 480px;
   }
   .banner-desc-content {
-    padding: 36px 28px;
+    padding: 40px 24px;
   }
   .hero-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
+  }
+  .hero-subtitle {
+    margin-bottom: 24px;
+  }
+  .hero-actions {
+    margin-bottom: 30px;
   }
   .hero-stats {
     padding: 14px 16px;
@@ -1402,11 +1408,66 @@ body {
     padding: 0 14px;
   }
   .hero-stat-item strong {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
   }
   .hero-nav-prev,
   .hero-nav-next {
     display: none;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .banner-slide-item {
+    min-height: 440px;
+  }
+  .banner-desc-content {
+    padding: 32px 16px;
+  }
+  .hero-eyebrow {
+    padding: 5px 12px;
+    font-size: 11px;
+    margin-bottom: 16px;
+  }
+  .hero-title {
+    font-size: 1.65rem;
+    margin-bottom: 12px;
+  }
+  .hero-subtitle {
+    font-size: 13px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  .hero-actions {
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .btn-hero-primary {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+  .btn-hero-ghost {
+    padding: 9px 18px;
+    font-size: 13px;
+  }
+  .hero-stats {
+    padding: 10px 12px;
+    border-radius: 12px;
+    width: 100%;
+    justify-content: space-around;
+  }
+  .hero-stat-divider {
+    display: none;
+  }
+  .hero-stat-item {
+    padding: 0 6px;
+  }
+  .hero-stat-item strong {
+    font-size: 1rem;
+    margin-bottom: 2px;
+  }
+  .hero-stat-item span {
+    font-size: 9px;
+    letter-spacing: 0.2px;
   }
 }
 
@@ -2343,10 +2404,6 @@ body {
   box-shadow: var(--shadow-md);
   border-color: var(--primary-color);
 }
-
-/* ==========================================================================
-   7. Antigravity UI Upgrades & Additional Sections Stylesheet
-   ========================================================================== */
 
 /* Circular Icon Wrappers with Soft Backgrounds */
 .icon-circle-wrapper {
