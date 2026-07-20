@@ -264,6 +264,7 @@ document.addEventListener("DOMContentLoaded", function () {
     new Swiper(".swiper-categories", {
       slidesPerView: 2,
       spaceBetween: 15,
+      loop: true,
       observer: true,
       observeParents: true,
       autoplay: {
@@ -272,9 +273,9 @@ document.addEventListener("DOMContentLoaded", function () {
       },
       breakpoints: {
         480: { slidesPerView: 3 },
-        768: { slidesPerView: 5 },
-        1024: { slidesPerView: 7 },
-        1200: { slidesPerView: 9 },
+        768: { slidesPerView: 4 },
+        1024: { slidesPerView: 5 },
+        1200: { slidesPerView: 6 },
       },
     });
 
@@ -282,13 +283,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const productSwiperConfig = {
       slidesPerView: 1,
       spaceBetween: 20,
+      loop: true,
       observer: true,
       observeParents: true,
+      autoplay: {
+        delay: 3500,
+        disableOnInteraction: false,
+      },
       breakpoints: {
         576: { slidesPerView: 2 },
         768: { slidesPerView: 3 },
-        992: { slidesPerView: 4 },
-        1200: { slidesPerView: 5 },
+        992: { slidesPerView: 3 },
+        1200: { slidesPerView: 4 },
       },
     };
     const featuredSwiper = new Swiper(
@@ -326,7 +332,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
-    // Force full layout update on shown tab event to fix hidden-pane init issue
+    // Force full layout update on shown tab event to fix hidden-pane loop init issue
     const tabElList = document.querySelectorAll('button[data-bs-toggle="tab"]');
     tabElList.forEach((tabEl) => {
       tabEl.addEventListener("shown.bs.tab", function () {
@@ -334,17 +340,33 @@ document.addEventListener("DOMContentLoaded", function () {
           "#productTabsContent .tab-pane.active .swiper",
         );
         if (activeSwiperEl && activeSwiperEl.swiper) {
-          activeSwiperEl.swiper.update();
+          const sw = activeSwiperEl.swiper;
+          sw.loopDestroy();
+          sw.loopCreate();
+          sw.update();
         }
       });
     });
 
     // Trending products swiper (scoped navigation)
     new Swiper(".swiper-products-trending", {
-      ...productSwiperConfig,
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      observer: true,
+      observeParents: true,
+      autoplay: {
+        delay: 3500,
+        disableOnInteraction: false,
+      },
       navigation: {
         nextEl: ".swiper-button-next-trending",
         prevEl: ".swiper-button-prev-trending",
+      },
+      breakpoints: {
+        576: { slidesPerView: 2 },
+        992: { slidesPerView: 2 },
+        1200: { slidesPerView: 2 },
       },
     });
 
@@ -364,6 +386,7 @@ document.addEventListener("DOMContentLoaded", function () {
     new Swiper(".swiper-news", {
       slidesPerView: 1,
       spaceBetween: 20,
+      loop: true,
       observer: true,
       observeParents: true,
       autoplay: {
@@ -385,16 +408,21 @@ document.addEventListener("DOMContentLoaded", function () {
     new Swiper(".swiper-products-deals", {
       slidesPerView: 1,
       spaceBetween: 20,
+      loop: true,
       observer: true,
       observeParents: true,
+      autoplay: {
+        delay: 3500,
+        disableOnInteraction: false,
+      },
       navigation: {
         nextEl: ".swiper-button-next-deals",
         prevEl: ".swiper-button-prev-deals",
       },
       breakpoints: {
         576: { slidesPerView: 2 },
-        992: { slidesPerView: 3 },
-        1200: { slidesPerView: 4 },
+        992: { slidesPerView: 2 },
+        1200: { slidesPerView: 3 },
       },
     });
 
@@ -419,6 +447,7 @@ document.addEventListener("DOMContentLoaded", function () {
     new Swiper(".swiper-vendors", {
       slidesPerView: 1,
       spaceBetween: 20,
+      loop: true,
       observer: true,
       observeParents: true,
       autoplay: {
@@ -432,8 +461,8 @@ document.addEventListener("DOMContentLoaded", function () {
       breakpoints: {
         576: { slidesPerView: 2 },
         768: { slidesPerView: 3 },
-        992: { slidesPerView: 4 },
-        1200: { slidesPerView: 5 },
+        992: { slidesPerView: 3 },
+        1200: { slidesPerView: 4 },
       },
     });
   }
