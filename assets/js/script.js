@@ -297,18 +297,23 @@ document.addEventListener("DOMContentLoaded", function () {
         1200: { slidesPerView: 4 },
       },
     };
-    const featuredSwiper = new Swiper(
-      ".swiper-products-featured",
-      productSwiperConfig,
+
+    // Helper to initialize Swiper inside a tab pane if not already initialized
+    function initTabSwiper(tabPaneEl) {
+      if (!tabPaneEl) return;
+      const swiperEl = tabPaneEl.querySelector(".swiper");
+      if (swiperEl && !swiperEl.swiper) {
+        new Swiper(swiperEl, productSwiperConfig);
+      }
+    }
+
+    // Initialize the active tab pane Swiper on load
+    const activeTabPane = document.querySelector(
+      "#productTabsContent .tab-pane.active",
     );
-    const bestsellerSwiper = new Swiper(
-      ".swiper-products-bestseller",
-      productSwiperConfig,
-    );
-    const mostviewedSwiper = new Swiper(
-      ".swiper-products-mostviewed",
-      productSwiperConfig,
-    );
+    if (activeTabPane) {
+      initTabSwiper(activeTabPane);
+    }
 
     // Dynamic Navigation controller for Product Tabs Swipers
     const tabPrevBtn = document.querySelector(".swiper-button-prev-products");
@@ -332,18 +337,27 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
 
-    // Force full layout update on shown tab event to fix hidden-pane loop init issue
+    // Initialize and force full layout update on shown tab event to fix hidden-pane loop init issue
     const tabElList = document.querySelectorAll('button[data-bs-toggle="tab"]');
     tabElList.forEach((tabEl) => {
       tabEl.addEventListener("shown.bs.tab", function () {
-        const activeSwiperEl = document.querySelector(
-          "#productTabsContent .tab-pane.active .swiper",
-        );
-        if (activeSwiperEl && activeSwiperEl.swiper) {
-          const sw = activeSwiperEl.swiper;
-          sw.loopDestroy();
-          sw.loopCreate();
-          sw.update();
+        const targetSelector =
+          tabEl.getAttribute("data-bs-target") || tabEl.getAttribute("href");
+        if (targetSelector) {
+          const targetPane = document.querySelector(targetSelector);
+          if (targetPane) {
+            initTabSwiper(targetPane);
+            const activeSwiperEl = targetPane.querySelector(".swiper");
+            if (activeSwiperEl && activeSwiperEl.swiper) {
+              const sw = activeSwiperEl.swiper;
+              sw.update();
+              if (sw.params.loop) {
+                sw.loopDestroy();
+                sw.loopCreate();
+                sw.update();
+              }
+            }
+          }
         }
       });
     });
